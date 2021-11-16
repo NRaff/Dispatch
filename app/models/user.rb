@@ -22,5 +22,27 @@ class User < ApplicationRecord
   validates :email, :session_token, :username, uniqueness: true
 
   # ASPIRE
-  
+  def self.find_by_credentials(username, password)
+
+  end
+
+  def password=(password)
+
+  end
+
+  def is_password?(password)
+
+  end
+
+  def ensure_session_token
+
+  end
+
+  def reset_session_token!
+
+  end
+
+  def self.generate_session_token
+
+  end
 end
