@@ -18,31 +18,40 @@
 #  index_users_on_username       (username) UNIQUE
 #
 class User < ApplicationRecord
+  attr_reader :password
+
   validates :display_name, :email, :password_digest, :session_token, :username, presence: true
   validates :email, :session_token, :username, uniqueness: true
 
+  after_initialize :ensure_session_token
+
   # ASPIRE
   def self.find_by_credentials(username, password)
-
+    user = User.find_by(username: username)
+    return user if user && user.is_password?(password)
+    return nil
   end
 
   def password=(password)
-
+    self.password = password
+    self.password_digest = BCrypt::Password.create(password)
   end
 
-  def is_password?(password)
-
+  def is_correct_password?(password)
+    passObj = BCrypt::Password.new(self.password_digest)
+    passObj.is_password?(password)
   end
 
   def ensure_session_token
-
+    self.session_token ||= User.generate_session_token
   end
 
   def reset_session_token!
-
+    self.session_token = User.generate_session_token
+    self.save!
   end
 
   def self.generate_session_token
-
+    SecureRandom::base64(12)
   end
 end
