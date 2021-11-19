@@ -1,3 +1,5 @@
+require 'byebug'
+
 class ApplicationController < ActionController::Base
   helper_method :current_user
 
@@ -12,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logout!
+    byebug
     current_user.reset_session_token!
     @current_user = nil
     session[:session_token] = nil
