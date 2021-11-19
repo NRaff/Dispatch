@@ -4,9 +4,23 @@ import * as UserApi from './utils/user_api'
 import * as SessionApi from './utils/session_api'
 import configureStore from './store/store'
 
+const getPreloadedState = () => {
+  let preloadedState = {}
+  if (window.currentUser) {
+    preloadedState = {
+      session: {
+        userId: window.currentUser.id
+      }
+    }
+    delete window.currentUser
+  }
+  return preloadedState;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   let root = document.getElementById('root')
-  const store = configureStore();
+  let preloadedState = getPreloadedState()
+  const store = configureStore(preloadedState);
   ReactDOM.render(
     <h1>React is working!</h1>,
     root
@@ -20,3 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
   window.newSession = SessionApi.newSession // WAE
   window.deleteSession = SessionApi.deleteSession //WAE
 })
+
