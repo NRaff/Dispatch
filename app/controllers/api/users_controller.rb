@@ -6,7 +6,7 @@ class Api::UsersController < ApplicationController
     if @user.save
       render :show
     else
-      flash.now[:errors] = @user.errors.full_messages
+      render :json => {:errors => @user.errors.full_messages}, :status => 422
     end
   end
 
@@ -26,17 +26,17 @@ class Api::UsersController < ApplicationController
     if @user.update(user_params)
       render :show
     else
-      flash.now[:errors] = @user.errors.full_messages
+      render json: {:errors => @user.errors.full_messages}, :status => 422
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     if @user.delete
-      flash[:messages] = "Account successfully deleted."
+      render json: {:sys_messages => "Account successfully deleted.", :status => 200
       # redirect_to api_session
     else
-      flash.now[:errors] = "Something went wrong. Please try again"
+      render json: {:errors => ["Something went wrong. Please try again"], :status => 403
     end
   end
 

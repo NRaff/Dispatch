@@ -8,13 +8,14 @@ class Api::SessionsController < ApplicationController
       login!(@user)
       render 'api/users/show'
     else
-      flash.now[:errors] = ["Invalid username or password"]
+      render :json => {:errors => ["Invalid username or password"]}, :status => 422
       # render :new
     end
   end
 
   def destroy
     logout!
+    render :json => {:sys_messages => ["Successfully logged out."]}, :status => 200
     # render :new
   end
 end

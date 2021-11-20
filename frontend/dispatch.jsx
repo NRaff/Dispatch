@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import * as UserApi from './utils/user_api'
 import * as SessionApi from './utils/session_api'
 import configureStore from './store/store'
+import { requestLoginUser, requestLogoutUser } from './actions/session_actions'
 
 const getPreloadedState = () => {
   let preloadedState = {}
@@ -26,12 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     root
   )
   window.store = store;
-  window.fetchUser = UserApi.fetchUser // WAE
-  window.fetchUsers = UserApi.fetchUsers // WAE
-  window.createUser = UserApi.createUser // WAE
-  window.deleteUser = UserApi.deleteUser // WAE - need to test after logging in
-  window.updateUser = UserApi.updateUser // WAE
-  window.newSession = SessionApi.newSession // WAE
-  window.deleteSession = SessionApi.deleteSession //WAE
+  window.login = requestLoginUser //WAE
+  window.logout = requestLogoutUser //WAE
 })
 
