@@ -7,7 +7,11 @@ class Api::UsersController < ApplicationController
       login!(@user)
       render :show
     else
-      render :json => {:errors => @user.errors.full_messages}, :status => 422
+      # byebug
+      @err = @user.errors.messages
+      render "api/errors/errors", :status => 422
+      # render :json => {:errors => @user.errors.messages}, :status => 422
+      # render :json => {:errors => @user.errors.full_messages}, :status => 422
     end
   end
 
@@ -26,7 +30,8 @@ class Api::UsersController < ApplicationController
     if @user.update(user_params)
       render :show
     else
-      render json: {:errors => @user.errors.full_messages}, :status => 422
+      @err = @user.errors.messages
+      render "api/errors/errors", :status => 422
     end
   end
 
