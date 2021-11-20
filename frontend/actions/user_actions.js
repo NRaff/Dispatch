@@ -24,13 +24,13 @@ export const removeUser = userId => ({
 export const fetchUsers = () => dispatch => (
   UserApi.fetchUsers()
     .then( users => dispatch(receiveAllUsers(users)))
-    .fail( err => dispatch(receiveUserErrors(err)))
+    .fail( err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 
 export const fetchUser = userId => dispatch => (
   UserApi.fetchUser(userId)
     .then( user => dispatch(receiveUser(user)))
-    .fail(err => dispatch(receiveUserErrors(err)))
+    .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 
 export const createUser = user => dispatch => (
@@ -39,17 +39,17 @@ export const createUser = user => dispatch => (
       dispatch(receiveUser(user))
       dispatch(loginUser(user))
     })
-    .fail(err => dispatch(receiveUserErrors(err)))
+    .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 
 export const deleteUser = userId => dispatch => (
   UserApi.deleteUser(userId)
     .then( () => console.log('User deleted'))
-    .fail(err => dispatch(receiveUserErrors(err)))
+    .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 
 export const updateUser = user => dispatch => (
   UserApi.updateUser(user)
     .then( user => dispatch(receiveUser(user)))
-    .fail(err => dispatch(receiveUserErrors(err)))
+    .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
