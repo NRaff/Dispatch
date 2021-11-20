@@ -55,10 +55,10 @@ class AuthForm extends React.Component {
     const {email, password} = this.state
 
     return (
-      <div>
+      <div className='authForm'>
         <h1>{authType}</h1>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="email">Email Address</label>
+          <label htmlFor="email">Email</label>
           <input
             id="email"
             type="text"
@@ -83,7 +83,7 @@ class AuthForm extends React.Component {
           <h3>OR</h3>
           <hr />
         </div>
-        <Link to={`/${this.otherAction().authAction}`}>{this.otherAction().display}</Link>
+        <Link className='ui-button' to={`/${this.otherAction().authAction}`}>{this.otherAction().display}</Link>
       </div>
       
     )

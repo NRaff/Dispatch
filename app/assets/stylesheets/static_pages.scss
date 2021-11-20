@@ -1,3 +1,93 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$dark: #28292C;
+$light: #7E7F80;
+$super-light: #DADADB;
+$super-dark: #18191A;
+$pop-light: #696D76;
+$light-blue: #8299C6;
+
+body {
+  background-color: $dark;
+  font-family: 'Nunito Sans', sans-serif;
+  color: $super-light;
+}
+
+h1 {
+  font-size: large;
+  font-weight: bold;
+}
+
+.authForm {
+  margin: 0 auto;
+  padding: 10px;
+  min-width: 300px;
+  max-width: 600px;
+  width: 60%;
+}
+
+.authForm form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 5px;
+  height: 25px;
+  margin-bottom: 10px;
+  background-color: $pop-light;
+  border-radius: 5px;
+  border-style: none;
+  color: $super-light;
+  font-size:100%;
+}
+
+input[type=submit] {
+  background-color: $light-blue;
+  height: 35px;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+.authOption {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.ui-button {
+  background-color: $light-blue;
+  height: 35px;
+  border-radius: 5px;
+  border-style: none;
+  color: $super-light;
+  font-size: 100%;
+  text-decoration: none;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.ui-button:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+hr {
+  width: 30%;
+  background-color: $super-light;
+  height: 1px;
+  border-style: none;
+}

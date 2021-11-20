@@ -8,7 +8,7 @@ import TopNavContainer from './top_nav/top_nav_container'
 const App = (props) => (
   <HashRouter>
     <div>
-      <Route path='/' render={() => (<h1>Hello World</h1>)} />
+      {/* <Route path='/' render={() => (<h1>Hello World</h1>)} /> */}
       <ProtectedRoute path='/' component={TopNavContainer} />
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />

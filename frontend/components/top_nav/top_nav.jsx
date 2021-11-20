@@ -14,7 +14,6 @@ class TopNav extends React.Component {
 
   render(){
     const {user, logout} = this.props
-    debugger
     return (
       <nav>
         {this.includeDisplayName(user)}
