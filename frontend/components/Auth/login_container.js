@@ -7,7 +7,7 @@ const mSTP = (state) => ({
     email: '',
     password: ''
   },
-  formType: 'Login'
+  authType: 'Login'
 })
 
 const mDTP = dispatch => ({

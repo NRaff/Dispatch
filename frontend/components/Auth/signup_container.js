@@ -5,7 +5,9 @@ import AuthForm from "./auth_form"
 const mSTP = state => ({
   user: {
     email: '',
-    password: ''
+    password: '',
+    displayName: '',
+    username: ''
   },
   authType: 'Sign Up'
 })

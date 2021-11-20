@@ -4,6 +4,13 @@
 // window.deleteUser = deleteUser
 // window.updateUser = updateUser
 
+const snakifiedUser = user => ({
+  email: user.email,
+  username: user.username,
+  display_name: user.displayName,
+  password: user.password
+})
+
 export const fetchUser = userId => (
   $.ajax({
     method: 'GET',
@@ -18,13 +25,16 @@ export const fetchUsers = () => (
   })
 )
 
-export const createUser = user => (
-  $.ajax({
-    method: 'POST',
-    url: '/api/users',
-    data: {user}
-  })
-)
+export const createUser = paramUser => {
+  const user = snakifiedUser(paramUser)
+  return (
+    $.ajax({
+      method: 'POST',
+      url: '/api/users',
+      data: {user}
+    })
+  )
+}
 
 export const deleteUser = userId => (
   $.ajax({
@@ -33,11 +43,12 @@ export const deleteUser = userId => (
   })
 )
 
-export const updateUser = user => {
+export const updateUser = paramUser => {
+  const user = snakifiedUser(paramUser)
   return (
     $.ajax({
       method: 'PATCH',
-      url: `/api/users/${user.id}`,
+      url: `/api/users/${paramUser.id}`,
       data: {user}
     })
   )
