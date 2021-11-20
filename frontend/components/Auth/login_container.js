@@ -1,4 +1,5 @@
 import { connect } from "react-redux"
+import { removeUserErrors } from "../../actions/error_actions"
 import { requestLoginUser } from "../../actions/session_actions"
 import AuthForm from "./auth_form"
 
@@ -12,7 +13,8 @@ const mSTP = (state) => ({
 })
 
 const mDTP = dispatch => ({
-  action: user => dispatch(requestLoginUser(user))
+  action: user => dispatch(requestLoginUser(user)),
+  removeErrors: () => dispatch(removeUserErrors())
 })
 
 export default connect(mSTP, mDTP)(AuthForm)

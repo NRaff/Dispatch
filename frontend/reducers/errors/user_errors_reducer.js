@@ -1,5 +1,5 @@
 import {
-  RECEIVE_USER_ERRORS
+  RECEIVE_USER_ERRORS, REMOVE_USER_ERRORS
 } from '../../actions/error_actions'
 
 const UserErrorsReducer = (state={}, action) => {
@@ -8,7 +8,9 @@ const UserErrorsReducer = (state={}, action) => {
   switch (action.type) {
     case RECEIVE_USER_ERRORS:
       nextState = action.errors
-      return nextState
+      return nextState;
+    case REMOVE_USER_ERRORS:
+      return {};
     default:
       return state;
   }

@@ -12,6 +12,10 @@ class AuthForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentWillUnmount(){
+    this.props.removeErrors();
+  }
+
   handleInput(e) {
     e.preventDefault()
     let user = Object.assign({}, this.state.user)
