@@ -8,6 +8,7 @@ const mSTP = state => ({
     password: '',
     displayName: ''
   },
+  errors: state.errors.userErrors,
   authType: 'Sign Up'
 })
 

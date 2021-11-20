@@ -22,5 +22,5 @@ export const requestLoginUser = user => dispatch => (
 export const requestLogoutUser = () => dispatch => (
   SessionApi.deleteSession()
     .then( () => dispatch(logoutUser()))
-    .fail( err => console.log(err.responseJSON)) //does there need to be error handling here?
+    .fail( err => console.log(err.responseJSON.errors)) //does there need to be error handling here?
 )

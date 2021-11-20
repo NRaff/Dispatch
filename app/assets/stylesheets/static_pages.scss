@@ -7,6 +7,8 @@ $super-light: #DADADB;
 $super-dark: #18191A;
 $pop-light: #696D76;
 $light-blue: #8299C6;
+$light-red: #E67776;
+$dark-red: #922227;
 
 body {
   background-color: $dark;
@@ -47,6 +49,12 @@ input {
   border-style: none;
   color: $super-light;
   font-size:100%;
+  outline: none;
+}
+
+input:active {
+  border-color: $super-light;
+  box-sizing: content-box;
 }
 
 input[type=submit] {
@@ -90,4 +98,23 @@ hr {
   background-color: $super-light;
   height: 1px;
   border-style: none;
+}
+
+.errorSection {
+  padding: 3px;
+  background-color: $light-red;
+  margin-bottom: -4px;
+  z-index: 1;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.errorItem {
+  color: $dark-red;
+}
+
+.authForm > .errorSection {
+  border-radius: 5px;
+  margin-top: 10px;
+
 }

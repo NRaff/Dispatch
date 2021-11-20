@@ -7,6 +7,7 @@ const mSTP = (state) => ({
     email: '',
     password: ''
   },
+  errors: state.errors.userErrors,
   authType: 'Login'
 })
 

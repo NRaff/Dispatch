@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 class AuthForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = this.props.user
+    this.state = {
+      user: this.props.user,
+    }
 
     this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -12,15 +14,15 @@ class AuthForm extends React.Component {
 
   handleInput(e) {
     e.preventDefault()
-    this.setState({
-      [e.target.id]: e.target.value
-    })
+    let user = Object.assign({}, this.state.user)
+    user[e.target.id] = e.target.value
+    this.setState({user})
   }
 
   handleSubmit(e) {
     e.preventDefault()
     const {action} = this.props
-    action(this.state)
+    action(this.state.user)
   }
 
   otherAction(){
@@ -33,12 +35,32 @@ class AuthForm extends React.Component {
     }
   }
 
+  displayErrors(errType){
+    const { errors } = this.props
+    if (errors[errType]) {
+      const displayText = {
+        email: 'Email',
+        displayName: 'Display name',
+        password: 'Password',
+        login: 'Oops!'
+      }
+      return (
+        <ul className='errorSection'>
+          {errors[errType].map((msg, idx) => (
+            <li key={idx} className='errorItem'>{`${displayText[errType]} ${msg}`}</li>
+          ))}
+        </ul>
+      )
+    }
+  }
+
   includeDetails(){
     if (this.props.authType === 'Sign Up'){
-      const {displayName} = this.state
+      const {displayName} = this.state.user
       return (
         <>
           <label htmlFor="displayName">Display Name</label>
+          {this.displayErrors('displayName')}
           <input
               id="displayName"
               type="text"
@@ -52,27 +74,29 @@ class AuthForm extends React.Component {
 
   render() {
     const {authType} = this.props
-    const {email, password} = this.state
-
+    const {email, password} = this.state.user
     return (
       <div className='authForm'>
         <h1>{authType}</h1>
+        {this.displayErrors('login')}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="email">Email</label>
+          {this.displayErrors('email')}
           <input
             id="email"
             type="text"
             onChange={this.handleInput}
             value={email}
           />
+          {this.includeDetails()}
           <label htmlFor="password">Password</label>
+          {this.displayErrors('password')}
           <input
             id="password"
             type="password"
             onChange={this.handleInput}
             value={password}
           />
-          {this.includeDetails()}
           <input
             type="submit"
             value={authType}
