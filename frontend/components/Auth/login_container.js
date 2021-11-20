@@ -14,6 +14,7 @@ const mSTP = (state) => ({
 
 const mDTP = dispatch => ({
   action: user => dispatch(requestLoginUser(user)),
+  loginDemo: user => dispatch(requestLoginUser(user)),
   removeErrors: () => dispatch(removeUserErrors())
 })
 

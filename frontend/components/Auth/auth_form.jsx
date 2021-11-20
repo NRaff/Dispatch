@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { demoLogin } from "../../utils/demo_login";
 
 class AuthForm extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class AuthForm extends React.Component {
 
     this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.demoLogin = this.demoLogin.bind(this)
   }
 
   componentWillUnmount(){
@@ -27,6 +29,11 @@ class AuthForm extends React.Component {
     e.preventDefault()
     const {action} = this.props
     action(this.state.user)
+  }
+
+  demoLogin(){
+    let user = demoLogin(this)
+    this.props.loginDemo(user)
   }
 
   otherAction(){
@@ -112,6 +119,10 @@ class AuthForm extends React.Component {
           <hr />
         </div>
         <Link className='ui-button' to={`/${this.otherAction().authAction}`}>{this.otherAction().display}</Link>
+        <button 
+          className='ui-button'
+          onClick={this.demoLogin}
+        >Login as Demo</button>
       </div>
       
     )
