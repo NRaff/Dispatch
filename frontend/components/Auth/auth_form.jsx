@@ -35,7 +35,7 @@ class AuthForm extends React.Component {
 
   includeDetails(){
     if (this.props.authType === 'Sign Up'){
-      const {displayName, username} = this.state
+      const {displayName} = this.state
       return (
         <>
           <label htmlFor="displayName">Display Name</label>
@@ -45,13 +45,6 @@ class AuthForm extends React.Component {
               onChange={this.handleInput}
               value={displayName}
             />
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            onChange={this.handleInput}
-            value={username}
-          />
         </>
       )
     }

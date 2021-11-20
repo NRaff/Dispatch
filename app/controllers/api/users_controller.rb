@@ -22,7 +22,6 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    byebug
     @user = User.find(params[:id])
     if @user.update(user_params)
       render :show
@@ -42,6 +41,6 @@ class Api::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:display_name, :email, :password, :username)
+    params.require(:user).permit(:display_name, :email, :password)
   end
 end

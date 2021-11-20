@@ -9,7 +9,6 @@ class Api::SessionsController < ApplicationController
       render 'api/users/show'
     else
       render :json => {:errors => ["Invalid email or password"]}, :status => 422
-      # render :new
     end
   end
 
@@ -20,7 +19,5 @@ class Api::SessionsController < ApplicationController
     else
       render :json => {:errors => ["No user is logged in."]}, :status => 422
     end
-    
-    # render :new
   end
 end

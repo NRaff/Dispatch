@@ -6,8 +6,7 @@ const mSTP = state => ({
   user: {
     email: '',
     password: '',
-    displayName: '',
-    username: ''
+    displayName: ''
   },
   authType: 'Sign Up'
 })
