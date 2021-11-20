@@ -23,16 +23,33 @@ class AuthForm extends React.Component {
   }
 
   render() {
-    const {authType, action} = this.props
+    const {authType} = this.props
+    const {email, password} = this.state
 
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>{authType}</h1>
+        <label htmlFor="email">Email Address</label>
         <input 
-          id='email'
+          id="email"
           type="text"
+          onChange={this.handleInput}
+          value={email}
+        />
+        <label htmlFor="email">Password</label>
+        <input
+          id="password"
+          type="password"
+          onChange={this.handleInput}
+          value={password}
+        />
+        <input 
+          type="submit" 
+          value={authType} 
         />
       </form>
     )
   }
 }
+
+export default AuthForm;
