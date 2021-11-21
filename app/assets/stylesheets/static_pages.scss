@@ -11,7 +11,7 @@ $light-red: #E67776;
 $dark-red: #922227;
 
 body {
-  background-color: $dark;
+  background-color: $super-light;
   font-family: 'Nunito Sans', sans-serif;
   color: $super-light;
 }
@@ -24,9 +24,11 @@ h1 {
 .authForm {
   margin: 0 auto;
   padding: 10px;
-  min-width: 300px;
-  max-width: 600px;
-  width: 60%;
+  min-width: 200px;
+  max-width: 400px;
+  width: 30%;
+  background-color: $dark;
+  border-radius: 5px;
 }
 
 .authForm form {
@@ -122,4 +124,30 @@ hr {
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 5px;
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: $dark;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo h1 {
+  height: inherit;
+}
+
+.logo img {
+  height: 35px;
+  width: auto;
 }
