@@ -1,6 +1,26 @@
 $dark-logo: 'quickreply_black_24dp.svg';
 $light-logo: 'quickreply_white_24dp.svg';
 
+$dark-profile: 'account_box_black_24dp.svg';
+$light-logo: 'account_box_white_24dp.svg';
+
 #logo {
-  content: url(<%= asset_path 'quickreply_black_24dp.svg' %>)
+  content: url(<%= asset_path 'logo/quickreply_black_24dp.svg' %>)
 }
+
+.logo-dark {
+  content: url(<%= asset_path 'logo/quickreply_black_24dp.svg' %>);
+}
+
+.logo-light {
+  content: url(<%= asset_path 'logo/quickreply_white_24dp.svg' %>)
+}
+
+.profile-dark {
+  content: url(<%= asset_path 'profile/account_box_black_24dp.svg' %>)
+}
+
+.profile-light {
+  content: url(<%= asset_path 'profile/account_box_white_24dp.svg' %>);
+}
+

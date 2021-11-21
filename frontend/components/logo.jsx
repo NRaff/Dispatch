@@ -1,8 +1,8 @@
 import React from "react";
 
-const Logo = () => (
+const Logo = ({theme}) => (
   <div className='logo'>
-    <img id='logo' alt="Quick reply icon" />
+    <img className={theme} alt="Quick reply icon" />
     <h1>Dispatch</h1>
   </div>
 )

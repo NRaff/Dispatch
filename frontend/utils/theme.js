@@ -8,3 +8,14 @@ export const Colors = {
   lightRed: '#E67776',
   darkRed: '#922227',
 }
+
+export const Icons = {
+  logo: {
+    darkLogo: 'logo-dark',
+    lightLogo: 'logo-light'
+  },
+  profile: {
+    darkProfile: 'profile-dark',
+    lightProfile: 'profile-light'
+  }
+}

@@ -152,3 +152,86 @@ hr {
   height: 35px;
   width: auto;
 }
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.profile {
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 5px;
+}
+
+.profile h1 {
+  margin-left: 5px;
+}
+
+.profile:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+.profile-dark {
+  height: 35px;
+  width: auto;
+}
+
+.profile-light {
+  height: 35px;
+  width: auto;
+}
+
+.profile-dropdown {
+  padding: 0;
+  list-style: none;
+  background-color: $super-light;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  min-width: 100%;
+  width: max-content;
+  display: none;
+  position: absolute;
+  top: 35px;
+  right: 0px;
+}
+
+.profile:hover .profile-dropdown {
+  display: block;
+  background-color: $super-light;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.profile-dropdown > li {
+  display: block;
+  position: relative;
+  text-align: left;
+  padding: 5px;
+  color: $dark;
+  // width: 100%;
+
+}
+
+.profile-dropdown > li:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.profile-dropdown > li:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.profile-dropdown > li:hover {
+  background-color: $light-blue;
+  color: $super-light;
+}
