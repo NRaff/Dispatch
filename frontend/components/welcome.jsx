@@ -1,11 +1,9 @@
 import React from "react";
+import Logo from "./logo";
 
 const Welcome = () => (
   <div className='welcome'>
-    <div className='logo'>
-      <img id='logo' alt="Quick reply icon" />
-      <h1>Dispatch</h1>
-    </div>
+    <Logo />
     <h3>Sign up or login to message friends and colleagues.</h3>
   </div>
 )

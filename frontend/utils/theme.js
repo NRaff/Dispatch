@@ -1,0 +1,10 @@
+export const Colors = {
+  dark: '#28292C',
+  light: '#7E7F80',
+  superLight: '#DADADB',
+  superDark: '#18191A',
+  popLight: '#696D76',
+  lightBlue: '#8299C6',
+  lightRed: '#E67776',
+  darkRed: '#922227',
+}
