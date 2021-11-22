@@ -243,9 +243,10 @@ hr {
   align-items: left;
   background-color: $super-light;
   width: 200px;
-  margin-left: 10px;
-  margin-top: 10px;
+  // margin-left: 10px;
+  // margin-top: 10px;
   border-radius: 5px;
+  flex-grow: 0.25;
 }
 
 .all-threads .thread-item:first-child {
@@ -315,4 +316,17 @@ hr {
 
 .thread-item:hover {
   background-color: $light-blue;
+}
+
+.main-app {
+  display: flex;
+  padding: 10px;
+}
+
+.messages-index {
+  flex-grow: 7;
+  margin-left: 10px;
+  background-color: $pop-light;
+  border-radius: 5px;
+  padding: 5px;
 }
