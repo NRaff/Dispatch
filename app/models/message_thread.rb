@@ -18,7 +18,8 @@ class MessageThread < ApplicationRecord
 
   has_many :user_threads,
     foreign_key: :thread_id,
-    class_name: :UserThread
+    class_name: :UserThread,
+    dependent: :destroy
 
   has_many :members,
     through: :user_threads,

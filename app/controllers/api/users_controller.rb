@@ -37,7 +37,7 @@ class Api::UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    if @user.delete
+    if @user.destroy
       render json: {:sys_messages => "Account successfully deleted."}, :status => 200
       # redirect_to api_session
     else

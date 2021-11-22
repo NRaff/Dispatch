@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import configureStore from './store/store'
 import Root from './components/root'
-import { createThread, deleteThread, updateThread } from './utils/thread_api'
+import { createThread, deleteThread, updateThread } from './actions/thread_actions'
 
 const getPreloadedState = () => {
   let preloadedState = {}

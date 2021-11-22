@@ -7,8 +7,8 @@ class Api::MessageThreadsController < ApplicationController
       render :show
     else
       @err = @message_thread.errors.messages
-      byebug
-      render "api/errors/errors"
+      # byebug
+      render "api/errors/errors", :status =>  422
     end
   end
 
@@ -18,13 +18,13 @@ class Api::MessageThreadsController < ApplicationController
       render :show
     else
       @err = @message_thread.errors.messages
-      render "api/errors/errors"
+      render "api/errors/errors", :status =>  422
     end
   end
 
   def destroy
     @message_thread = MessageThread.find(params[:id])
-    if @message_thread.delete
+    if @message_thread.destroy
       render json: {:sys_messages => "Thread successfully deleted."}, :status => 200
     else
       render json: {:errors => ["Something went wrong. Please try again"]}, :status => 422
