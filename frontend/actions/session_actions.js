@@ -15,7 +15,7 @@ export const logoutUser = () => ({
 
 export const requestLoginUser = user => dispatch => (
   SessionApi.newSession(user)
-    .then( user => dispatch(loginUser(user)))
+    .then( payload => dispatch(loginUser(payload.user)))
     .fail( err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 

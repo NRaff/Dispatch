@@ -42,7 +42,7 @@ export const createUser = user => dispatch => (
     .then( payload => {
       dispatch(receiveUser(payload.user))
       dispatch(receiveAllThreads(payload.threads))
-      dispatch(loginUser(user))
+      dispatch(loginUser(payload.user))
     })
     .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
