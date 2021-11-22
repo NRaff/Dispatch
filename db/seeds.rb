@@ -11,3 +11,10 @@ users = User.create([
   {password: 123456, display_name: 'Two', email: 'two@email.com'},
   {password: 123456, display_name: 'Three', email: 'three@email.com'}
 ])
+
+threads = User.create([
+  {name: 'Thread 1'},
+  {name: 'Thread 2'},
+  {name: 'Thread 3'},
+  {name: 'Thread 4'},
+])

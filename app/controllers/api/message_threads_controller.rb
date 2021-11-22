@@ -1,20 +1,23 @@
+require 'byebug'
+
 class Api::MessageThreadsController < ApplicationController
   def create
     @message_thread = current_user.threads.create(thread_params)
-    if @message_thread
+    if @message_thread.id
       render :show
     else
-      @errors = @message_thread.errors.messages
+      @err = @message_thread.errors.messages
+      byebug
       render "api/errors/errors"
     end
   end
 
-  def updated
+  def update
     @message_thread = MessageThread.find(params[:id])
     if @message_thread.update(thread_params)
       render :show
     else
-      @errors = @message_thread.errors.messages
+      @err = @message_thread.errors.messages
       render "api/errors/errors"
     end
   end
@@ -29,6 +32,6 @@ class Api::MessageThreadsController < ApplicationController
   end
 
   def thread_params
-    params.require(:message_thread).permit(:name)
+    params.require(:thread).permit(:name)
   end
 end

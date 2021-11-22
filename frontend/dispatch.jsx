@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import * as UserApi from './utils/user_api'
-import * as SessionApi from './utils/session_api'
 import configureStore from './store/store'
-import { requestLoginUser, requestLogoutUser } from './actions/session_actions'
 import Root from './components/root'
+import { createThread, deleteThread, updateThread } from './utils/thread_api'
 
 const getPreloadedState = () => {
   let preloadedState = {}
@@ -25,7 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const store = configureStore(preloadedState);
   ReactDOM.render(<Root store={store} />, root)
   window.store = store;
-  window.login = requestLoginUser //WAE
-  window.logout = requestLogoutUser //WAE
+  window.createThread = createThread
+  window.updateThread = updateThread
+  window.deleteThread = deleteThread
+  
 })
 

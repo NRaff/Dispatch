@@ -1,1 +1,1 @@
-json.extract! thread, *thread.keys
+json.extract! msg_thread, :id, :is_thread, :name
