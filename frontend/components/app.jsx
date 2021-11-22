@@ -5,6 +5,7 @@ import SignupContainer from './Auth/signup_container'
 import { AuthRoute, ProtectedRoute } from "../utils/route_utils"
 import TopNavContainer from './top_nav/top_nav_container'
 import Welcome from "./welcome"
+import ThreadsContainer from './threads/threads_container'
 
 const App = (props) => (
   <HashRouter>
@@ -14,7 +15,7 @@ const App = (props) => (
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />
       <ProtectedRoute path='/' component={TopNavContainer} />
-      {/* protected route, main */}
+      <ProtectedRoute path='/' component={ThreadsContainer} />
 
       
     </div>

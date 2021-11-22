@@ -32,7 +32,7 @@ export const updateThread = thread => dispatch => (
     .fail(err => dispatch(receiveThreadErrors(err.responseJSON.errors)))
 )
 
-export const deleteThread = threadId => dispatch (
+export const deleteThread = threadId => dispatch => (
   ThreadApi.deleteThread(threadId)
     .then( () => dispatch(removeThread(threadId)))
     .fail( err => dispatch(receiveThreadErrors(err.responseJSON.errors)))
