@@ -24,4 +24,8 @@ class MessageThread < ApplicationRecord
   has_many :members,
     through: :user_threads,
     source: :user
+
+  has_many :messages,
+    foreign_key: :thread_id,
+    class_name: :Message
 end

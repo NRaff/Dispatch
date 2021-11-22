@@ -17,10 +17,14 @@ export const logoutUser = () => ({
 export const requestLoginUser = user => dispatch => (
   SessionApi.newSession(user)
     .then( payload => {
+      // debugger
       dispatch(loginUser(payload.user))
       if (payload.threads) dispatch(receiveAllThreads(payload.threads))
     })
-    .fail( err => dispatch(receiveUserErrors(err.responseJSON.errors)))
+    .fail( err => {
+      // debugger
+      dispatch(receiveUserErrors(err.responseJSON.errors))
+    })
 )
 
 export const requestLogoutUser = () => dispatch => (
