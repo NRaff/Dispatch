@@ -18,3 +18,10 @@ threads = User.create([
   {name: 'Thread 3'},
   {name: 'Thread 4'},
 ])
+
+messages = Message.create([
+  {thread_id: 24, message: 'Hello world'},
+  {thread_id: 24, message: 'Hello world 2'},
+  {thread_id: 24, message: 'Hello world 3'},
+  {thread_id: 24, message: 'Hello world 4'}
+])

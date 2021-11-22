@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :users, except: [:new, :edit]
     resources :message_threads, only: [:create, :update, :destroy]
+    resources :messages, only: [:create, :update, :destroy]
   end
 end

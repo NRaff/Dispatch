@@ -1,7 +1,11 @@
+require 'byebug'
+
 class Api::MessagesController < ApplicationController
   def create
-    @message = current_user.messages.create(message_params)
-    if @message.id
+    @message = Message.new(message_params)
+    @message.sender_id = current_user.id
+    # byebug
+    if @message.save
       render :show
     else
       @err = @message.errors.messages
