@@ -32,6 +32,10 @@ class User < ApplicationRecord
     through: :user_threads,
     source: :message_thread
 
+  has_many :accessible_messages,
+    through: :threads,
+    source: :messages
+
   # ASPIRE
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
