@@ -6,7 +6,7 @@ import {
   createMessage,
   updateMessage,
   deleteMessage
-} from './utils/message_api'
+} from './actions/message_actions'
 
 const getPreloadedState = () => {
   let preloadedState = {}
