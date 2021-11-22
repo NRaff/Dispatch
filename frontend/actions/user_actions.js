@@ -1,6 +1,7 @@
 import * as UserApi from '../utils/user_api'
 import { receiveUserErrors } from './error_actions';
 import { loginUser } from './session_actions';
+import { receiveAllThreads } from './thread_actions';
 
 export const RECEIVE_ALL_USERS = 'RECEIVE_ALL_USERS';
 export const RECEIVE_USER = 'RECEIVE_USER';
@@ -29,14 +30,18 @@ export const fetchUsers = () => dispatch => (
 
 export const fetchUser = userId => dispatch => (
   UserApi.fetchUser(userId)
-    .then( user => dispatch(receiveUser(user)))
+    .then( payload => {
+      dispatch(receiveUser(payload.user))
+      dispatch(receiveAllThreads(payload.threads))
+    })
     .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 
 export const createUser = user => dispatch => (
   UserApi.createUser(user)
-    .then( user => {
-      dispatch(receiveUser(user))
+    .then( payload => {
+      dispatch(receiveUser(payload.user))
+      dispatch(receiveAllThreads(payload.threads))
       dispatch(loginUser(user))
     })
     .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
