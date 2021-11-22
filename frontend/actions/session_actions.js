@@ -1,5 +1,6 @@
 import * as SessionApi from '../utils/session_api'
 import { receiveUserErrors } from './error_actions';
+import { receiveAllThreads } from './thread_actions';
 
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
@@ -15,7 +16,10 @@ export const logoutUser = () => ({
 
 export const requestLoginUser = user => dispatch => (
   SessionApi.newSession(user)
-    .then( payload => dispatch(loginUser(payload.user)))
+    .then( payload => {
+      dispatch(loginUser(payload.user))
+      if (payload.threads) dispatch(receiveAllThreads(payload.threads))
+    })
     .fail( err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 

@@ -32,7 +32,7 @@ export const fetchUser = userId => dispatch => (
   UserApi.fetchUser(userId)
     .then( payload => {
       dispatch(receiveUser(payload.user))
-      dispatch(receiveAllThreads(payload.threads))
+      if (payload.threads) dispatch(receiveAllThreads(payload.threads))
     })
     .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
@@ -41,7 +41,7 @@ export const createUser = user => dispatch => (
   UserApi.createUser(user)
     .then( payload => {
       dispatch(receiveUser(payload.user))
-      dispatch(receiveAllThreads(payload.threads))
+      if (payload.threads) dispatch(receiveAllThreads(payload.threads))
       dispatch(loginUser(payload.user))
     })
     .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
