@@ -11,9 +11,11 @@ const App = (props) => (
     <div>
       {/* <Route path='/' render={() => (<h1>Hello World</h1>)} /> */}
       <AuthRoute path='/' component={Welcome} />
-      <ProtectedRoute path='/' component={TopNavContainer} />
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />
+      <ProtectedRoute path='/' component={TopNavContainer} />
+      {/* protected route, main */}
+
       
     </div>
   </HashRouter>
