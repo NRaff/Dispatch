@@ -357,6 +357,10 @@ hr {
   margin-top: 5px;
 }
 
+.full-message:hover .edit-delete {
+  display: flex;
+}
+
 .full-message .profile-light {
   height: 30px;
   width: auto;
@@ -442,10 +446,9 @@ hr {
 }
 
 .edit-delete {
-  display: flex;
+  display: none;
   align-items: center;
-  justify-content: center;
-  flex-grow: 1;
+  justify-content: right;
 }
 
 .edit-btn {
