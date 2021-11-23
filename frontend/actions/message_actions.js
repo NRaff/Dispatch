@@ -1,5 +1,5 @@
 import * as MessageApi from '../utils/message_api'
-import { receiveMessageErrors } from './error_actions';
+import { receiveMessageErrors, removeMessageErrors } from './error_actions';
 
 export const RECEIVE_ALL_MESSAGES = 'RECEIVE_ALL_MESSAGES';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
@@ -22,7 +22,10 @@ export const removeMessage = messageId => ({
 
 export const createMessage = message => dispatch => (
   MessageApi.createMessage(message)
-    .then( message => dispatch(receiveMessage(message)))
+    .then( message => {
+      dispatch(receiveMessage(message))
+      dispatch(removeMessageErrors())
+    })
     .fail( err => dispatch(receiveMessageErrors(err.responseJSON.errors)))
 )
 

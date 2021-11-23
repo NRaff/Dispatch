@@ -1,5 +1,6 @@
 import {
-  RECEIVE_MESSAGE_ERRORS
+  RECEIVE_MESSAGE_ERRORS,
+  REMOVE_MESSAGE_ERRORS
 } from '../../actions/error_actions'
 
 const MessageErrorsReducer = (state={}, action) => {
@@ -8,7 +9,9 @@ const MessageErrorsReducer = (state={}, action) => {
   switch (action.type) {
     case RECEIVE_MESSAGE_ERRORS:
       nextState = action.errors
-      return nextState
+      return nextState;
+    case REMOVE_MESSAGE_ERRORS:
+      return {};
     default:
       return state;
   }

@@ -11,6 +11,10 @@ class NewMessage extends React.Component {
     this.handleSend = this.handleSend.bind(this)
   }
 
+  componentWillUnmount(){
+    this.props.removeErrors();
+  }
+
   handleInput(e) {
     let nextState = Object.assign({}, this.state)
     nextState[e.target.id] = e.target.value
@@ -26,10 +30,31 @@ class NewMessage extends React.Component {
     })
   }
 
+  displayErrors() {
+    const { errors } = this.props
+    const displayText = {
+      thread: "Make sure you've selected a thread!",
+      message: "You're message can't be empty."
+    }
+    let ui_errors = errors.filter(err => Object.keys(displayText).includes(err))
+    if (errors.length > 0) {
+      return (
+        <ul className='errorSection'>
+          {
+            ui_errors.map((err, idx) => (
+              <li key={idx} className='errorItem'>{`${displayText[err]}`}</li>
+            ))
+          }
+        </ul>
+      )
+    }
+  }
+
   render(){
 
     return (
       <div className='new-message'>
+        {this.displayErrors()}
         <textarea
           id="message"
           cols="30"
