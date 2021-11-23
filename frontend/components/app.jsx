@@ -10,7 +10,6 @@ import ThreadsContainer from './threads/threads_container'
 const App = (props) => (
   <HashRouter>
     <div>
-      {/* <Route path='/' render={() => (<h1>Hello World</h1>)} /> */}
       <AuthRoute path='/' component={Welcome} />
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />
