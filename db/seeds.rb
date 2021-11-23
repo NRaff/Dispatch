@@ -5,13 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.delete_all
+
 users = User.create([
   {password: 123456, display_name: 'nick', email: 'nick@email.com'},
   {password: 123456, display_name: 'One', email: 'one@email.com'},
   {password: 123456, display_name: 'Two', email: 'two@email.com'},
-  {password: 123456, display_name: 'Three', email: 'three@email.com'}
+  {password: 123456, display_name: 'Three', email: 'three@email.com'},
+  {password: 123456, display_name: 'Demo', email: 'Demo@email.com'}
 ])
 
+MessageThread.delete_all
 threads = MessageThread.create([
   {name: 'Thread 1'},
   {name: 'Thread 2'},
