@@ -10,6 +10,7 @@ users = User.create([
   {password: 123456, display_name: 'One', email: 'one@email.com'},
   {password: 123456, display_name: 'Two', email: 'two@email.com'},
   {password: 123456, display_name: 'Three', email: 'three@email.com'}
+  {password: 123456, display_name: 'Demo', email: 'demo@email.com'}
 ])
 
 threads = User.create([

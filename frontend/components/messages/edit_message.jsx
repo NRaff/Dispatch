@@ -1,31 +1,31 @@
 import React from "react";
 
-class NewMessage extends React.Component {
+class EditMessage extends React.Component {
   constructor(props) {
     super(props)
-    // hardcoding the thread id until a later date
-    this.state = {
-      threadId: 24,
-      message: ''
-    }
+    this.state = this.props.message
     this.handleInput = this.handleInput.bind(this)
-    this.handleSend = this.handleSend.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
   }
 
-  handleInput(e) {
+  handleInput(e){
     let nextState = Object.assign({}, this.state)
     nextState[e.target.id] = e.target.value
     this.setState(nextState)
   }
 
-  handleSend(e){
-    this.props.createMessage(this.state)
+  handleUpdate(e){
+    this.props.updateMessage(this.state)
+    this.props.history.goBack()
   }
+
 
   render(){
 
     return (
-      <div className='new-message'>
+      <div className='edit-popover'>
+        <h1>Edit Message</h1>
+        <span className='close-btn'>&times;</span>
         <textarea
           id="message"
           cols="30"
@@ -35,12 +35,12 @@ class NewMessage extends React.Component {
           placeholder='Send a message...'
         ></textarea>
         <button
-          onClick={this.handleSend}
+          onClick={this.handleUpdate}
           className='ui-button'
-        >Send</button>
+        >Save changes</button>
       </div>
     )
   }
 }
 
-export default NewMessage;
+export default EditMessage;

@@ -7,22 +7,31 @@ import TopNavContainer from './top_nav/top_nav_container'
 import Welcome from "./welcome"
 import ThreadsContainer from './threads/threads_container'
 import MessagesContainer from './messages/messages_container'
+import NewMessageContainer from './messages/new_message_container'
+import EditMessageContainer from './messages/edit_message_container'
 
 const App = (props) => (
   <HashRouter>
-    <div>
+    <>
       {/* <Route path='/' render={() => (<h1>Hello World</h1>)} /> */}
       <AuthRoute path='/' component={Welcome} />
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />
-      <ProtectedRoute path='/' component={TopNavContainer} />
-      <div className='main-app'>
-        <ProtectedRoute path='/' component={ThreadsContainer} />
-        <ProtectedRoute path='/' component={MessagesContainer} />
+      <div className='app-page'>
+        <ProtectedRoute path='/' component={TopNavContainer} />
+        <div className='main-app'>
+          <ProtectedRoute path='/' component={ThreadsContainer} />
+          <div className='messages-area'>
+            <ProtectedRoute path='/' component={MessagesContainer} />
+            <ProtectedRoute path='/' component={NewMessageContainer} />
+            <ProtectedRoute exact path='/:messageId' component={EditMessageContainer} />
+          </div>
+        </div>
       </div>
+      
 
       
-    </div>
+    </>
   </HashRouter>
 )
 

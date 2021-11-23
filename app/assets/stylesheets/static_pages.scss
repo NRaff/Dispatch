@@ -14,6 +14,7 @@ body {
   background-color: $super-light;
   font-family: 'Nunito Sans', sans-serif;
   color: $super-light;
+  height: 100vh;
 }
 
 h1 {
@@ -243,6 +244,7 @@ hr {
   align-items: left;
   background-color: $super-light;
   width: 200px;
+  height: fit-content;
   // margin-left: 10px;
   // margin-top: 10px;
   border-radius: 5px;
@@ -318,15 +320,132 @@ hr {
   background-color: $light-blue;
 }
 
+#root {
+  height: 100%;
+}
+
+.app-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .main-app {
   display: flex;
   padding: 10px;
+  height: 100%;
+}
+
+.messages-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 7;
+  margin-left: 10px;
 }
 
 .messages-index {
-  flex-grow: 7;
-  margin-left: 10px;
+  flex-grow: 9;
   background-color: $pop-light;
   border-radius: 5px;
   padding: 5px;
+  margin-bottom: 5px;
+}
+
+.full-message {
+  display: flex;
+  justify-content: left;
+  margin-top: 5px;
+}
+
+.full-message .profile-light {
+  height: 30px;
+  width: auto;
+}
+
+.message-item {
+  font-size: 12px;
+}
+
+.message-header {
+  display: flex;
+  // flex-direction: column;
+  justify-content: left;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.message-header > p {
+  font-size: 10px;
+  display: inline-block;
+  color: $super-light;
+  margin-left: 10px;
+  vertical-align: bottom;
+}
+
+.message-header > h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.new-message {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.new-message > .ui-button {
+  margin-top: 5px;
+  color: $super-light;
+  flex-grow: 1;
+}
+
+.new-message > textarea {
+  font-family: 'Nunito Sans', sans-serif;
+  padding: 5px;
+  color: $super-dark;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+}
+
+.edit-popover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  right: 30px;
+  left: 30px;
+  bottom: 400px;
+  background-color: $dark;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.edit-popover h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.edit-popover > .ui-button {
+  margin-top: 5px;
+  color: $super-light;
+  // flex-grow: 1;
+}
+
+.edit-popover > textarea {
+  font-family: 'Nunito Sans', sans-serif;
+  padding: 5px;
+  color: $super-dark;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+}
+
+.close-btn {
+  position: absolute;
+  font-size: 30px;
+  right: 10px;
+  top: 3px;
+  cursor: pointer;
 }
