@@ -410,13 +410,13 @@ hr {
 }
 
 .edit-popover {
-  position: relative;
+  // position: relative;
   display: flex;
   flex-direction: column;
-  right: 30px;
-  left: 30px;
-  bottom: 400px;
-  background-color: $dark;
+  // left: 30px;
+  // right: 30px;
+  // top: 100px;
+  background-color: $light-red;
   padding: 10px;
   border-radius: 5px;
 }
@@ -426,10 +426,8 @@ hr {
   margin-bottom: 5px;
 }
 
-.edit-popover > .ui-button {
-  margin-top: 5px;
-  color: $super-light;
-  // flex-grow: 1;
+.edit-popover .ui-button:first-child {
+  margin-right: 5px;
 }
 
 .edit-popover > textarea {
@@ -442,10 +440,15 @@ hr {
   resize: none;
 }
 
-.close-btn {
-  position: absolute;
-  font-size: 30px;
-  right: 10px;
-  top: 3px;
-  cursor: pointer;
+.edit-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel {
+  background-color: $dark;
+}
+
+.save {
+  background-color: $light-blue;
 }

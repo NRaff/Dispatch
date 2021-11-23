@@ -25,7 +25,6 @@ class EditMessage extends React.Component {
     return (
       <div className='edit-popover'>
         <h1>Edit Message</h1>
-        <span className='close-btn'>&times;</span>
         <textarea
           id="message"
           cols="30"
@@ -34,10 +33,16 @@ class EditMessage extends React.Component {
           onChange={this.handleInput}
           placeholder='Send a message...'
         ></textarea>
-        <button
-          onClick={this.handleUpdate}
-          className='ui-button'
-        >Save changes</button>
+        <div className='edit-options'>
+          <button
+            onClick={this.props.history.goBack}
+            className='ui-button cancel'
+          >Cancel</button>
+          <button
+            onClick={this.handleUpdate}
+            className='ui-button save'
+          >Save changes</button>
+        </div>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from "react"
 import { HashRouter, Route } from "react-router-dom"
+import { Switch } from "react-router"
 import LoginContainer from './Auth/login_container'
 import SignupContainer from './Auth/signup_container'
 import { AuthRoute, ProtectedRoute } from "../utils/route_utils"
@@ -23,8 +24,11 @@ const App = (props) => (
           <ProtectedRoute path='/' component={ThreadsContainer} />
           <div className='messages-area'>
             <ProtectedRoute path='/' component={MessagesContainer} />
-            <ProtectedRoute path='/' component={NewMessageContainer} />
-            <ProtectedRoute exact path='/:messageId' component={EditMessageContainer} />
+            <Switch>
+              <ProtectedRoute exact path='/:messageId' component={EditMessageContainer} />
+              <ProtectedRoute exact path='/' component={NewMessageContainer} />
+            </Switch> 
+            
           </div>
         </div>
       </div>
