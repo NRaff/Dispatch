@@ -5,6 +5,7 @@ class NewMessage extends React.Component {
     super(props)
     // hardcoding the thread id until a later date
     this.state = {
+      senderId: this.props.userId,
       message: ''
     }
     this.handleInput = this.handleInput.bind(this)
@@ -24,7 +25,8 @@ class NewMessage extends React.Component {
   handleSend(e){
     let message = Object.assign({}, this.state)
     message['threadId'] = this.props.activeThreadId
-    this.props.createMessage(message)
+    App.cable.subscriptions.subscriptions[0].speak({message})
+    // this.props.createMessage(message)
     this.setState({
       message: ''
     })

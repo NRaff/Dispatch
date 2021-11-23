@@ -5,7 +5,8 @@ import NewMessage from "./new_message";
 
 const mSTP = state => ({
   activeThreadId: state.ui.activeThreadId,
-  errors: Object.keys(state.errors.messageErrors)
+  errors: Object.keys(state.errors.messageErrors),
+  userId: state.session.userId
 })
 
 const mDTP = dispatch => ({

@@ -1,4 +1,4 @@
-require 'byebug'
+# require 'byebug'
 
 class Api::MessagesController < ApplicationController
   def create

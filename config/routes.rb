@@ -8,4 +8,6 @@ Rails.application.routes.draw do
     resources :message_threads, only: [:create, :update, :destroy]
     resources :messages, only: [:create, :update, :destroy]
   end
+
+  mount ActionCable.server, at: '/cable'
 end
