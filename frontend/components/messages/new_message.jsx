@@ -20,6 +20,9 @@ class NewMessage extends React.Component {
 
   handleSend(e){
     this.props.createMessage(this.state)
+    this.setState({
+      message: ''
+    })
   }
 
   render(){

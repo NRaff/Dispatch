@@ -364,6 +364,7 @@ hr {
 
 .message-item {
   font-size: 12px;
+  flex-grow: 4;
 }
 
 .message-header {
@@ -438,6 +439,45 @@ hr {
   border-radius: 5px;
   outline: none;
   resize: none;
+}
+
+.edit-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.edit-btn {
+  background-color: $light-blue;
+  text-decoration: none;
+  color: $super-light;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  height: fit-content;
+}
+
+.edit-btn:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+.delete-btn {
+  background-color: $dark-red;
+  color: $super-light;
+  border-radius: 5px;
+  padding: 5px;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  height: fit-content;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
 }
 
 .edit-options {
