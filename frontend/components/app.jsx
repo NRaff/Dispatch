@@ -25,8 +25,8 @@ const App = (props) => (
           <div className='messages-area'>
             <ProtectedRoute path='/' component={MessagesContainer} />
             <Switch>
+              <ProtectedRoute path='/' component={NewMessageContainer} />
               <ProtectedRoute exact path='/:messageId' component={EditMessageContainer} />
-              <ProtectedRoute exact path='/' component={NewMessageContainer} />
             </Switch> 
             
           </div>

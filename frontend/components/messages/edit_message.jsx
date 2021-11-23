@@ -21,7 +21,6 @@ class EditMessage extends React.Component {
 
 
   render(){
-
     return (
       <div className='edit-popover'>
         <h1>Edit Message</h1>
