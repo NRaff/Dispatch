@@ -7,7 +7,6 @@ class Api::MessageThreadsController < ApplicationController
       render :show
     else
       @err = @message_thread.errors.messages
-      # byebug
       render "api/errors/errors", :status =>  422
     end
   end

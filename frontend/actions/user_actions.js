@@ -49,7 +49,7 @@ export const createUser = user => dispatch => (
 
 export const deleteUser = userId => dispatch => (
   UserApi.deleteUser(userId)
-    .then( () => console.log('User deleted'))
+    // .then( () => console.log('User deleted'))
     .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )
 

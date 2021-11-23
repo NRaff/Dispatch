@@ -17,12 +17,10 @@ export const logoutUser = () => ({
 export const requestLoginUser = user => dispatch => (
   SessionApi.newSession(user)
     .then( payload => {
-      // debugger
       dispatch(loginUser(payload.user))
       if (payload.threads) dispatch(receiveAllThreads(payload.threads))
     })
     .fail( err => {
-      // debugger
       dispatch(receiveUserErrors(err.responseJSON.errors))
     })
 )
@@ -30,5 +28,5 @@ export const requestLoginUser = user => dispatch => (
 export const requestLogoutUser = () => dispatch => (
   SessionApi.deleteSession()
     .then( () => dispatch(logoutUser()))
-    .fail( err => console.log(err.responseJSON.errors)) //does there need to be error handling here?
+    // .fail( err => console.log(err.responseJSON.errors)) //does there need to be error handling here?
 )

@@ -7,7 +7,6 @@ class Api::UsersController < ApplicationController
       login!(@user)
       render :show
     else
-      # byebug
       @err = @user.errors.messages
       render "api/errors/errors", :status => 422
       # render :json => {:errors => @user.errors.messages}, :status => 422
