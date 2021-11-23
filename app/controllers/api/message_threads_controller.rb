@@ -1,5 +1,3 @@
-require 'byebug'
-
 class Api::MessageThreadsController < ApplicationController
   def create
     @message_thread = current_user.threads.create(thread_params)
