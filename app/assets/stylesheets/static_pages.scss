@@ -14,6 +14,7 @@ body {
   background-color: $super-light;
   font-family: 'Nunito Sans', sans-serif;
   color: $super-light;
+  height: 100vh;
 }
 
 h1 {
@@ -243,9 +244,11 @@ hr {
   align-items: left;
   background-color: $super-light;
   width: 200px;
-  margin-left: 10px;
-  margin-top: 10px;
+  height: fit-content;
+  // margin-left: 10px;
+  // margin-top: 10px;
   border-radius: 5px;
+  flex-grow: 0.25;
 }
 
 .all-threads .thread-item:first-child {
@@ -264,6 +267,10 @@ hr {
   justify-content: space-between;
   color: $dark;
   padding: 5px;
+}
+
+.active-thread {
+  background-color: $light-blue;
 }
 
 .add-thread {
@@ -314,5 +321,177 @@ hr {
 } 
 
 .thread-item:hover {
+  background-color: $light-blue;
+}
+
+#root {
+  height: 100%;
+}
+
+.app-page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-app {
+  display: flex;
+  padding: 10px;
+  height: 100%;
+}
+
+.messages-area {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 7;
+  margin-left: 10px;
+}
+
+.messages-index {
+  flex-grow: 9;
+  background-color: $pop-light;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.full-message {
+  display: flex;
+  justify-content: left;
+  margin-top: 5px;
+}
+
+.full-message:hover .edit-delete {
+  display: flex;
+}
+
+.full-message .profile-light {
+  height: 30px;
+  width: auto;
+}
+
+.message-item {
+  font-size: 12px;
+  flex-grow: 4;
+}
+
+.message-header {
+  display: flex;
+  // flex-direction: column;
+  justify-content: left;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.message-header > p {
+  font-size: 10px;
+  display: inline-block;
+  color: $super-light;
+  margin-left: 10px;
+  vertical-align: bottom;
+}
+
+.message-header > h3 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.new-message {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.new-message > .ui-button {
+  margin-top: 5px;
+  color: $super-light;
+  flex-grow: 1;
+}
+
+.new-message > textarea {
+  font-family: 'Nunito Sans', sans-serif;
+  padding: 5px;
+  color: $super-dark;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+}
+
+.edit-popover {
+  display: flex;
+  flex-direction: column;
+  background-color: $light-red;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.edit-popover h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.edit-popover .ui-button:first-child {
+  margin-right: 5px;
+}
+
+.edit-popover > textarea {
+  font-family: 'Nunito Sans', sans-serif;
+  padding: 5px;
+  color: $super-dark;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+}
+
+.edit-delete {
+  display: none;
+  align-items: center;
+  justify-content: right;
+}
+
+.edit-btn {
+  background-color: $light-blue;
+  text-decoration: none;
+  color: $super-light;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  height: fit-content;
+}
+
+.edit-btn:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+.delete-btn {
+  background-color: $dark-red;
+  color: $super-light;
+  border-radius: 5px;
+  padding: 5px;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  height: fit-content;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+.edit-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel {
+  background-color: $dark;
+}
+
+.save {
   background-color: $light-blue;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import NewThread from "./new_thread";
 import ThreadItem from "./thread_item";
 
-const ThreadsIndex = ({threads, createThread, deleteThread}) => {
+const ThreadsIndex = ({threads, createThread, deleteThread, setActiveThread}) => {
   return (
     <div className='all-threads'>
       <NewThread createThread={createThread} />
@@ -12,6 +12,7 @@ const ThreadsIndex = ({threads, createThread, deleteThread}) => {
             key={item.id}
             thread={item}
             deleteThread={() => deleteThread(item.id)}
+            setActiveThread={() => setActiveThread(item.id)}
           />
         ))
       }

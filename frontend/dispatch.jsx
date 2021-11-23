@@ -2,7 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import configureStore from './store/store'
 import Root from './components/root'
-import { createThread, deleteThread, updateThread } from './actions/thread_actions'
+import {
+  createMessage,
+  updateMessage,
+  deleteMessage
+} from './actions/message_actions'
 
 const getPreloadedState = () => {
   let preloadedState = {}
@@ -23,9 +27,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const store = configureStore(preloadedState);
   ReactDOM.render(<Root store={store} />, root)
   window.store = store;
-  window.createThread = createThread
-  window.updateThread = updateThread
-  window.deleteThread = deleteThread
-  
 })
 
