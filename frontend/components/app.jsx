@@ -13,7 +13,6 @@ import EditMessageContainer from './messages/edit_message_container'
 
 const App = (props) => (
   <HashRouter>
-    <div>
       <AuthRoute path='/' component={Welcome} />
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />
@@ -31,7 +30,6 @@ const App = (props) => (
           </div>
         </div>
       </div>
-    </div>
   </HashRouter>
 )
 
