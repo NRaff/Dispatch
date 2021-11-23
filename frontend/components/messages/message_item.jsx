@@ -18,7 +18,7 @@ const MessageItem = ({message, sender, updateMessage, deleteMessage}) => (
       <p>{message.message}</p>
     </div>
     <div className='edit-delete'>
-      <Link className='edit-btn' to={`/${message.id}`}>Edit</Link>
+      <Link className='edit-btn' to={`/edit/${message.id}`}>Edit</Link>
       <button 
         onClick={() => deleteMessage(message.id)}
         className='delete-btn'
