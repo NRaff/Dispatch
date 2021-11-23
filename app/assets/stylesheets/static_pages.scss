@@ -269,6 +269,10 @@ hr {
   padding: 5px;
 }
 
+.active-thread {
+  background-color: $light-blue;
+}
+
 .add-thread {
   display: flex;
   // justify-content: space-between;
