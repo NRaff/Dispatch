@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icons } from "../../utils/theme";
+import * as RealtimeThread from '../../utils/sockets'
 
 const createdTime = timestamp => {
   let date = new Date(timestamp)
@@ -8,7 +9,7 @@ const createdTime = timestamp => {
 }
 
 const deleteMessage = (payload) => {
-  App.cable.subscriptions.subscriptions[0].deleteMessage(payload)
+  RealtimeThread.deleteMessage(payload)
 }
 
 

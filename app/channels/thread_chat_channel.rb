@@ -45,7 +45,8 @@ class ThreadChatChannel < ApplicationCable::Channel
   end
 
   def update_message(payload)
-    message = Message.find(params[:id])
+    # byebug
+    message = Message.find(payload['message']['id'])
     if message.update(message_params(payload))
       socket = {
         message: set_message_JSON(message), 
@@ -60,6 +61,7 @@ class ThreadChatChannel < ApplicationCable::Channel
         type: 'RECEIVE_MESSAGE_ERRORS'
       }
     end
+    ThreadChatChannel.broadcast_to('thread_chat', socket)
   end
 
   def delete_message(payload)

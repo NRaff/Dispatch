@@ -13,10 +13,6 @@ class NewMessage extends React.Component {
     this.handleSend = this.handleSend.bind(this)
   }
 
-  componentWillUnmount(){
-    this.props.removeErrors();
-  }
-
   handleInput(e) {
     let nextState = Object.assign({}, this.state)
     nextState[e.target.id] = e.target.value

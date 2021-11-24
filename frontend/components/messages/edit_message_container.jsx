@@ -12,7 +12,8 @@ const mSTP = (state, ownProps) => ({
 })
 
 const mDTP = dispatch => ({
-  updateMessage: message => dispatch(updateMessage(message))
+  updateMessage: message => dispatch(updateMessage(message)),
+  dispatch: dispatch
 })
 
 export default withRouter(connect(mSTP, mDTP)(EditMessage))

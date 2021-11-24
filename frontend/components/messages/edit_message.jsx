@@ -1,4 +1,5 @@
 import React from "react";
+import * as RealtimeThread from '../../utils/sockets'
 
 class EditMessage extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class EditMessage extends React.Component {
   }
 
   handleUpdate(e){
-    this.props.updateMessage(this.state)
+    let payload = {message: this.state}
+    payload['currentUserId'] = this.props.userId
+    RealtimeThread.updateMessage(payload)
     this.props.history.goBack()
   }
 
