@@ -15,6 +15,9 @@ body {
   font-family: 'Nunito Sans', sans-serif;
   color: $super-light;
   height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  overflow: hidden;
   // position: fixed;
   // top: 0px;
   // bottom: 0px;
@@ -163,7 +166,7 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 5px;
+  height: 8vh;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -240,20 +243,6 @@ hr {
 .profile-dropdown > li:hover {
   background-color: $light-blue;
   color: $super-light;
-}
-
-.all-threads {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: left;
-  background-color: $super-light;
-  width: 200px;
-  height: fit-content;
-  // margin-left: 10px;
-  // margin-top: 10px;
-  border-radius: 5px;
-  flex-grow: 0.25;
 }
 
 .all-threads .thread-item:first-child {
@@ -334,42 +323,69 @@ hr {
 }
 
 .app-page {
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100vw;
 }
 
 .main-app {
+  // position: relative;
+  // top: 0px;
+  // bottom: 0px;
+  // left: 0px;
+  // right: 0px;
   display: flex;
-  padding: 10px;
-  height: 100vh;
+  // padding: 10px;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  height: 92vh;
+
+}
+
+.all-threads {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: left;
+  background-color: $super-light;
+  width: 10vw;
+  min-width: 150px;
+  height: fit-content;
+  border-radius: 5px;
+  flex-grow: 0.25;
 }
 
 .messages-area {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  margin-left: 10px;
+  margin-left: 1vh;
+  height: 91vh;
+  width: 88vw;
 }
 
 .messages-index {
   background-color: $pop-light;
   border-radius: 5px;
-  padding: 5px;
-  margin-bottom: 5px;
-  flex: 1;
+  margin-bottom: 1vh;
+  height: 79vh;
+  width: 100%;
   overflow: auto;
-  max-height: 65%;
-//   position: absolute;
-//   right: 10px;
-//   bottom: 10px;
-//   left: 10px;
+  overflow-x:hidden;
 }
 
 .full-message {
   display: flex;
   justify-content: left;
   margin-top: 5px;
+  width: 100%;
+  overflow-wrap: normal;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.full-message:hover {
+  background-color: $light;
 }
 
 .full-message:hover .edit-delete {
@@ -379,11 +395,18 @@ hr {
 .full-message .profile-light {
   height: 30px;
   width: auto;
+  align-self: flex-start;
 }
 
 .message-item {
   font-size: 12px;
   flex-grow: 4;
+}
+
+.message-item p {
+  overflow-wrap: normal;
+  word-break: break-all;
+  white-space: pre-line;
 }
 
 .message-header {
@@ -410,6 +433,7 @@ hr {
 .new-message {
   display: flex;
   flex-direction: column;
+  height: 12vh;
   width: 100%;
 }
 
@@ -458,7 +482,9 @@ hr {
 .edit-delete {
   display: none;
   align-items: center;
+  align-self: flex-start;
   justify-content: right;
+  padding-right: 5px;
 }
 
 .edit-btn {
