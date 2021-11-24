@@ -1,4 +1,5 @@
 import React from "react";
+import * as RealtimeThread from '../../utils/sockets'
 
 class NewMessage extends React.Component {
   constructor(props) {
@@ -25,8 +26,7 @@ class NewMessage extends React.Component {
   handleSend(e){
     let message = Object.assign({}, this.state)
     message['threadId'] = this.props.activeThreadId
-    App.cable.subscriptions.subscriptions[0].receiveMessage({message})
-    // this.props.createMessage(message)
+    RealtimeThread.newMessage({message})
     this.setState({
       message: ''
     })

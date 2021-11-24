@@ -37,7 +37,8 @@ class ThreadChatChannel < ApplicationCable::Channel
       socket = {
         errors: err,
         status: 422,
-        currentUser: message.sender_id
+        currentUser: message.sender_id,
+        type: 'RECEIVE_MESSAGE_ERRORS'
       }
     end
     ThreadChatChannel.broadcast_to('thread_chat', socket)
@@ -55,7 +56,8 @@ class ThreadChatChannel < ApplicationCable::Channel
       socket = {
         errors: err,
         status: 422,
-        currentUser: payload['currentUserId']
+        currentUser: payload['currentUserId'],
+        type: 'RECEIVE_MESSAGE_ERRORS'
       }
     end
   end
@@ -69,7 +71,8 @@ class ThreadChatChannel < ApplicationCable::Channel
       socket = {
         errors: err,
         status: 422,
-        currentUser: payload['sender_id']
+        currentUser: payload['sender_id'],
+        type: 'RECEIVE_MESSAGE_ERRORS'
       }
     end
     ThreadChatChannel.broadcast_to('thread_chat', socket)
