@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import { createThread, deleteThread } from "../../actions/thread_actions"
-import { receiveActiveThread } from "../../actions/ui_actions"
+import { receiveActiveThread, setupActiveThread } from "../../actions/ui_actions"
 import ThreadsIndex from "./threads_index"
 
 const mSTP = state => ({
@@ -11,7 +11,7 @@ const mSTP = state => ({
 const mDTP = dispatch => ({
   createThread: newThread => dispatch(createThread(newThread)),
   deleteThread: threadId => dispatch(deleteThread(threadId)),
-  setActiveThread: threadId => dispatch(receiveActiveThread(threadId))
+  setActiveThread: threadId => dispatch(setupActiveThread(threadId))
 })
 
 export default connect(mSTP,mDTP)(ThreadsIndex)

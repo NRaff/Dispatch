@@ -34,7 +34,7 @@ export const fetchUser = userId => dispatch => (
     .then( payload => {
       dispatch(receiveUser(payload.user))
       if (payload.threads) dispatch(receiveAllThreads(payload.threads))
-      if (payload.messages) dispatch(receiveAllMessages(payload.messages))
+      // if (payload.messages) dispatch(receiveAllMessages(payload.messages))
     })
     .fail(err => dispatch(receiveUserErrors(err.responseJSON.errors)))
 )

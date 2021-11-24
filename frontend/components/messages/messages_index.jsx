@@ -16,6 +16,7 @@ class MessagesIndex extends React.Component {
   componentDidMount() {
     this.props.fetchUsers();
     RealtimeThread.createRealtimeThread(this.props.dispatch)
+    RealtimeThread.getThreadMessages(this.props.activeThreadId)
   }
 
   render() {

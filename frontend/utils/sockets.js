@@ -21,6 +21,10 @@ export const createRealtimeThread = dispatch => {
   );
 }
 
+export const getThreadMessages = threadId => {
+  App.cable.subscriptions.subscriptions[0].receiveThreadMessages(threadId)
+}
+
 export const newMessage = payload => {
   App.cable.subscriptions.subscriptions[0].receiveMessage(payload)
 }

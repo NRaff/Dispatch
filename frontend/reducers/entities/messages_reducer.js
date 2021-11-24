@@ -1,4 +1,5 @@
 import {
+  CLEAR_MESSAGES,
   RECEIVE_ALL_MESSAGES,
   RECEIVE_MESSAGE,
   REMOVE_MESSAGE
@@ -17,6 +18,8 @@ const MessagesReducer = (state={}, action) => {
     case REMOVE_MESSAGE:
       delete nextState[action.messageId]
       return nextState;
+    case CLEAR_MESSAGES:
+      return {};
     default:
       return state;
   }

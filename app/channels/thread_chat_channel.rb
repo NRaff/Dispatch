@@ -23,7 +23,6 @@ class ThreadChatChannel < ApplicationCable::Channel
         errors: err,
         status: 422
       }
-      byebug
     end
     ThreadChatChannel.broadcast_to('thread_chat', socket)
   end
@@ -45,7 +44,6 @@ class ThreadChatChannel < ApplicationCable::Channel
   end
 
   def update_message(payload)
-    # byebug
     message = Message.find(payload['message']['id'])
     if message.update(message_params(payload))
       socket = {
@@ -80,14 +78,13 @@ class ThreadChatChannel < ApplicationCable::Channel
     ThreadChatChannel.broadcast_to('thread_chat', socket)
   end
 
-  def receive_thread_messages(thread_id)
-    byebug
-    thread = MessageThread
+  def receive_thread_messages(payload)
+    msg_thread = MessageThread
               .includes(:messages)
-              .where(id: thread_id)
+              .find(payload['threadId'])
     messages = {}
-    if thread
-      messages = set_messages_JSON(thread.messages)
+    if msg_thread
+      messages = set_messages_JSON(msg_thread.messages)
     end
     socket = {messages: messages, type: 'RECEIVE_ALL_MESSAGES'}
     ThreadChatChannel.broadcast_to('thread_chat', socket)

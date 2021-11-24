@@ -12,9 +12,10 @@ import MessagesIndex from "./messages_index"
 const mSTP = state => {
   // debugger
   return ({
-  messages: activeThreadMessages(state.ui.activeThreadId, Object.values(state.entities.messages)),
+  messages: Object.values(state.entities.messages),//activeThreadMessages(state.ui.activeThreadId, Object.values(state.entities.messages)),
   users: state.entities.users,
-  currentUserId: state.session.userId
+  currentUserId: state.session.userId,
+  activeThreadId: state.ui.activeThreadId
 })
 }
 
@@ -24,6 +25,7 @@ const mDTP = dispatch => ({
   updateMessage: message => dispatch(updateMessage(message)),
   deleteMessage: messageId => dispatch(deleteMessage(messageId)),
   receiveMessage: message => dispatch(receiveMessage(message)),
+  clearMessages: () => dispatch(clearMessages()),
   dispatch: dispatch
 })
 
