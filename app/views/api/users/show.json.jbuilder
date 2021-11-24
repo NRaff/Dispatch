@@ -1,8 +1,3 @@
-require 'byebug'
-
-
-# threadMsgs = @user.threads.includes(:messages)
-
 threads = @user.threads
 messages = @user.accessible_messages
 # byebug

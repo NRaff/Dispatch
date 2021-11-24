@@ -25,7 +25,7 @@ class NewMessage extends React.Component {
   handleSend(e){
     let message = Object.assign({}, this.state)
     message['threadId'] = this.props.activeThreadId
-    App.cable.subscriptions.subscriptions[0].speak({message})
+    App.cable.subscriptions.subscriptions[0].receiveMessage({message})
     // this.props.createMessage(message)
     this.setState({
       message: ''

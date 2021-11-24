@@ -7,7 +7,12 @@ const createdTime = timestamp => {
   return date.toLocaleString()
 }
 
-const MessageItem = ({message, sender, updateMessage, deleteMessage}) => (
+const deleteMessage = (payload) => {
+  App.cable.subscriptions.subscriptions[0].deleteMessage(payload)
+}
+
+
+const MessageItem = ({message, sender, currentUserId, updateMessage, /*deleteMessage*/}) => (
   <div className='full-message'>
     <img className={Icons.profile.lightProfile} alt="profileImg" />
     <div className='message-item'>
@@ -20,7 +25,7 @@ const MessageItem = ({message, sender, updateMessage, deleteMessage}) => (
     <div className='edit-delete'>
       <Link className='edit-btn' to={`/edit/${message.id}`}>Edit</Link>
       <button 
-        onClick={() => deleteMessage(message.id)}
+        onClick={() => deleteMessage({id: message.id, sender_id: currentUserId})}
         className='delete-btn'
       >Delete</button>
     </div>

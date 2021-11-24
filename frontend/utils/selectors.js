@@ -1,3 +1,7 @@
 export const activeThreadMessages = (threadId, allMessages) => {
-  return allMessages.filter(msg => msg.threadId === threadId)
+  let threadMessages = allMessages.filter(msg => {
+
+    return msg.threadId === threadId
+  })
+  return threadMessages
 }

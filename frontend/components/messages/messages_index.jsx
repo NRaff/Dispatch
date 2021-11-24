@@ -5,6 +5,11 @@ import * as Casify from "../../utils/casify"
 class MessagesIndex extends React.Component {
   constructor(props){
     super(props)
+    this.bottom = React.createRef()
+  }
+
+  componentDidUpdate(){
+    this.bottom.current.scrollIntoView();
   }
 
   componentDidMount() {
@@ -13,28 +18,20 @@ class MessagesIndex extends React.Component {
       { channel: "ThreadChatChannel"},
       {
         received: data => {
-          debugger
-          let content = data.message
-          // debugger
-          let newData = {
-            message: content.message,
-            threadId: content.thread_id,
-            senderId: content.sender_id,
-            createdAt: content.created_at,
-            id: content.id
-          }
-          this.props.receiveMessage(newData)
+          this.props.dispatch(data)
         },
-        speak: function(data) {
-          return this.perform("speak", data)
+        receiveMessage: function(data) {
+          return this.perform("receive_message", data)
+        },
+        receiveThreadMessages: function(data) {
+          return this.perform("receive_thread_messages", data)
+        },
+        deleteMessage: function(data) {
+          return this.perform("delete_message", data)
         }
       }
     );
   }
-
-  // componentDidUpdate(){
-  //   this.bottom.scrollIntoView();
-  // }
 
   render() {
     const {messages, users, createMessage, updateMessage, deleteMessage} = this.props
@@ -47,6 +44,7 @@ class MessagesIndex extends React.Component {
             updateMessage={updateMessage} 
             deleteMessage={deleteMessage}
             sender={users[msg.senderId].displayName}
+            currentUserId={this.props.currentUserId}
           />
         ))}
         <div ref={this.bottom} />
