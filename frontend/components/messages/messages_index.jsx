@@ -37,16 +37,16 @@ class MessagesIndex extends React.Component {
     const {messages, users, createMessage, updateMessage, deleteMessage} = this.props
     return (
       <div className='messages-index'>
-        {messages.map(msg => (
-          <MessageItem 
-            key={msg.id} 
-            message={msg} 
-            updateMessage={updateMessage} 
-            deleteMessage={deleteMessage}
-            sender={users[msg.senderId].displayName}
-            currentUserId={this.props.currentUserId}
-          />
-        ))}
+          {messages.map(msg => (
+            <MessageItem
+              key={msg.id}
+              message={msg}
+              updateMessage={updateMessage}
+              deleteMessage={deleteMessage}
+              sender={users[msg.senderId].displayName}
+              currentUserId={this.props.currentUserId}
+            />
+          ))}
         <div ref={this.bottom} />
       </div>
     )
