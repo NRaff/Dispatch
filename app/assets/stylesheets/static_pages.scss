@@ -404,8 +404,7 @@ hr {
 }
 
 .message-item p {
-  overflow-wrap: normal;
-  word-break: break-all;
+  overflow-wrap: break-word;
   white-space: pre-line;
 }
 
