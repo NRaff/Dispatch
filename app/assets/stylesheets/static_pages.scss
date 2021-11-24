@@ -18,11 +18,6 @@ body {
   width: 100vw;
   max-width: 100vw;
   overflow: hidden;
-  // position: fixed;
-  // top: 0px;
-  // bottom: 0px;
-  // left: 0px;
-  // right: 0px;
 }
 
 h1 {
@@ -359,7 +354,7 @@ hr {
 .messages-area {
   display: flex;
   flex-direction: column;
-  margin-left: 1vh;
+  margin-left: 1vw;
   height: 91vh;
   width: 88vw;
 }
@@ -529,4 +524,12 @@ hr {
 
 .save {
   background-color: $light-blue;
+}
+
+.messages-area .errorSection {
+  position: absolute;
+  left: 25vw;
+  right: 5vw;
+  bottom: 15vh;
+  border-radius: 5px;
 }
