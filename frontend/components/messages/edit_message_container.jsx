@@ -7,7 +7,8 @@ import { withRouter } from 'react-router'
 
 const mSTP = (state, ownProps) => ({
   message: state.entities.messages[ownProps.match.params.messageId],
-  errors: state.errors.messageErrors
+  errors: state.errors.messageErrors,
+  userId: state.session.userId
 })
 
 const mDTP = dispatch => ({

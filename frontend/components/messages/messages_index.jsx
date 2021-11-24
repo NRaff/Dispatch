@@ -1,6 +1,7 @@
 import React from "react";
 import MessageItem from "./message_item";
-import * as Casify from "../../utils/casify"
+import * as RealtimeThread from "../../utils/sockets"
+
 
 class MessagesIndex extends React.Component {
   constructor(props){
@@ -14,23 +15,7 @@ class MessagesIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchUsers();
-    App.cable.subscriptions.create(
-      { channel: "ThreadChatChannel"},
-      {
-        received: data => {
-          this.props.dispatch(data)
-        },
-        receiveMessage: function(data) {
-          return this.perform("receive_message", data)
-        },
-        receiveThreadMessages: function(data) {
-          return this.perform("receive_thread_messages", data)
-        },
-        deleteMessage: function(data) {
-          return this.perform("delete_message", data)
-        }
-      }
-    );
+    RealtimeThread.createRealtimeThread(this.props.dispatch)
   }
 
   render() {

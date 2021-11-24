@@ -43,6 +43,23 @@ class ThreadChatChannel < ApplicationCable::Channel
     ThreadChatChannel.broadcast_to('thread_chat', socket)
   end
 
+  def update_message(payload)
+    message = Message.find(params[:id])
+    if message.update(message_params(payload))
+      socket = {
+        message: set_message_JSON(message), 
+        type: 'RECEIVE_MESSAGE'
+      }
+    else
+      err = message.errors.messages
+      socket = {
+        errors: err,
+        status: 422,
+        currentUser: payload['currentUserId']
+      }
+    end
+  end
+
   def delete_message(payload)
     message = Message.find(payload['id'])
     if message.destroy
