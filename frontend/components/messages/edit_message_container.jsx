@@ -13,6 +13,7 @@ const mSTP = (state, ownProps) => ({
 
 const mDTP = dispatch => ({
   updateMessage: message => dispatch(updateMessage(message)),
+  removeErrors: () => dispatch(removeMessageErrors()),
   dispatch: dispatch
 })
 

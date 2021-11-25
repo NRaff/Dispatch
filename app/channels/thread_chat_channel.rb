@@ -7,26 +7,6 @@ class ThreadChatChannel < ApplicationCable::Channel
     stream_for 'thread_chat'
   end
 
-  def speak(data)
-    snaked_msg = {
-      message: data['message']['message'],
-      thread_id: data['message']['threadId'],
-      sender_id: data['message']['senderId']
-    }
-    message = Message.new(snaked_msg)
-    # message.user_id = current_user.id
-    if message.save
-      socket = { message: message }
-    else
-      err = message.errors.messages
-      socket = {
-        errors: err,
-        status: 422
-      }
-    end
-    ThreadChatChannel.broadcast_to('thread_chat', socket)
-  end
-
   def receive_message(new_message)
     message = Message.new(message_params(new_message))
     if message.save
