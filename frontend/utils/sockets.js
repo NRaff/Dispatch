@@ -1,6 +1,9 @@
-export const createRealtimeThread = dispatch => {
+export const createRealtimeThread = (dispatch, threadId) => {
   App.cable.subscriptions.create(
-    { channel: "ThreadChatChannel" },
+    { 
+      channel: 'ThreadChatChannel',
+      thread: threadId
+    },
     {
       received: data => {
         dispatch(data)

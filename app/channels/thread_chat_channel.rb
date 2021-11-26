@@ -4,7 +4,7 @@ class ThreadChatChannel < ApplicationCable::Channel
 
   def subscribed
     # stream_from "some_channel"
-    stream_for 'thread_chat'
+    stream_for "thread_chat:#{params[:thread]}"
   end
 
   def receive_message(new_message)
@@ -20,7 +20,7 @@ class ThreadChatChannel < ApplicationCable::Channel
         type: 'RECEIVE_MESSAGE_ERRORS'
       }
     end
-    ThreadChatChannel.broadcast_to('thread_chat', socket)
+    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
   end
 
   def update_message(payload)
@@ -39,7 +39,7 @@ class ThreadChatChannel < ApplicationCable::Channel
         type: 'RECEIVE_MESSAGE_ERRORS'
       }
     end
-    ThreadChatChannel.broadcast_to('thread_chat', socket)
+    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
   end
 
   def delete_message(payload)
@@ -55,7 +55,7 @@ class ThreadChatChannel < ApplicationCable::Channel
         type: 'RECEIVE_MESSAGE_ERRORS'
       }
     end
-    ThreadChatChannel.broadcast_to('thread_chat', socket)
+    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
   end
 
   def receive_thread_messages(payload)
@@ -67,7 +67,7 @@ class ThreadChatChannel < ApplicationCable::Channel
       messages = set_messages_JSON(msg_thread.messages)
     end
     socket = {messages: messages, type: 'RECEIVE_ALL_MESSAGES'}
-    ThreadChatChannel.broadcast_to('thread_chat', socket)
+    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
   end
 
   def message_params(message)

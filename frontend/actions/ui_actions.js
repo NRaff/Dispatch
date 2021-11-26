@@ -7,6 +7,7 @@ export const receiveActiveThread = threadId => ({
 })
 
 export const setupActiveThread = threadId => dispatch => {
-  RealtimeThread.getThreadMessages({threadId})
+  // RealtimeThread.createRealtimeThread(dispatch, threadId)
+  RealtimeThread.getThreadMessages({ threadId: threadId })
   dispatch(receiveActiveThread(threadId))
 }

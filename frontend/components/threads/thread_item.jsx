@@ -1,10 +1,16 @@
 import React from "react";
 
+
 class ThreadItem extends React.Component {
   constructor(props) {
     super(props)
     this.handleDelete = this.handleDelete.bind(this)
     this.setActive = this.setActive.bind(this)
+  }
+
+  componentDidMount(){
+    //setup websocket for thread
+    this.props.createSocket();
   }
 
   handleDelete(e){
@@ -16,6 +22,7 @@ class ThreadItem extends React.Component {
 
   setActive(e){
     this.props.setActiveThread()
+    
     let oldActive = document.getElementsByClassName('active-thread')[0]
     if (oldActive) oldActive.classList.remove('active-thread')
     e.currentTarget.classList.add('active-thread')
