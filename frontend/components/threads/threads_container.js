@@ -13,7 +13,7 @@ const mDTP = dispatch => ({
   createSocket: threadId => RealtimeThread.createRealtimeThread(dispatch, threadId),
   createThread: newThread => dispatch(createThread(newThread)),
   deleteThread: threadId => dispatch(deleteThread(threadId)),
-  setActiveThread: threadId => dispatch(setupActiveThread(threadId))
+  setActiveThread: threadId => dispatch(setupActiveThread(threadId)),
 })
 
 export default connect(mSTP,mDTP)(ThreadsIndex)

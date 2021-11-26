@@ -6,7 +6,6 @@ import {
   receiveMessage
 } from '../../actions/message_actions'
 import { fetchUsers } from "../../actions/user_actions"
-import { activeThreadMessages } from "../../utils/selectors"
 import MessagesIndex from "./messages_index"
 
 const mSTP = state => {

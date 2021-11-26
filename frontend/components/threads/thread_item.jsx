@@ -9,13 +9,11 @@ class ThreadItem extends React.Component {
   }
 
   componentDidMount(){
-    //setup websocket for thread
     this.props.createSocket();
   }
 
   handleDelete(e){
     e.preventDefault()
-    //stop propagation to avoid triggering the set active as well
     e.stopPropagation()
     this.props.deleteThread()
   }
