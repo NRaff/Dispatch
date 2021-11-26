@@ -7,11 +7,11 @@ import {
 } from '../../actions/message_actions'
 import { fetchUsers } from "../../actions/user_actions"
 import MessagesIndex from "./messages_index"
+import {activeThreadMessages} from "../../utils/selectors"
 
 const mSTP = state => {
-  // debugger
   return ({
-  messages: Object.values(state.entities.messages),//activeThreadMessages(state.ui.activeThreadId, Object.values(state.entities.messages)),
+  messages: activeThreadMessages(state.ui.activeThreadId, Object.values(state.entities.messages)),
   users: state.entities.users,
   currentUserId: state.session.userId,
   activeThreadId: state.ui.activeThreadId
