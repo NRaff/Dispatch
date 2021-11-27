@@ -1,6 +1,5 @@
 import React from "react";
 
-
 class ThreadItem extends React.Component {
   constructor(props) {
     super(props)
