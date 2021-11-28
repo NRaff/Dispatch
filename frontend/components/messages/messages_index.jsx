@@ -1,6 +1,5 @@
 import React from "react";
 import MessageItem from "./message_item";
-import * as RealtimeThread from "../../utils/sockets"
 
 
 class MessagesIndex extends React.Component {

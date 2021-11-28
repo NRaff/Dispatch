@@ -2,11 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import configureStore from './store/store'
 import Root from './components/root'
-import {
-  createMessage,
-  updateMessage,
-  deleteMessage
-} from './actions/message_actions'
 
 const getPreloadedState = () => {
   let preloadedState = {}
