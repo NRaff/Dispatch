@@ -27,13 +27,15 @@ export const createRealtimeThread = (dispatch, threadId) => {
 const identifySubs = (subscriptions, thread) => {
   for (const sub of subscriptions) {
     let subObj = JSON.parse(sub.identifier)
-    if (subObj.thread === thread) return sub
+    if (subObj.thread === thread) {
+      return sub
+    }
   }
 }
 
 export const getThreadMessages = threadId => {
-  //need to identify the correct thread to call the action on
-  App.cable.subscriptions.subscriptions[0].receiveThreadMessages(threadId)
+  let threadSub = identifySubs(App.cable.subscriptions.subscriptions, threadId.threadId)
+  threadSub.receiveThreadMessages(threadId)
 }
 
 export const newMessage = payload => {
