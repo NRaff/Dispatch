@@ -1,7 +1,8 @@
+require 'byebug'
+
 class UserConfigChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
-    stream_for `user_config:#{params[:userId]}`
+    stream_for "user_config:#{params[:user]}"
   end
 
   def receive_all_users
@@ -11,7 +12,7 @@ class UserConfigChannel < ApplicationCable::Channel
       users: usersObj,
       type: 'RECEIVE_ALL_USERS'
     }
-    UserConfigChannel.broadcast_to("user_config:#{params[:userId]}")
+    UserConfigChannel.broadcast_to("user_config:#{params[:user]}")
   end
 
   def receive_all_threads

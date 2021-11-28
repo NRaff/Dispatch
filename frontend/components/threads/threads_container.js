@@ -6,7 +6,8 @@ import * as RealtimeThread from "../../utils/thread_chat_socket"
 
 const mSTP = state => ({
   threads: Object.values(state.entities.threads),
-  activeThreadId: state.ui.activeThreadId
+  activeThreadId: state.ui.activeThreadId,
+  currentUserId: state.session.userId
 })
 
 const mDTP = dispatch => ({
@@ -14,6 +15,7 @@ const mDTP = dispatch => ({
   createThread: newThread => dispatch(createThread(newThread)),
   deleteThread: threadId => dispatch(deleteThread(threadId)),
   setActiveThread: threadId => dispatch(setupActiveThread(threadId)),
+  dispatch: dispatch
 })
 
 export default connect(mSTP,mDTP)(ThreadsIndex)

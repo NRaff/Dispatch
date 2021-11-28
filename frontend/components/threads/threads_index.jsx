@@ -1,10 +1,13 @@
 import React from "react";
 import NewThread from "./new_thread";
 import ThreadItem from "./thread_item";
+import * as RealtimeUser from "../../utils/user_config_socket"
 
 class ThreadsIndex extends React.Component{
   componentDidMount(){
     // do user_config channel set up here
+    const {currentUserId, dispatch} = this.props
+    RealtimeUser.createRealtimeUser(dispatch, currentUserId)
   }
 
   render(){
