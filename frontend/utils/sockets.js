@@ -24,18 +24,29 @@ export const createRealtimeThread = (dispatch, threadId) => {
   );
 }
 
+const identifySubs = (subscriptions, thread) => {
+  for (const sub of subscriptions) {
+    let subObj = JSON.parse(sub.identifier)
+    if (subObj.thread === thread) return sub
+  }
+}
+
 export const getThreadMessages = threadId => {
+  //need to identify the correct thread to call the action on
   App.cable.subscriptions.subscriptions[0].receiveThreadMessages(threadId)
 }
 
 export const newMessage = payload => {
-  App.cable.subscriptions.subscriptions[0].receiveMessage(payload)
+  let threadSub = identifySubs(App.cable.subscriptions.subscriptions, payload.message.threadId)
+  threadSub.receiveMessage(payload)
 }
 
 export const updateMessage = payload => {
+  //need to identify the correct thread to call the action on
   App.cable.subscriptions.subscriptions[0].updateMessage(payload)
 }
 
 export const deleteMessage = payload => {
+  //need to identify the correct thread to call the action on
   App.cable.subscriptions.subscriptions[0].deleteMessage(payload)
 }
