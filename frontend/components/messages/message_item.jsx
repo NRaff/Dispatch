@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Icons } from "../../utils/theme";
-import * as RealtimeThread from '../../utils/sockets'
+import * as RealtimeThread from '../../utils/thread_chat_socket'
 
 const createdTime = timestamp => {
   let date = new Date(timestamp)

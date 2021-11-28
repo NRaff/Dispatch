@@ -1,4 +1,4 @@
-import * as RealtimeThread from "../utils/sockets"
+import * as RealtimeThread from "../utils/thread_chat_socket"
 export const RECEIVE_ACTIVE_THREAD = 'RECEIVE_ACTIVE_THREAD';
 
 export const receiveActiveThread = threadId => ({

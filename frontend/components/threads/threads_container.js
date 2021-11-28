@@ -2,7 +2,7 @@ import { connect } from "react-redux"
 import { createThread, deleteThread } from "../../actions/thread_actions"
 import { receiveActiveThread, setupActiveThread } from "../../actions/ui_actions"
 import ThreadsIndex from "./threads_index"
-import * as RealtimeThread from "../../utils/sockets"
+import * as RealtimeThread from "../../utils/thread_chat_socket"
 
 const mSTP = state => ({
   threads: Object.values(state.entities.threads),

@@ -1,5 +1,5 @@
 import React from "react";
-import * as RealtimeThread from '../../utils/sockets'
+import * as RealtimeThread from '../../utils/thread_chat_socket'
 
 class NewMessage extends React.Component {
   constructor(props) {
