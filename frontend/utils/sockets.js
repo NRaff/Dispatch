@@ -44,11 +44,11 @@ export const newMessage = payload => {
 }
 
 export const updateMessage = payload => {
-  //need to identify the correct thread to call the action on
-  App.cable.subscriptions.subscriptions[0].updateMessage(payload)
+  let threadSub = identifySubs(App.cable.subscriptions.subscriptions, payload.message.threadId)
+  threadSub.updateMessage(payload)
 }
 
 export const deleteMessage = payload => {
-  //need to identify the correct thread to call the action on
-  App.cable.subscriptions.subscriptions[0].deleteMessage(payload)
+  let threadSub = identifySubs(App.cable.subscriptions.subscriptions, payload.threadId)
+  threadSub.deleteMessage(payload)
 }
