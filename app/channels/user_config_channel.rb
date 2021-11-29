@@ -19,17 +19,23 @@ class UserConfigChannel < ApplicationCable::Channel
   end
 
   def receive_user
-    user = User.find(params[:user])
+    # user = User.find(params[:user])
+    user = User.includes(:threads).find(params[:user])
     userObj = set_object_JSON(user, currentUserKeys)
     socket = {
       user: userObj,
       type: 'RECEIVE_USER'
     }
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
+    self.receive_all_threads(user.threads)
   end
 
-  def receive_all_threads
-
+  def receive_all_threads(threads)
+    socket = {
+      threads: set_objects_JSON(threads, threadKeys),
+      type: 'RECEIVE_ALL_THREADS'
+    }
+    UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
   end
 
   def receive_thread
@@ -67,6 +73,10 @@ class UserConfigChannel < ApplicationCable::Channel
       end
     end
     obj
+  end
+
+  def threadKeys
+    ['id', 'name', 'is_thread', 'created_at']
   end
 
   def permittedUserKeys
