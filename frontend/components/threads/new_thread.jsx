@@ -1,11 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as RealtimeUser from "../../utils/user_config_socket"
 
 class NewThread extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      name: ''
+      thread: {
+        name: '',
+        invitees: []
+      },
+      user: this.props.currentUser
     }
     this.handleInput = this.handleInput.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
@@ -13,9 +18,9 @@ class NewThread extends React.Component {
 
   handleInput(e) {
     e.preventDefault()
-    this.setState({
-      name: e.target.value
-    })
+    let thread = this.state.thread
+    thread['name'] = e.target.value
+    this.setState({thread})
   }
 
   handleAdd(e) {
@@ -25,26 +30,33 @@ class NewThread extends React.Component {
     payload['thread'] = this.state
     payload['thread']['invitees'] = [26, 27]
     payload['user'] = this.props.currentUser
+    //link to the popover, pass payload as props
     RealtimeUser.receiveThread(payload)
     this.setState({
-      name: ''
+      thread: {
+        name: '',
+        invitees: []
+      },
+      user: this.props.currentUser
     })
   }
 
   // will need to come back to allow folks to add more info/invite people to it
   render() {
     const {createThread} = this.props
+    const {thread} = this.state
     return (
       <div className='add-thread'>
         <input 
           type="text"
-          value={this.state.name}
+          value={thread.name}
           onChange={this.handleInput}
           placeholder='Create a thread'
         />
-        <button
+        <Link to={`/new/${thread.name}`}>➕</Link>
+        {/* <button
           onClick={this.handleAdd}
-        >➕</button>
+        >➕</button> */}
       </div>
     )
   }

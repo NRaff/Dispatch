@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $dark: #28292C;
+$overlay: rgba( 24, 25, 26, 90%);
 $light: #7E7F80;
 $super-light: #DADADB;
 $super-dark: #18191A;
@@ -533,3 +534,99 @@ hr {
   bottom: 15vh;
   border-radius: 5px;
 }
+
+.thread-invite-overlay{
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: $overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thread-invite {
+  display: flex;
+  flex-direction: column;
+  background-color: $super-dark;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.thread-invite h1 {
+  margin-bottom: 5px;
+}
+
+.thread-invite span {
+  position: relative;
+  top: -10px;
+  right: -1px;
+  font-size: 100%;
+}
+
+.thread-invite span:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+.thread-invite header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.thread-invite input::placeholder {
+  color: $light;
+}
+
+.search-results {
+  background-color: $dark;
+  max-height: 100px;
+  border-radius: 5px;
+}
+
+.search-results li:hover {
+  background-color: $light;
+  border-left: $light-blue;
+  border-left-style: solid;
+  border-left-width: 3px;
+  cursor: pointer;
+}
+
+.search-results li {
+  padding: 3px;
+}
+
+.search-results li:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.search-results li:last-child {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.added-users {
+  max-height: 60px;
+  max-width: 200px;
+  border-radius: 5px;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  flex-wrap: wrap;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.added-users li {
+  background-color: $light-blue;
+  color: $super-light;
+  border-radius: 20px;
+  padding: 5px;
+  margin: 2px;
+  font-size: 12px;
+}
+

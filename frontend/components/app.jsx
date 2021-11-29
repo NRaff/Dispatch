@@ -10,6 +10,7 @@ import ThreadsContainer from './threads/threads_container'
 import MessagesContainer from './messages/messages_container'
 import NewMessageContainer from './messages/new_message_container'
 import EditMessageContainer from './messages/edit_message_container'
+import ThreadInviteContainer from './threads/thread_invite_container'
 
 const App = (props) => (
   <HashRouter>
@@ -20,6 +21,7 @@ const App = (props) => (
         <ProtectedRoute path='/' component={TopNavContainer} />
         <div className='main-app'>
           <ProtectedRoute path='/' component={ThreadsContainer} />
+          <ProtectedRoute exact path='/new/:thread' component={ThreadInviteContainer} />
           <div className='messages-area'>
             <ProtectedRoute path='/' component={MessagesContainer} />
             <Switch>

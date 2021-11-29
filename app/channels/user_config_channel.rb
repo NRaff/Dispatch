@@ -40,6 +40,7 @@ class UserConfigChannel < ApplicationCable::Channel
 
   def receive_thread(payload)
     user = User.find(payload['user'])
+    byebug
     new_thread = user.threads.create(name: payload['thread']['name'])
     if new_thread.id
       invitees = payload['thread']['invitees']
