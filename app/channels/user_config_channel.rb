@@ -38,11 +38,32 @@ class UserConfigChannel < ApplicationCable::Channel
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
   end
 
-  def receive_thread(thread)
-    # create the new thread object from the current user
-    # create any necessary associations via the invited users array
-    # broadcast the newly created thread to each invited user
-
+  def receive_thread(payload)
+    
+    user = User.find(payload['user'])
+    new_thread = user.threads.create(name: payload['thread']['name'])
+    if new_thread.id
+      invitees = payload['thread']['invitees']
+      socket = {
+        thread: set_object_JSON(new_thread, thread_keys),
+        type: 'RECEIVE_THREAD'
+      }
+      invitees.each do |user|
+        byebug
+        new_thread.user_threads.create(user_id: user)
+        UserConfigChannel.broadcast_to("user_config:#{user}", socket)  
+      end
+      UserConfigChannel.broadcast_to("user_config:#{user.id}", socket)
+    else
+      err = new_thread.errors.messages
+      socket = {
+        errors: err, 
+        status: 422,
+        currentUser: payload['user'],
+        type: 'RECEIVE_THREAD_ERRORS'
+      }
+      UserConfigChannel.broadcast_to("user_config:#{payload['user']}", socket)
+    end
   end
 
   def update_thread

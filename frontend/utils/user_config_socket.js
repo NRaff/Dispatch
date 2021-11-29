@@ -13,6 +13,9 @@ export const createRealtimeUser = (dispatch, userId) => {
       },
       receiveUser: function (data) {
         return this.perform("receive_user", data)
+      },
+      receiveThread: function (data) {
+        return this.perform("receive_thread", data)
       }
     }
   )
@@ -35,4 +38,9 @@ export const receiveAllUsers = user => {
 export const receiveUser = user => {
   let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, user)
   userConfigSub.receiveUser({user})
+}
+
+export const receiveThread = payload => {
+  let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
+  userConfigSub.receiveThread(payload)
 }

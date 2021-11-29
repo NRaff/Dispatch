@@ -1,4 +1,5 @@
 import React from "react";
+import * as RealtimeUser from "../../utils/user_config_socket"
 
 class NewThread extends React.Component {
   constructor(props){
@@ -19,7 +20,12 @@ class NewThread extends React.Component {
 
   handleAdd(e) {
     const {createThread} = this.props
-    createThread(this.state)
+    // createThread(this.state)
+    let payload = {};
+    payload['thread'] = this.state
+    payload['thread']['invitees'] = [26, 27]
+    payload['user'] = this.props.currentUser
+    RealtimeUser.receiveThread(payload)
     this.setState({
       name: ''
     })

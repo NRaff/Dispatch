@@ -1,15 +1,8 @@
 import React from "react";
 import NewThread from "./new_thread";
 import ThreadItem from "./thread_item";
-import * as RealtimeUser from "../../utils/user_config_socket"
 
 class ThreadsIndex extends React.Component{
-  componentDidMount(){
-    const {currentUserId, dispatch} = this.props
-    // RealtimeUser.createRealtimeUser(dispatch, currentUserId)
-    // RealtimeUser.receiveAllUsers(currentUserId)
-  }
-
   render(){
     const { 
       threads,
@@ -20,7 +13,10 @@ class ThreadsIndex extends React.Component{
     } = this.props
     return (
       <div className='all-threads'>
-        <NewThread createThread={createThread} />
+        <NewThread 
+          createThread={createThread}
+          currentUser={this.props.currentUserId}
+        />
         {
           threads.map(item => (
             <ThreadItem
