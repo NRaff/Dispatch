@@ -10,7 +10,8 @@ const mSTP = state => ({
 
 const mDTP = dispatch => ({
   fetchUser: userId => dispatch(fetchUser(userId)),
-  logout: () => dispatch(requestLogoutUser())
+  logout: () => dispatch(requestLogoutUser()),
+  dispatch: dispatch
 })
 
 export default connect(mSTP,mDTP)(TopNav)

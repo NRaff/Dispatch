@@ -6,7 +6,7 @@ import * as RealtimeUser from "../../utils/user_config_socket"
 class ThreadsIndex extends React.Component{
   componentDidMount(){
     const {currentUserId, dispatch} = this.props
-    RealtimeUser.createRealtimeUser(dispatch, currentUserId)
+    // RealtimeUser.createRealtimeUser(dispatch, currentUserId)
     // RealtimeUser.receiveAllUsers(currentUserId)
   }
 

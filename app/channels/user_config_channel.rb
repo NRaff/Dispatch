@@ -2,22 +2,20 @@ require 'byebug'
 
 class UserConfigChannel < ApplicationCable::Channel
   def subscribed
-    if params[:user]
-      stream_for "user_config:#{params[:user]}"
-      byebug
-    end
+    stream_for "user_config:#{params[:user]}"
+    self.receive_all_users
   end
 
-  def receive_all_users(payload)
-    byebug
+  def receive_all_users
+    # byebug
     users = User.all
     usersObj = set_objects_JSON(users, permittedUserKeys)
     socket = {
       users: usersObj,
       type: 'RECEIVE_ALL_USERS'
     }
-    byebug
-    UserConfigChannel.broadcast_to("user_config:#{params[:user]}")
+    # byebug
+    UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
   end
 
   def receive_all_threads
