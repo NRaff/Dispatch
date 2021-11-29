@@ -4,6 +4,7 @@ class UserConfigChannel < ApplicationCable::Channel
   def subscribed
     stream_for "user_config:#{params[:user]}"
     self.receive_all_users
+    self.receive_user if params[:user]
   end
 
   def receive_all_users
@@ -14,7 +15,16 @@ class UserConfigChannel < ApplicationCable::Channel
       users: usersObj,
       type: 'RECEIVE_ALL_USERS'
     }
-    # byebug
+    UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
+  end
+
+  def receive_user
+    user = User.find(params[:user])
+    userObj = set_object_JSON(user, currentUserKeys)
+    socket = {
+      user: userObj,
+      type: 'RECEIVE_USER'
+    }
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
   end
 
@@ -49,8 +59,22 @@ class UserConfigChannel < ApplicationCable::Channel
     allObjects
   end
 
+  def set_object_JSON(object, permitKeys)
+    obj = Hash.new()
+    object.attributes.each do |key, val|
+      if permitKeys.include?(key)
+        obj[key.camelize(:lower)] = val
+      end
+    end
+    obj
+  end
+
   def permittedUserKeys
     ['id','display_name']
+  end
+
+  def currentUserKeys
+    ['id', 'display_name', 'email','created_at',]
   end
 
   def unsubscribed

@@ -10,7 +10,7 @@ class TopNav extends React.Component {
     document.body.style.background = Colors.dark
     const {fetchUser, currentUserId} = this.props
     RealtimeUser.createRealtimeUser(this.props.dispatch, currentUserId)
-    fetchUser(currentUserId)
+    // fetchUser(currentUserId)
   }
 
   componentWillUnmount(){
