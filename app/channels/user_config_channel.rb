@@ -10,9 +10,9 @@ class UserConfigChannel < ApplicationCable::Channel
   def receive_all_users
     # byebug
     users = User.all
-    usersObj = set_objects_JSON(users, permittedUserKeys)
+    users_obj = set_objects_JSON(users, permitted_user_keys)
     socket = {
-      users: usersObj,
+      users: users_obj,
       type: 'RECEIVE_ALL_USERS'
     }
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
@@ -21,9 +21,9 @@ class UserConfigChannel < ApplicationCable::Channel
   def receive_user
     # user = User.find(params[:user])
     user = User.includes(:threads).find(params[:user])
-    userObj = set_object_JSON(user, currentUserKeys)
+    user_obj = set_object_JSON(user, current_user_keys)
     socket = {
-      user: userObj,
+      user: user_obj,
       type: 'RECEIVE_USER'
     }
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
@@ -32,59 +32,73 @@ class UserConfigChannel < ApplicationCable::Channel
 
   def receive_all_threads(threads)
     socket = {
-      threads: set_objects_JSON(threads, threadKeys),
+      threads: set_objects_JSON(threads, thread_keys),
       type: 'RECEIVE_ALL_THREADS'
     }
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
   end
 
-  def receive_thread
+  def receive_thread(thread)
+    # create the new thread object from the current user
+    # create any necessary associations via the invited users array
+    # broadcast the newly created thread to each invited user
 
   end
 
   def update_thread
-
+    # find the thread
+    # make necessary changes
+    # broadcast changes to associated users according to the 'user_threads' association
   end
 
   def delete_thread
-
+    # find the thread
+    # delete thread
+    # broadcast changes to associated users
   end
 
   # ! consider move this to super class
-  def set_objects_JSON(objects, permitKeys)
-    allObjects = Hash.new()
+  def set_objects_JSON(objects, permit_keys)
+    all_objects = Hash.new()
     objects.each do |obj|
-      subObj = Hash.new()
+      sub_obj = Hash.new()
       obj.attributes.each do |key, val|
-        if permitKeys.include?(key)
-          subObj[key.camelize(:lower)] = val
+        if permit_keys.include?(key)
+          sub_obj[key.camelize(:lower)] = val
         end
       end
-      allObjects[obj.id] = subObj
+      all_objects[obj.id] = sub_obj
     end
-    allObjects
+    all_objects
   end
 
-  def set_object_JSON(object, permitKeys)
+  def set_object_JSON(object, permit_keys)
     obj = Hash.new()
     object.attributes.each do |key, val|
-      if permitKeys.include?(key)
+      if permit_keys.include?(key)
         obj[key.camelize(:lower)] = val
       end
     end
     obj
   end
 
-  def threadKeys
+  def thread_keys
     ['id', 'name', 'is_thread', 'created_at']
   end
 
-  def permittedUserKeys
+  def permitted_user_keys
     ['id','display_name']
   end
 
-  def currentUserKeys
+  def current_user_keys
     ['id', 'display_name', 'email','created_at',]
+  end
+
+  def thread_params
+    threadObj = {
+      user_id: params['thread']['userId'],
+      name: params['thread']['name']
+    }
   end
 
   def unsubscribed
