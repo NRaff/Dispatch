@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $dark: #28292C;
-$overlay: rgba( 24, 25, 26, 90%);
+$overlay: rgba( 24, 25, 26, 75%);
 $light: #7E7F80;
 $super-light: #DADADB;
 $super-dark: #18191A;
@@ -271,7 +271,7 @@ hr {
   padding: 0px;
 }
 
-.add-thread > button {
+.add-thread > .add-btn {
   background: none;
   border: none;
   flex-grow: 1;
@@ -281,9 +281,10 @@ hr {
   box-sizing: border-box;
   text-align: right;
   padding-right: 10px;
+  text-decoration: none;
 }
 
-.add-thread > button:hover {
+.add-thread > .add-btn:hover {
   cursor: pointer;
   transform: scale(1.01) perspective(1px);
 }

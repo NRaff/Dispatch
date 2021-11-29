@@ -27,12 +27,17 @@ class UserConfigChannel < ApplicationCable::Channel
       type: 'RECEIVE_USER'
     }
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
-    self.receive_all_threads(user.threads)
+    self.receive_all_threads(user.threads.includes(:members))
   end
 
   def receive_all_threads(threads)
+    new_threads = threads.map do |t|
+      new_thread = t.as_json
+      new_thread['user_ids'] = t.members.map {|m| m.id}
+      new_thread
+    end
     socket = {
-      threads: set_objects_JSON(threads, thread_keys),
+      threads: set_camel_JSON(new_threads, thread_keys),
       type: 'RECEIVE_ALL_THREADS'
     }
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
@@ -40,7 +45,6 @@ class UserConfigChannel < ApplicationCable::Channel
 
   def receive_thread(payload)
     user = User.find(payload['user'])
-    byebug
     new_thread = user.threads.create(name: payload['thread']['name'])
     if new_thread.id
       invitees = payload['thread']['invitees']
@@ -131,6 +135,22 @@ class UserConfigChannel < ApplicationCable::Channel
     end
     all_objects
   end
+
+  # ! consider move to super class
+  def set_camel_JSON(objects, permit_keys)
+    all_objects = Hash.new()
+    objects.each do |obj|
+      sub_obj = Hash.new()
+      # byebug
+      obj.each do |key, val|
+        if permit_keys.include?(key)
+          sub_obj[key.camelize(:lower)] = val
+        end
+      end
+      all_objects[obj['id']] = sub_obj
+    end
+    all_objects
+  end
   
   # ! consider move this to super class
   def set_object_JSON(object, permit_keys)
@@ -144,7 +164,7 @@ class UserConfigChannel < ApplicationCable::Channel
   end
 
   def thread_keys
-    ['id', 'name', 'is_thread', 'created_at']
+    ['id', 'name', 'is_thread', 'created_at', 'user_ids']
   end
 
   def permitted_user_keys

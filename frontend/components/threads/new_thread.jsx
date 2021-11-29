@@ -53,10 +53,10 @@ class NewThread extends React.Component {
           onChange={this.handleInput}
           placeholder='Create a thread'
         />
-        <Link to={`/new/${thread.name}`}>➕</Link>
-        {/* <button
-          onClick={this.handleAdd}
-        >➕</button> */}
+        <Link 
+          to={`/new/${thread.name}`}
+          className="add-btn"
+        >➕</Link>
       </div>
     )
   }
