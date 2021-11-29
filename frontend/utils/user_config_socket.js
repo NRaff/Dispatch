@@ -8,14 +8,24 @@ export const createRealtimeUser = (dispatch, userId) => {
       received: data => {
         dispatch(data)
       },
-      receiveAllUsers: function () {
-        return this.perform("receive_all_users")
+      receiveAllUsers: function (data) {
+        debugger
+        return this.perform("receive_all_users", data)
       }
     }
   )
 }
 
-export const receiveAllUsers = () => {
-  let userConfigSub = App.cable.subscriptions.subscriptions[0]
-  userConfigSub.receiveAllUsers()
+const identifyUserSub = (subscriptions, user) => {
+  for (const sub of subscriptions) {
+    let subObj = JSON.parse(sub.identifier)
+    if (subObj.user === user) {
+      return sub
+    }
+  }
+}
+
+export const receiveAllUsers = (user) => {
+  let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, user)
+  userConfigSub.receiveAllUsers({user})
 }

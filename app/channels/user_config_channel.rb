@@ -2,16 +2,21 @@ require 'byebug'
 
 class UserConfigChannel < ApplicationCable::Channel
   def subscribed
-    stream_for "user_config:#{params[:user]}"
+    if params[:user]
+      stream_for "user_config:#{params[:user]}"
+      byebug
+    end
   end
 
-  def receive_all_users
+  def receive_all_users(payload)
+    byebug
     users = User.all
     usersObj = set_objects_JSON(users, permittedUserKeys)
     socket = {
       users: usersObj,
       type: 'RECEIVE_ALL_USERS'
     }
+    byebug
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}")
   end
 
@@ -37,7 +42,7 @@ class UserConfigChannel < ApplicationCable::Channel
     objects.each do |obj|
       subObj = Hash.new()
       obj.attributes.each do |key, val|
-        if permitKeys.includes(key)
+        if permitKeys.include?(key)
           subObj[key.camelize(:lower)] = val
         end
       end
@@ -52,5 +57,6 @@ class UserConfigChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+    # byebug
   end
 end

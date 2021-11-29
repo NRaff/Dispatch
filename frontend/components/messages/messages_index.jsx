@@ -1,5 +1,6 @@
 import React from "react";
 import MessageItem from "./message_item";
+import * as RealtimeUser from "../../utils/user_config_socket"
 
 
 class MessagesIndex extends React.Component {
@@ -13,7 +14,9 @@ class MessagesIndex extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchUsers();
+    // this.props.fetchUsers();
+    const {currentUserId} = this.props
+    // RealtimeUser.receiveAllUsers(currentUserId)
   }
 
   render() {
