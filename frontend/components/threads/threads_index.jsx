@@ -7,15 +7,12 @@ class ThreadsIndex extends React.Component{
   render(){
     const { 
       threads,
-      createThread, 
-      deleteThread, 
       setActiveThread, 
       createSocket 
     } = this.props
     return (
       <div className='all-threads'>
         <NewThread 
-          createThread={createThread}
           currentUser={this.props.currentUserId}
         />
         {
@@ -23,7 +20,7 @@ class ThreadsIndex extends React.Component{
             <ThreadItem
               key={item.id}
               thread={item}
-              deleteThread={() => RealtimeUser.deleteThread({thread: item.id, user: this.props.currentUserId})/*deleteThread(item.id)*/}
+              deleteThread={() => RealtimeUser.deleteThread({thread: item.id, user: this.props.currentUserId})}
               setActiveThread={() => setActiveThread(item.id)}
               createSocket={() => createSocket(item.id)}
             />

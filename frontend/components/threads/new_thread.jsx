@@ -24,8 +24,6 @@ class NewThread extends React.Component {
   }
 
   handleAdd(e) {
-    const {createThread} = this.props
-    // createThread(this.state)
     let payload = {};
     payload['thread'] = this.state
     payload['thread']['invitees'] = [26, 27]
