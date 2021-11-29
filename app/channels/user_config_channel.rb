@@ -52,7 +52,7 @@ class UserConfigChannel < ApplicationCable::Channel
   end
 
   def delete_thread
-    # find the thread
+    # find the thread (use includes)
     # delete thread
     # broadcast changes to associated users
   end
@@ -71,7 +71,8 @@ class UserConfigChannel < ApplicationCable::Channel
     end
     all_objects
   end
-
+  
+  # ! consider move this to super class
   def set_object_JSON(object, permit_keys)
     obj = Hash.new()
     object.attributes.each do |key, val|

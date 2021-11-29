@@ -11,6 +11,7 @@ class ThreadChatChannel < ApplicationCable::Channel
     message = Message.new(message_params(new_message))
     if message.save
       socket = {message: set_message_JSON(message), type: 'RECEIVE_MESSAGE'}
+      ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
     else
       err = message.errors.messages
       socket = {
@@ -19,8 +20,8 @@ class ThreadChatChannel < ApplicationCable::Channel
         currentUser: message.sender_id,
         type: 'RECEIVE_MESSAGE_ERRORS'
       }
+      UserConfigChannel.broadcast_to("user_config:#{message.sender_id}", socket)
     end
-    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
   end
 
   def update_message(payload)
@@ -30,6 +31,7 @@ class ThreadChatChannel < ApplicationCable::Channel
         message: set_message_JSON(message), 
         type: 'RECEIVE_MESSAGE'
       }
+      ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
     else
       err = message.errors.messages
       socket = {
@@ -38,14 +40,16 @@ class ThreadChatChannel < ApplicationCable::Channel
         currentUser: payload['currentUserId'],
         type: 'RECEIVE_MESSAGE_ERRORS'
       }
+      UserConfigChannel.broadcast_to("user_config:#{payload['currentUserId']}", socket)
     end
-    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
+    
   end
 
   def delete_message(payload)
     message = Message.find(payload['id'])
     if message.destroy
       socket = {messageId: payload['id'], type: 'REMOVE_MESSAGE'}
+      ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
     else
       err = ["There was an issue deleting the message. Please try again."]
       socket = {
@@ -54,8 +58,9 @@ class ThreadChatChannel < ApplicationCable::Channel
         currentUser: payload['sender_id'],
         type: 'RECEIVE_MESSAGE_ERRORS'
       }
+      UserConfigChannel.broadcast_to("user_config:#{payload['sender_id']}", socket)
     end
-    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
+    
   end
 
   def receive_thread_messages(payload)
