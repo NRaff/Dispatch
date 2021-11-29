@@ -39,7 +39,6 @@ class UserConfigChannel < ApplicationCable::Channel
   end
 
   def receive_thread(payload)
-    
     user = User.find(payload['user'])
     new_thread = user.threads.create(name: payload['thread']['name'])
     if new_thread.id
@@ -48,11 +47,7 @@ class UserConfigChannel < ApplicationCable::Channel
         thread: set_object_JSON(new_thread, thread_keys),
         type: 'RECEIVE_THREAD'
       }
-      invitees.each do |user|
-        byebug
-        new_thread.user_threads.create(user_id: user)
-        UserConfigChannel.broadcast_to("user_config:#{user}", socket)  
-      end
+      add_invitees(invitees, new_thread, socket)
       UserConfigChannel.broadcast_to("user_config:#{user.id}", socket)
     else
       err = new_thread.errors.messages
@@ -66,13 +61,56 @@ class UserConfigChannel < ApplicationCable::Channel
     end
   end
 
+  def add_invitees(invitees, thread, socket)
+    invitees.each do |user|
+      thread.user_threads.create(user_id: user)
+      UserConfigChannel.broadcast_to("user_config:#{user}", socket)  
+    end
+  end
+
   def update_thread
-    # find the thread
-    # make necessary changes
-    # broadcast changes to associated users according to the 'user_threads' association
+    updated_thread = MessageThread.find(payload['thread']['id'])
+    if updated_thread.update(payload['thread'])
+      socket = {
+        thread: set_object_JSON(updated_thread, thread_keys),
+        type: 'RECEIVE_THREAD'
+      }
+      invitees = payload['thread']['invitees']
+      add_invitees(invitees, updated_thread, socket)
+      UserConfigChannel.broadcast_to("user_config:#{payload['user']}", socket)
+    else
+      err = updated_thread.errors.messages
+      socket = {
+        errors: err,
+        status: 422,
+        currentUser: payload['user'],
+        type: 'RECEIVE_THREAD_ERRORS'
+      }
+      UserConfigChannel.broadcast_to("user_config:#{payload['user']}", socket)
+    end
   end
 
   def delete_thread
+    thread = MessageThread.includes(:members).find(payload['thread'])
+    members = thread.members
+    if thread.destroy
+      socket = {
+        currentUser: payload['user'],
+        type: 'REMOVE_THREAD'
+      }
+      members.each do |member|
+        UserConfigChannel.broadcast_to("user_config:#{member.id}", socket)
+      end
+    else
+      err = thread.errors.messages
+      socket = {
+        errors: err,
+        status: 422,
+        currentUser: payload['user'],
+        type: 'RECEIVE_THREAD_ERRORS'
+      }
+      UserConfigChannel.broadcast_to("user_config:#{payload['user']}", socket)
+    end
     # find the thread (use includes)
     # delete thread
     # broadcast changes to associated users
