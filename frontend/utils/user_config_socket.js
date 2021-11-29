@@ -16,6 +16,9 @@ export const createRealtimeUser = (dispatch, userId) => {
       },
       receiveThread: function (data) {
         return this.perform("receive_thread", data)
+      },
+      deleteThread: function (data) {
+        return this.perform("delete_thread", data)
       }
     }
   )
@@ -43,4 +46,9 @@ export const receiveUser = user => {
 export const receiveThread = payload => {
   let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
   userConfigSub.receiveThread(payload)
+}
+
+export const deleteThread = payload => {
+  let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
+  userConfigSub.deleteThread(payload)
 }

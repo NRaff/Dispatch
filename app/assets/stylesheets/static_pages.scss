@@ -269,6 +269,7 @@ hr {
   align-items: center;
   height: 100%;
   padding: 0px;
+  border-bottom: solid 3px $light-blue;
 }
 
 .add-thread > .add-btn {
@@ -383,6 +384,7 @@ hr {
 
 .full-message:hover {
   background-color: $light;
+  border-left: solid 3px $light-blue;
 }
 
 .full-message:hover .edit-delete {

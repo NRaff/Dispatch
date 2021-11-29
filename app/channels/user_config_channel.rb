@@ -48,8 +48,10 @@ class UserConfigChannel < ApplicationCable::Channel
     new_thread = user.threads.create(name: payload['thread']['name'])
     if new_thread.id
       invitees = payload['thread']['invitees']
+      received_thread = new_thread.as_json
+      received_thread['user_ids'] = new_thread.members.map {|m| m.id}
       socket = {
-        thread: set_object_JSON(new_thread, thread_keys),
+        thread: set_obj_camel_JSON(received_thread, thread_keys),
         type: 'RECEIVE_THREAD'
       }
       add_invitees(invitees, new_thread, socket)
@@ -95,14 +97,16 @@ class UserConfigChannel < ApplicationCable::Channel
     end
   end
 
-  def delete_thread
+  def delete_thread(payload)
     thread = MessageThread.includes(:members).find(payload['thread'])
     members = thread.members
     if thread.destroy
       socket = {
         currentUser: payload['user'],
+        threadId: thread.id,
         type: 'REMOVE_THREAD'
       }
+      
       members.each do |member|
         UserConfigChannel.broadcast_to("user_config:#{member.id}", socket)
       end
@@ -156,6 +160,16 @@ class UserConfigChannel < ApplicationCable::Channel
   def set_object_JSON(object, permit_keys)
     obj = Hash.new()
     object.attributes.each do |key, val|
+      if permit_keys.include?(key)
+        obj[key.camelize(:lower)] = val
+      end
+    end
+    obj
+  end
+
+  def set_obj_camel_JSON(object, permit_keys)
+    obj = Hash.new()
+    object.each do |key, val|
       if permit_keys.include?(key)
         obj[key.camelize(:lower)] = val
       end

@@ -1,6 +1,7 @@
 import React from "react";
 import NewThread from "./new_thread";
 import ThreadItem from "./thread_item";
+import * as RealtimeUser from "../../utils/user_config_socket"
 
 class ThreadsIndex extends React.Component{
   render(){
@@ -22,7 +23,7 @@ class ThreadsIndex extends React.Component{
             <ThreadItem
               key={item.id}
               thread={item}
-              deleteThread={() => deleteThread(item.id)}
+              deleteThread={() => RealtimeUser.deleteThread({thread: item.id, user: this.props.currentUserId})/*deleteThread(item.id)*/}
               setActiveThread={() => setActiveThread(item.id)}
               createSocket={() => createSocket(item.id)}
             />
