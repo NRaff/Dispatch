@@ -45,7 +45,10 @@ class UserConfigChannel < ApplicationCable::Channel
 
   def receive_thread(payload)
     user = User.find(payload['user'])
-    new_thread = user.threads.create(name: payload['thread']['name'])
+    new_thread = user.threads.create({
+      name: payload['thread']['name'],
+      is_thread: payload['thread']['is_thread']
+    })
     if new_thread.id
       invitees = payload['thread']['invitees']
       received_thread = new_thread.as_json

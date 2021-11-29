@@ -7,7 +7,8 @@ class ThreadInvite extends React.Component {
     this.state = {
       thread: {
         name: this.props.thread,
-        invitees: []
+        invitees: [],
+        is_thread: true
       },
       userNames: Object.keys(this.props.users),
       userSearch: '',
