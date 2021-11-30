@@ -68,7 +68,6 @@ class Search extends React.Component {
     const { userNames, userSearch } = this.state
     if (userSearch) {
       return (
-        <>
         <ul className="search-results">
           {userNames.map((name, idx) => (
             <li
@@ -76,9 +75,8 @@ class Search extends React.Component {
               onClick={this.handleSearchClick}
             >{name}</li>
           ))}
-            <li onClick={this.handleCreateDM}>{this.renderAddedUsers()}</li>
+          {this.renderAddedUsers()}
         </ul>
-        </>
       )
     }
   }
@@ -87,7 +85,7 @@ class Search extends React.Component {
     const { addedUsers } = this.state
     if (addedUsers.length > 0) {
       return (
-        <>
+        <li>
           <ul 
             className="added-users"
           >
@@ -97,7 +95,7 @@ class Search extends React.Component {
               >{user}</li>
             ))}
           </ul>
-        </>
+        </li>
       )
     }
   }
@@ -112,10 +110,6 @@ class Search extends React.Component {
           placeholder="Start a dm..."
         />
         {this.renderSearch()}
-        {/* {this.renderAddedUsers()} */}
-        {/* <div className="add-users-staging">
-          {this.renderAddedUsers()}
-        </div> */}
       </div>
     )
   }
