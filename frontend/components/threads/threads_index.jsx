@@ -2,6 +2,7 @@ import React from "react";
 import NewThread from "./new_thread";
 import ThreadItem from "./thread_item";
 import * as RealtimeUser from "../../utils/user_config_socket"
+import SearchContainer from "../top_nav/search_container"
 
 class ThreadsIndex extends React.Component{
   renderThreads(){
@@ -54,17 +55,6 @@ class ThreadsIndex extends React.Component{
         />
         {this.renderThreads()}
         {this.renderDMs()}
-        {/* {
-          threads.map(item => (
-            <ThreadItem
-              key={item.id}
-              thread={item}
-              deleteThread={() => RealtimeUser.deleteThread({thread: item.id, user: this.props.currentUserId})}
-              setActiveThread={() => setActiveThread(item.id)}
-              createSocket={() => createSocket(item.id)}
-            />
-          ))
-        } */}
       </div>
     )
   }
