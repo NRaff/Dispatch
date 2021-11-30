@@ -182,6 +182,22 @@ hr {
   display: block;
 }
 
+.search-bar span {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  right: 5px;
+  font-size: 100%;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+}
+
+.search-bar span:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
 .search-bar .search-results {
   position: absolute;
   margin-top: 3px;

@@ -12,6 +12,7 @@ class Search extends React.Component {
     this.handleSearchClick = this.handleSearchClick.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.handleCreateDM = this.handleCreateDM.bind(this)
+    this.clearSearch = this.clearSearch.bind(this)
   }
 
   handleCreateDM(e) {
@@ -29,6 +30,10 @@ class Search extends React.Component {
       user: user.id
     }
     RealtimeUser.receiveThread(payload)
+    this.clearSearch()
+  }
+
+  clearSearch(){
     this.setState({
       userNames: Object.keys(this.props.users),
       userSearch: '',
@@ -62,6 +67,15 @@ class Search extends React.Component {
     let { addedUsers } = this.state
     addedUsers.push(e.target.textContent)
     this.setState({ addedUsers }, this.filterNames)
+  }
+
+  renderClear(){
+    const { userSearch } = this.state
+    if (userSearch) {
+      return (
+        <span onClick={this.clearSearch}>&times;</span>
+      )
+    }
   }
 
   renderSearch() {
@@ -103,6 +117,7 @@ class Search extends React.Component {
   render(){
     return (
       <div className="search-bar">
+        {this.renderClear()}
         <input 
           type="text" 
           value={this.state.userSearch}
