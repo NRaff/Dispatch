@@ -44,6 +44,7 @@ export const receiveUser = user => {
 }
 
 export const receiveThread = payload => {
+  // debugger
   let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
   userConfigSub.receiveThread(payload)
 }

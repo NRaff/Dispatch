@@ -20,14 +20,14 @@ class Search extends React.Component {
     const {addedUsers} = this.state
     const thread = {
       name: addedUsers.join(', '),
-      invitees: addedUsers.map(user => this.props.users[user].id)
+      invitees: addedUsers.map(user => this.props.users[user].id),
+      is_thread: false
     }
     const user = this.props.user
     const payload = {
       thread: thread,
-      user: user
+      user: user.id
     }
-
     RealtimeUser.receiveThread(payload)
     this.setState({
       userNames: Object.keys(this.props.users),
