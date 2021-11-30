@@ -289,10 +289,10 @@ hr {
   align-items: center;
   height: 100%;
   padding: 0px;
-  border-bottom: solid 3px $light-blue;
+  // border-bottom: solid 3px $dark;
   background-color: $super-light;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
 .add-thread > .add-btn {
@@ -378,12 +378,9 @@ hr {
 }
 
 .threads {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
   margin-bottom: 5px;
   background-color: $super-light;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-radius: 5px;
 }
 
 .threads .thread-item {
@@ -393,6 +390,11 @@ hr {
 .threads .thread-item:hover {
   border-left: solid 3px $light-blue;
   background-color: $light;
+}
+
+.threads .thread-item:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .dms {
@@ -408,6 +410,12 @@ hr {
   background-color: $light;
   border-left: solid 3px $light-red;
 }
+
+.dms .thread-item:first-child{
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .messages-area {
   display: flex;
   flex-direction: column;
