@@ -193,12 +193,15 @@ hr {
 }
 
 .profile {
-  height: 100%;
-  width: auto;
+  display: block;
+  position: relative;
+  text-align: center;
+}
+
+.profile header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-right: 5px;
+  justify-content: center;
 }
 
 .profile h1 {
@@ -213,6 +216,7 @@ hr {
 .profile-dark {
   height: 35px;
   width: auto;
+  display: inline-block;
 }
 
 .profile-light {
@@ -230,8 +234,6 @@ hr {
   width: max-content;
   display: none;
   position: absolute;
-  top: 35px;
-  right: 0px;
 }
 
 .profile:hover .profile-dropdown {

@@ -44,9 +44,11 @@ class Profile extends React.Component {
     return (
       <div 
         className='profile'
-      >
-        <img className={theme} alt="profileImg" />
-        <h1>{user ? user.displayName : 'loading...'}</h1>
+      > 
+        <header>
+          <img className={theme} alt="profileImg" />
+          <h1>{user ? user.displayName : 'loading...'}</h1>
+        </header>
         {this.createDropdown()}
       </div>
     )
