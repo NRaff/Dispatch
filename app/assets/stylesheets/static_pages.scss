@@ -266,11 +266,6 @@ hr {
   color: $super-light;
 }
 
-.all-threads .thread-item:first-child {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
 .all-threads .thread-item:last-child {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -295,6 +290,9 @@ hr {
   height: 100%;
   padding: 0px;
   border-bottom: solid 3px $light-blue;
+  background-color: $super-light;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .add-thread > .add-btn {
@@ -338,7 +336,7 @@ hr {
 } 
 
 .thread-item:hover {
-  background-color: $light-blue;
+  cursor: pointer;
 }
 
 #root {
@@ -371,7 +369,7 @@ hr {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: left;
-  background-color: $super-light;
+  // background-color: $super-light;
   width: 10vw;
   min-width: 150px;
   height: fit-content;
@@ -379,6 +377,37 @@ hr {
   flex-grow: 0.25;
 }
 
+.threads {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  margin-bottom: 5px;
+  background-color: $super-light;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.threads .thread-item {
+  border-left: solid 3px $light-blue;
+}
+
+.threads .thread-item:hover {
+  border-left: solid 3px $light-blue;
+  background-color: $light;
+}
+
+.dms {
+  background-color: $super-light;
+  border-radius: 5px;
+}
+
+.dms .thread-item {
+  border-left: solid 3px $light-red;
+}
+
+.dms .thread-item:hover {
+  background-color: $light;
+  border-left: solid 3px $light-red;
+}
 .messages-area {
   display: flex;
   flex-direction: column;
