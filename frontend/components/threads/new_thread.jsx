@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as RealtimeUser from "../../utils/user_config_socket"
 
 class NewThread extends React.Component {
   constructor(props){
@@ -13,7 +12,7 @@ class NewThread extends React.Component {
       user: this.props.currentUser
     }
     this.handleInput = this.handleInput.bind(this)
-    this.handleAdd = this.handleAdd.bind(this)
+    this.clearInputs = this.clearInputs.bind(this)
   }
 
   handleInput(e) {
@@ -23,25 +22,16 @@ class NewThread extends React.Component {
     this.setState({thread})
   }
 
-  handleAdd(e) {
-    let payload = {};
-    payload['thread'] = this.state
-    payload['thread']['invitees'] = [26, 27]
-    payload['user'] = this.props.currentUser
-    //link to the popover, pass payload as props
-    RealtimeUser.receiveThread(payload)
+  clearInputs(e) {
     this.setState({
       thread: {
         name: '',
         invitees: []
-      },
-      user: this.props.currentUser
+      }
     })
   }
 
-  // will need to come back to allow folks to add more info/invite people to it
   render() {
-    const {createThread} = this.props
     const {thread} = this.state
     return (
       <div className='add-thread'>
@@ -54,6 +44,7 @@ class NewThread extends React.Component {
         <Link 
           to={`/new/${thread.name}`}
           className="add-btn"
+          onClick={this.clearInputs}
         >➕</Link>
       </div>
     )

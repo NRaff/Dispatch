@@ -1,9 +1,15 @@
 import * as RealtimeThread from "../utils/thread_chat_socket"
 export const RECEIVE_ACTIVE_THREAD = 'RECEIVE_ACTIVE_THREAD';
+export const NEW_MESSAGE = 'NEW_MESSAGE';
 
 export const receiveActiveThread = threadId => ({
   type: RECEIVE_ACTIVE_THREAD,
   threadId
+})
+
+export const newMessage = message => ({
+  type: NEW_MESSAGE,
+  message
 })
 
 export const setupActiveThread = threadId => dispatch => {

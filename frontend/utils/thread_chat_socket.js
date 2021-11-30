@@ -1,3 +1,5 @@
+import { receiveNewMessage, RECEIVE_MESSAGE } from "../actions/message_actions";
+
 export const createRealtimeThread = (dispatch, threadId) => {
   App.cable.subscriptions.create(
     { 
@@ -6,7 +8,11 @@ export const createRealtimeThread = (dispatch, threadId) => {
     },
     {
       received: data => {
-        dispatch(data)
+        if (data.type === RECEIVE_MESSAGE) {
+          dispatch(receiveNewMessage(data.message))
+        } else {
+          dispatch(data)
+        }
       },
       receiveMessage: function (data) {
         return this.perform("receive_message", data)

@@ -53,14 +53,14 @@ class UserConfigChannel < ApplicationCable::Channel
       })
       if new_thread.id
         invitees = payload['thread']['invitees']
+        add_invitees(invitees, new_thread)
         received_thread = new_thread.as_json
         received_thread['user_ids'] = new_thread.members.map {|m| m.id}
         socket = {
           thread: set_obj_camel_JSON(received_thread, thread_keys),
           type: 'RECEIVE_THREAD'
         }
-        add_invitees(invitees, new_thread, socket)
-        broadcast_user_channel(socket)
+        broadcast_to_members(new_thread.members, socket)
       else
         err = new_thread.errors.messages
         socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
@@ -73,27 +73,9 @@ class UserConfigChannel < ApplicationCable::Channel
     end
   end
 
-  def add_invitees(invitees, thread, socket)
+  def add_invitees(invitees, thread)
     invitees.each do |user|
       thread.user_threads.create(user_id: user)
-      UserConfigChannel.broadcast_to("user_config:#{user}", socket)  
-    end
-  end
-
-  def update_thread
-    updated_thread = MessageThread.find(payload['thread']['id'])
-    if updated_thread.update(payload['thread'])
-      socket = {
-        thread: set_object_JSON(updated_thread, thread_keys),
-        type: 'RECEIVE_THREAD'
-      }
-      invitees = payload['thread']['invitees']
-      add_invitees(invitees, updated_thread, socket)
-      broadcast_user_channel(socket)
-    else
-      err = updated_thread.errors.messages
-      socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
-      broadcast_user_channel(socket)
     end
   end
 
@@ -106,10 +88,7 @@ class UserConfigChannel < ApplicationCable::Channel
         threadId: thread.id,
         type: 'REMOVE_THREAD'
       }
-      
-      members.each do |member|
-        UserConfigChannel.broadcast_to("user_config:#{member.id}", socket)
-      end
+      broadcast_to_members(members, socket)
     else
       err = thread.errors.messages
       socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
@@ -144,5 +123,12 @@ class UserConfigChannel < ApplicationCable::Channel
   private
   def broadcast_user_channel(socket)
     UserConfigChannel.broadcast_to("user_config:#{params[:user]}", socket)
+  end
+
+  def broadcast_to_members(members, socket)
+    #expect that members are User objects
+    members.each do |m|
+      UserConfigChannel.broadcast_to("user_config:#{m.id}", socket) 
+    end
   end
 end

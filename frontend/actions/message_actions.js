@@ -1,5 +1,6 @@
 import * as MessageApi from '../utils/message_api'
 import { receiveMessageErrors, removeMessageErrors } from './error_actions';
+import { newMessage } from './ui_actions';
 
 export const RECEIVE_ALL_MESSAGES = 'RECEIVE_ALL_MESSAGES';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
@@ -24,6 +25,11 @@ export const removeMessage = messageId => ({
 export const clearMessages = () => ({
   type: CLEAR_MESSAGES
 })
+
+export const receiveNewMessage = message => dispatch => {
+  dispatch(receiveMessage(message))
+  dispatch(newMessage(message))
+}
 
 export const createMessage = message => dispatch => (
   MessageApi.createMessage(message)
