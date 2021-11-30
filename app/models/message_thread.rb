@@ -10,10 +10,10 @@
 #
 # Indexes
 #
-#  index_message_threads_on_name  (name) UNIQUE
+#  index_message_threads_on_name  (name)
 #
 class MessageThread < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :is_thread, inclusion: {in: [true, false] }
 
   has_many :user_threads,
@@ -28,4 +28,6 @@ class MessageThread < ApplicationRecord
   has_many :messages,
     foreign_key: :thread_id,
     class_name: :Message
+
+  # check if a thread name exists in the list of threads a user has access to
 end

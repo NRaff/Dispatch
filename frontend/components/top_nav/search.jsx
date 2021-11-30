@@ -85,7 +85,7 @@ class Search extends React.Component {
     const { addedUsers } = this.state
     if (addedUsers.length > 0) {
       return (
-        <li>
+        <li onClick={this.handleCreateDM}>
           <ul 
             className="added-users"
           >

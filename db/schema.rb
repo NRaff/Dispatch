@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_180358) do
+ActiveRecord::Schema.define(version: 2021_11_30_184309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_11_22_180358) do
     t.boolean "is_thread", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_message_threads_on_name", unique: true
+    t.index ["name"], name: "index_message_threads_on_name"
   end
 
   create_table "messages", force: :cascade do |t|

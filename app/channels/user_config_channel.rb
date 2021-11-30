@@ -44,29 +44,41 @@ class UserConfigChannel < ApplicationCable::Channel
   end
 
   def receive_thread(payload)
-    user = User.find(payload['user'])
-    new_thread = user.threads.create({
-      name: payload['thread']['name'],
-      is_thread: payload['thread']['is_thread']
-    })
-    if new_thread.id
-      invitees = payload['thread']['invitees']
-      received_thread = new_thread.as_json
-      received_thread['user_ids'] = new_thread.members.map {|m| m.id}
-      socket = {
-        thread: set_obj_camel_JSON(received_thread, thread_keys),
-        type: 'RECEIVE_THREAD'
-      }
-      add_invitees(invitees, new_thread, socket)
-      UserConfigChannel.broadcast_to("user_config:#{user.id}", socket)
+    user = User.includes(:threads).find(payload['user'])
+    thread_names = user.threads.map { |t| t.name }
+    unless thread_names.include?(payload['thread']['name'])
+      new_thread = user.threads.create({
+        name: payload['thread']['name'],
+        is_thread: payload['thread']['is_thread']
+      })
+      if new_thread.id
+        invitees = payload['thread']['invitees']
+        received_thread = new_thread.as_json
+        received_thread['user_ids'] = new_thread.members.map {|m| m.id}
+        socket = {
+          thread: set_obj_camel_JSON(received_thread, thread_keys),
+          type: 'RECEIVE_THREAD'
+        }
+        add_invitees(invitees, new_thread, socket)
+        UserConfigChannel.broadcast_to("user_config:#{user.id}", socket)
+      else
+        err = new_thread.errors.messages
+        socket = {
+          errors: err, 
+          status: 422,
+          currentUser: payload['user'],
+          type: 'RECEIVE_THREAD_ERRORS'
+        }
+        UserConfigChannel.broadcast_to("user_config:#{payload['user']}", socket)
+      end
     else
-      err = new_thread.errors.messages
+      err = ["Thread already exists"]
       socket = {
-        errors: err, 
-        status: 422,
-        currentUser: payload['user'],
-        type: 'RECEIVE_THREAD_ERRORS'
-      }
+          errors: err, 
+          status: 422,
+          currentUser: payload['user'],
+          type: 'RECEIVE_THREAD_ERRORS'
+        }
       UserConfigChannel.broadcast_to("user_config:#{payload['user']}", socket)
     end
   end

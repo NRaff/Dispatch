@@ -10,7 +10,7 @@
 #
 # Indexes
 #
-#  index_message_threads_on_name  (name) UNIQUE
+#  index_message_threads_on_name  (name)
 #
 
 # This model initially had no columns defined. If you add columns to the
