@@ -167,6 +167,31 @@ hr {
   padding-right: 10px;
 }
 
+.top-nav input {
+  margin: 0px;
+  width: 50vw;
+}
+
+.top-nav input::placeholder {
+  color: $super-light;
+}
+
+.search-bar {
+  z-index: 1;
+  position: relative;
+  display: block;
+}
+
+.search-bar .search-results {
+  position: absolute;
+  margin-top: 3px;
+  width: 100%;
+}
+
+.search-results .added-users {
+  width: 100%;
+}
+
 .profile {
   height: 100%;
   width: auto;
@@ -590,7 +615,7 @@ hr {
   border-radius: 5px;
 }
 
-.search-results li:hover {
+.search-results > li:hover {
   background-color: $light;
   border-left: $light-blue;
   border-left-style: solid;
@@ -598,16 +623,16 @@ hr {
   cursor: pointer;
 }
 
-.search-results li {
+.search-results > li {
   padding: 3px;
 }
 
-.search-results li:first-child {
+.search-results > li:first-child {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.search-results li:last-child {
+.search-results > li:last-child {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }

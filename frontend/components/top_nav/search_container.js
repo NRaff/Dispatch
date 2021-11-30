@@ -1,6 +1,5 @@
 import { connect } from "react-redux"
-import { requestLogoutUser } from "../../actions/session_actions"
-import TopNav from "./top_nav"
+import Search from "./search"
 
 const mapNamesToIds = users => {
   let allUsers = {}
@@ -16,9 +15,4 @@ const mSTP = state => ({
   users: mapNamesToIds(Object.values(state.entities.users)),
 })
 
-const mDTP = dispatch => ({
-  logout: () => dispatch(requestLogoutUser()),
-  dispatch: dispatch
-})
-
-export default connect(mSTP,mDTP)(TopNav)
+export default connect(mSTP)(Search)
