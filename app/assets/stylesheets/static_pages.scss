@@ -713,3 +713,55 @@ hr {
   font-size: 12px;
 }
 
+.notification {
+  background-color: $super-light;
+  border-left: solid 3px $light-red;
+  padding: 5px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30%;
+  z-index: 3;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  color: $super-dark;
+  box-shadow: 3px 3px 3px $super-dark;
+  animation-duration: 0.5s;
+  animation-name: slideout;
+}
+
+.active-notification {
+  animation-duration: 0.5s;
+  animation-name: slidein;
+}
+
+@keyframes slideout {
+  from {
+    margin-left: 0%;
+  }
+  to {
+    margin-left: -100%;
+  }
+}
+
+@keyframes slidein {
+  from {
+    margin-top: -10%;
+  }
+  to {
+    margin-top: 0%;
+  }
+}
+
+.notification span {
+  position: absolute;
+  right: 5px;
+  top: 0px;
+}
+
+.notification span:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}

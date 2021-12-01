@@ -17,5 +17,9 @@ export const Icons = {
   profile: {
     darkProfile: 'profile-dark',
     lightProfile: 'profile-light'
+  },
+  notification: {
+    darkNote: 'notification-dark',
+    lightNote: 'notification-light'
   }
 }

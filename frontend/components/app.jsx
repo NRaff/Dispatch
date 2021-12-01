@@ -11,6 +11,7 @@ import MessagesContainer from './messages/messages_container'
 import NewMessageContainer from './messages/new_message_container'
 import EditMessageContainer from './messages/edit_message_container'
 import ThreadInviteContainer from './threads/thread_invite_container'
+import NotificationContainer from "./notification/notification_container"
 
 const App = (props) => (
   <HashRouter>
@@ -18,6 +19,7 @@ const App = (props) => (
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />
       <div className='app-page'>
+      <ProtectedRoute path='/' component={NotificationContainer} />
         <ProtectedRoute path='/' component={TopNavContainer} />
         <div className='main-app'>
           <ProtectedRoute path='/' component={ThreadsContainer} />

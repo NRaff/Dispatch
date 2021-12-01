@@ -1,8 +1,9 @@
-import { RECEIVE_ACTIVE_THREAD } from "../actions/ui_actions";
+import { CLEAR_NEW_MESSAGE, RECEIVE_ACTIVE_THREAD } from "../actions/ui_actions";
 import { NEW_MESSAGE } from "../actions/ui_actions";
 
 const defaultState = {
-  activeThreadId: null
+  activeThreadId: null,
+  newMessage: null
 }
 
 const UIReducer = (state=defaultState, action) => {
@@ -14,6 +15,9 @@ const UIReducer = (state=defaultState, action) => {
       return nextState;
     case NEW_MESSAGE:
       nextState['newMessage'] = action.message
+      return nextState;
+    case CLEAR_NEW_MESSAGE:
+      nextState['newMessage'] = null
       return nextState;
     default:
       return state;
