@@ -32,19 +32,27 @@ class Notification extends React.Component {
     setTimeout(this.props.clearNotification,500)
   }
 
+  validateShow(){
+    const { fromThread, activeThread, currentUser, message } = this.props
+    if (fromThread && 
+        (activeThread != message.threadId) && 
+        (currentUser != message.senderId)){
+          return true;
+    }
+    return false
+  }
+
   renderMessage(){
     const {fromThread} = this.props
-    if (fromThread) {
-      if (fromThread.isThread) {
-        return this.translateThread()
-      } else {
-        return this.translateDM()
-      }
+    if (fromThread.isThread) {
+      return this.translateThread()
+    } else {
+      return this.translateDM()
     }
   }
+
   render() {
-    const {fromThread} = this.props
-    if (fromThread) {
+    if (this.validateShow()) {
       setTimeout(this.closeNotification, 5000)
       return (
         <header className='notification active-notification'>

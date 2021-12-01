@@ -10,6 +10,7 @@ const threadId = state => {
 
 const mSTP = state => ({
   fromThread: state.entities.threads[threadId(state)],
+  activeThread: state.ui.activeThreadId,
   message: state.ui.newMessage,
   users: state.entities.users,
   currentUser: state.session.userId
