@@ -165,6 +165,18 @@ hr {
   height: 8vh;
   padding-left: 10px;
   padding-right: 10px;
+  animation-duration: 400ms;
+  animation-name: popin;
+}
+
+@keyframes popin {
+  from {
+    margin-top: -100%;
+  }
+
+  to {
+    margin-top: 0%;
+  }
 }
 
 .top-nav input {
@@ -369,13 +381,7 @@ hr {
 }
 
 .main-app {
-  // position: relative;
-  // top: 0px;
-  // bottom: 0px;
-  // left: 0px;
-  // right: 0px;
   display: flex;
-  // padding: 10px;
   padding-left: 1vw;
   padding-right: 1vw;
   height: 92vh;
@@ -399,6 +405,11 @@ hr {
   margin-bottom: 5px;
   background-color: $super-light;
   border-radius: 5px;
+}
+
+.thread-item {
+  animation-duration: 800ms;
+  animation-name: slidein;
 }
 
 .threads .thread-item {
@@ -460,6 +471,18 @@ hr {
   overflow-wrap: normal;
   padding-top: 5px;
   padding-bottom: 5px;
+  animation-duration: 400ms;
+  animation-name: slidein;
+}
+
+@keyframes slideinright {
+  from {
+    margin-right: 0%;
+  }
+
+  to {
+    margin-right: 100%;
+  }
 }
 
 .full-message:hover {
@@ -481,6 +504,7 @@ hr {
   font-size: 12px;
   flex-grow: 4;
 }
+
 
 .message-item p {
   overflow-wrap: break-word;

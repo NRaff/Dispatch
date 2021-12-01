@@ -30,7 +30,6 @@ class Notification extends React.Component {
     const note = document.getElementsByClassName('active-notification')[0]
     note.classList.remove('active-notification')
     setTimeout(this.props.clearNotification,500)
-    // this.props.clearNotification()
   }
 
   renderMessage(){
