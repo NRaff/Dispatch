@@ -307,6 +307,23 @@ hr {
   justify-content: space-between;
   color: $dark;
   padding: 5px;
+  position: relative;
+}
+
+.inline-notify {
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  background-color: $light-red;
+  color: $super-light;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -1px;
+  right: -7px;
+  padding: 1px;
+  font-size: 80%;
 }
 
 .active-thread {

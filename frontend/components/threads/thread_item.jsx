@@ -17,6 +17,16 @@ class ThreadItem extends React.Component {
     this.props.deleteThread()
   }
 
+  renderUnreads(){
+    if (this.props.unreads > 0 && this.props.activeThread != this.props.thread.id) {
+      return (
+        <div className="inline-notify">
+          <span>{this.props.unreads}</span>
+        </div>
+      )
+    }
+  }
+
   setActive(e){
     this.props.setActiveThread()
     
@@ -34,6 +44,7 @@ class ThreadItem extends React.Component {
         onClick={this.setActive}
       >
         <h3>{thread.name}</h3>
+        {this.renderUnreads()}
         <button
           onClick={this.handleDelete}
         >🗑</button>

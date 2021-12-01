@@ -1,4 +1,4 @@
-# require 'byebug'
+require 'byebug'
 
 class ThreadChatChannel < ApplicationCable::Channel
 
@@ -64,15 +64,17 @@ class ThreadChatChannel < ApplicationCable::Channel
   end
 
   def receive_thread_messages(payload)
+    # byebug
     msg_thread = MessageThread
               .includes(:messages)
-              .find(payload['threadId'])
+              .find(payload['thread'])
     messages = {}
     if msg_thread
       messages = set_messages_JSON(msg_thread.messages)
     end
     socket = {messages: messages, type: 'RECEIVE_ALL_MESSAGES'}
-    ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
+    UserConfigChannel.broadcast_to("user_config:#{payload['user']}", socket)
+    # ThreadChatChannel.broadcast_to("thread_chat:#{params[:thread]}", socket)
   end
 
   def message_params(message)

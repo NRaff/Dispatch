@@ -1,4 +1,5 @@
 import * as RealtimeThread from "../utils/thread_chat_socket"
+import { clearMessages } from "./message_actions";
 export const RECEIVE_ACTIVE_THREAD = 'RECEIVE_ACTIVE_THREAD';
 export const NEW_MESSAGE = 'NEW_MESSAGE';
 export const CLEAR_NEW_MESSAGE = 'CLEAR_NEW_MESSAGE';
@@ -17,7 +18,8 @@ export const clearNewMessage = () => ({
   type: CLEAR_NEW_MESSAGE
 })
 
-export const setupActiveThread = threadId => dispatch => {
-  RealtimeThread.getThreadMessages({ threadId: threadId })
-  dispatch(receiveActiveThread(threadId))
+export const setupActiveThread = payload => dispatch => {
+  dispatch(clearMessages())
+  RealtimeThread.getThreadMessages(payload)
+  dispatch(receiveActiveThread(payload.thread))
 }

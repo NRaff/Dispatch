@@ -6,7 +6,7 @@ import SearchContainer from "../top_nav/search_container"
 
 class ThreadsIndex extends React.Component{
   renderThreads(){
-    const {setActiveThread, createSocket} = this.props
+    const {setActiveThread, createSocket, messages, currentUserId} = this.props
     const allThreads = this.props.threads
     const threads = allThreads.filter(thread => thread.isThread)
     return (
@@ -15,17 +15,20 @@ class ThreadsIndex extends React.Component{
           <ThreadItem
             key={item.id}
             thread={item}
-            deleteThread={() => RealtimeUser.deleteThread({ thread: item.id, user: this.props.currentUserId })}
-            setActiveThread={() => setActiveThread(item.id)}
+            deleteThread={() => RealtimeUser.deleteThread({ thread: item.id, user: currentUserId })}
+            setActiveThread={() => setActiveThread({thread: item.id, user: currentUserId})}
             createSocket={() => createSocket(item.id)}
+            unreads={messages.filter(m => m.threadId === item.id).length}
+            activeThread={this.props.activeThreadId}
           />
         ))}
       </div>
     )
   }
 
+
   renderDMs() {
-    const { setActiveThread, createSocket } = this.props
+    const { setActiveThread, createSocket, messages } = this.props
     const allThreads = this.props.threads
     const dms = allThreads.filter(thread => !thread.isThread)
     return (
@@ -37,6 +40,8 @@ class ThreadsIndex extends React.Component{
             deleteThread={() => RealtimeUser.deleteThread({ thread: item.id, user: this.props.currentUserId })}
             setActiveThread={() => setActiveThread(item.id)}
             createSocket={() => createSocket(item.id)}
+            unreads={messages.filter(m => m.threadId === item.id).length}
+            activeThread={this.props.activeThreadId}
           />
         ))}
       </div>

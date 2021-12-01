@@ -39,9 +39,9 @@ const identifySubs = (subscriptions, thread) => {
   }
 }
 
-export const getThreadMessages = threadId => {
-  let threadSub = identifySubs(App.cable.subscriptions.subscriptions, threadId.threadId)
-  threadSub.receiveThreadMessages(threadId)
+export const getThreadMessages = payload => {
+  let threadSub = identifySubs(App.cable.subscriptions.subscriptions, payload.thread)
+  threadSub.receiveThreadMessages(payload)
 }
 
 export const newMessage = payload => {
