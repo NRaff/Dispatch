@@ -224,6 +224,7 @@ hr {
   display: block;
   position: relative;
   text-align: center;
+  z-index: 1;
 }
 
 .profile header {
@@ -277,8 +278,6 @@ hr {
   text-align: left;
   padding: 5px;
   color: $dark;
-  // width: 100%;
-
 }
 
 .profile-dropdown > li:last-child {
@@ -478,6 +477,7 @@ hr {
   width: 100%;
   overflow: hidden;
   border-radius: 5px;
+  position: relative;
 }
 
 .messages-index {
@@ -505,9 +505,6 @@ hr {
 .full-message {
   display: flex;
   justify-content: left;
-  // margin-top: 5px;
-  // margin-right: 10px;
-  // width: 100%;
   overflow-wrap: normal;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -516,6 +513,14 @@ hr {
   border-bottom-right-radius: 5px;
   animation-duration: 400ms;
   animation-name: slidein;
+}
+
+.other-user:hover {
+  border-left: solid 3px $dark;
+}
+
+.current-user:hover {
+  border-left: solid 3px $light-blue;
 }
 
 @keyframes slideinright {
@@ -530,7 +535,6 @@ hr {
 
 .full-message:hover {
   background-color: $light;
-  border-left: solid 3px $light-blue;
 }
 
 .full-message:hover .edit-delete {

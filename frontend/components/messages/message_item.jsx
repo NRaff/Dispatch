@@ -58,6 +58,23 @@ class MessageItem extends React.Component {
     )
   }
 
+  // unused, considering dropping other users in on the other side
+  renderOtherUserFlipped(){
+    const { message, sender } = this.props
+    return (
+      <div className='full-message other-user'>
+        <div className='message-item'>
+          <div className='message-header'>
+            <p>{this.createdTime(message.createdAt)}</p>
+            <h3>{sender}</h3>
+          </div>
+          <p>{message.message}</p>
+        </div>
+        <img className={Icons.profile.lightProfile} alt="profileImg" />
+      </div>
+    )
+  }
+
   renderOtherUserMessage() {
     const { message, sender } = this.props
     return (
