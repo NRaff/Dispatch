@@ -26,11 +26,8 @@ const App = (props) => (
           <ProtectedRoute exact path='/new/:thread' component={ThreadInviteContainer} />
           <div className='messages-area'>
             <ProtectedRoute path='/' component={MessagesContainer} />
-            <Switch>
-              <ProtectedRoute exact path='/' component={NewMessageContainer} />
-              <ProtectedRoute exact path='/edit/:messageId' component={EditMessageContainer} />
-            </Switch> 
-            
+            <ProtectedRoute path='/' component={NewMessageContainer} />
+            <ProtectedRoute exact path='/edit/:messageId' component={EditMessageContainer} />
           </div>
         </div>
       </div>

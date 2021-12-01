@@ -470,6 +470,7 @@ hr {
   background-color: $pop-light;
   border-radius: 5px;
   position: relative;
+  z-index: 0;
 }
 
 .messages-container {
@@ -478,23 +479,24 @@ hr {
   overflow: hidden;
   border-radius: 5px;
   position: relative;
+  flex-grow: 4;
+  z-index: 0;
 }
 
 .messages-index {
   border-radius: 5px;
   height: 100%;
-  overflow: auto;
   overflow-x:hidden;
   position: relative;
   left: 0px;
   margin-right: 3px;
   padding-right: 3px;
+  z-index: 0;
 }
 
 .messages-index::-webkit-scrollbar {
   background: transparent;
   width: 5px;
-  // margin: 2px;
 }
 
 .messages-index::-webkit-scrollbar-thumb {
@@ -582,7 +584,7 @@ hr {
 .new-message {
   display: flex;
   flex-direction: column;
-  height: 20%;
+  // height: 20%;
   position: relative;
   margin-top: 10px;
   margin-left: 5px;
@@ -591,6 +593,7 @@ hr {
   background-color: $light;
   border-radius: 5px;
   padding: 5px;
+  flex-grow: 1;
 }
 
 .new-message > .ui-button {
@@ -609,12 +612,26 @@ hr {
   flex-grow: 1;
 }
 
+.edit-overlay {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: $overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
 .edit-popover {
   display: flex;
   flex-direction: column;
-  background-color: $light-red;
+  background-color: $super-dark;
   padding: 10px;
   border-radius: 5px;
+  z-index: 1;
 }
 
 .edit-popover h1 {
@@ -727,6 +744,7 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .thread-invite {
@@ -735,6 +753,7 @@ hr {
   background-color: $super-dark;
   border-radius: 5px;
   padding: 10px;
+  z-index: 1;
 }
 
 .thread-invite h1 {
