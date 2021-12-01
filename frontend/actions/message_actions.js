@@ -6,6 +6,7 @@ export const RECEIVE_ALL_MESSAGES = 'RECEIVE_ALL_MESSAGES';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 export const CLEAR_MESSAGES = 'CLEAR_MESSAGES';
+export const CLEAR_THREAD_MESSAGES = 'CLEAR_THREAD_MESSAGES';
 
 export const receiveAllMessages = messages => ({
   type: RECEIVE_ALL_MESSAGES,
@@ -24,6 +25,11 @@ export const removeMessage = messageId => ({
 
 export const clearMessages = () => ({
   type: CLEAR_MESSAGES
+})
+
+export const clearThreadMessages = threadId => ({
+  type: CLEAR_THREAD_MESSAGES,
+  threadId
 })
 
 export const receiveNewMessage = message => dispatch => {
