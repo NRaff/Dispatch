@@ -21,5 +21,13 @@ export const Icons = {
   notification: {
     darkNote: 'notification-dark',
     lightNote: 'notification-light'
+  },
+  edit: {
+    darkEdit: 'edit-dark',
+    lightEdit: 'edit-light'
+  },
+  delete: {
+    darkDelete: 'delete-dark',
+    lightDelete: 'delete-light'
   }
 }

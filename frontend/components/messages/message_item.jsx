@@ -14,22 +14,37 @@ class MessageItem extends React.Component {
     return date.toLocaleString()
   }
 
-  deleteMessage(payload) {
+  deleteMessage() {
+    const { message, currentUserId } = this.props
+    const payload = {
+      id: message.id, 
+      sender_id: currentUserId, 
+      threadId: message.threadId
+    }
     RealtimeThread.deleteMessage(payload)
   }
 
-  renderCurrentUserMessage() {
-
-  }
-
-  renderOtherUserMessage() {
-
-  }
-
-  render() {
-    const { message, sender, currentUserId } = this.props
+  renderUDOptions(){
+    const { message } = this.props
     return (
-      <div className='full-message'>
+      <div className='edit-delete'>
+        <Link className='edit-btn' to={`/edit/${message.id}`}>
+          <img className={Icons.edit.lightEdit} alt="edit icon" />
+        </Link>
+        <span 
+          onClick={this.deleteMessage}
+          className='delete-btn'
+        >
+          <img className={Icons.delete.lightDelete} alt="delete icon" />
+        </span>
+      </div>
+    )
+  }
+
+  renderCurrentUserMessage() {
+    const { message, sender } = this.props
+    return (
+      <div className='full-message current-user'>
         <img className={Icons.profile.lightProfile} alt="profileImg" />
         <div className='message-item'>
           <div className='message-header'>
@@ -38,15 +53,34 @@ class MessageItem extends React.Component {
           </div>
           <p>{message.message}</p>
         </div>
-        <div className='edit-delete'>
-          <Link className='edit-btn' to={`/edit/${message.id}`}>Edit</Link>
-          <button
-            onClick={() => this.deleteMessage({ id: message.id, sender_id: currentUserId, threadId: message.threadId })}
-            className='delete-btn'
-          >Delete</button>
+        {this.renderUDOptions()}
+      </div>
+    )
+  }
+
+  renderOtherUserMessage() {
+    const { message, sender } = this.props
+    return (
+      <div className='full-message other-user'>
+        <img className={Icons.profile.lightProfile} alt="profileImg" />
+        <div className='message-item'>
+          <div className='message-header'>
+            <h3>{sender}</h3>
+            <p>{this.createdTime(message.createdAt)}</p>
+          </div>
+          <p>{message.message}</p>
         </div>
       </div>
     )
+  }
+
+  render() {
+    const { message, currentUserId } = this.props
+    if (currentUserId === message.senderId) {
+      return this.renderCurrentUserMessage()
+    } else {
+      return this.renderOtherUserMessage()
+    }
   }
 }
 
