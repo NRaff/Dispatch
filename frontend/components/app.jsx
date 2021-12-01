@@ -19,7 +19,7 @@ const App = (props) => (
       <AuthRoute path='/login' component={LoginContainer} />
       <AuthRoute path='/signup' component={SignupContainer} />
       <div className='app-page'>
-      <ProtectedRoute path='/' component={NotificationContainer} />
+        <ProtectedRoute path='/' component={NotificationContainer} />
         <ProtectedRoute path='/' component={TopNavContainer} />
         <div className='main-app'>
           <ProtectedRoute path='/' component={ThreadsContainer} />
