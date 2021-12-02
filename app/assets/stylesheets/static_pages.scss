@@ -8,6 +8,7 @@ $super-light: #DADADB;
 $super-dark: #18191A;
 $pop-light: #696D76;
 $light-blue: #8299C6;
+$light-purple: #6442A7;
 $light-red: #E67776;
 $dark-red: #922227;
 
@@ -415,15 +416,18 @@ hr {
   height: fit-content;
   border-radius: 5px;
   flex-grow: 0.25;
+  position: relative;
 }
 
 .threads {
   margin-bottom: 5px;
   background-color: $super-light;
   border-radius: 5px;
+  position: relative;
 }
 
 .thread-item {
+  position: relative;
   animation-duration: 800ms;
   animation-name: slidein;
 }
@@ -882,4 +886,54 @@ hr {
 .notification span:hover {
   cursor: pointer;
   transform: scale(1.01) perspective(1px);
+}
+
+.workspace-index {
+  width: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.workspace-bubble {
+  background-color: $light;
+  font-weight: bold;
+  border-radius: 5px;
+  width: 100%;
+  aspect-ratio: 1;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  color: $super-light;
+  font-size: bold;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.workspace-bubble:hover {
+  border-bottom: solid 3px $light-blue;
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
+}
+
+.workspace-bubble:hover .workspace-tooltip {
+  display: flex;
+}
+
+.workspace-tooltip {
+  display: none;
+  padding: 3px;
+  background-color: $super-dark;
+  border: solid 3px $light;
+  border-radius: 5px;
+  width: 100px;
+  position: absolute;
+  color: $super-light;
+  font-size: 12px;
+  left: 40px;
 }

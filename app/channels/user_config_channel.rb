@@ -1,9 +1,9 @@
-# require 'byebug'
+require 'byebug'
 
 class UserConfigChannel < ApplicationCable::Channel
   def subscribed
     stream_for "user_config:#{params[:user]}"
-    self.receive_all_users
+    # self.receive_all_users
     self.receive_user if params[:user]
   end
 
@@ -35,6 +35,23 @@ class UserConfigChannel < ApplicationCable::Channel
     socket = {
       workspaces: set_objects_JSON(workspaces, workspace_keys),
       type: 'RECEIVE_ALL_WORKSPACES'
+    }
+    broadcast_user_channel(socket)
+  end
+
+  def setup_workspace(payload)
+    # byebug
+    user_id = payload['user']
+    wsp_id = payload['workspace']
+    workspace = Workspace.includes(:users).find(wsp_id)
+    self.receive_workspace_users(workspace.users)
+    # self.receive_all_threads(workspace.threads)
+  end
+
+  def receive_workspace_users(users)
+    socket = {
+      users: set_objects_JSON(users, permitted_user_keys),
+      type: 'RECEIVE_ALL_USERS'
     }
     broadcast_user_channel(socket)
   end

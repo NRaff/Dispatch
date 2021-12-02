@@ -5,15 +5,17 @@ import MessagesContainer from './messages/messages_container'
 import NewMessageContainer from './messages/new_message_container'
 import EditMessageContainer from './messages/edit_message_container'
 import ThreadInviteContainer from './threads/thread_invite_container'
+import WorkspaceContainer from './workspaces/ws_index_container'
 
 const MainApp = (props) => (
   <div className='main-app'>
-    <ProtectedRoute path='/' component={ThreadsContainer} />
-    <ProtectedRoute exact path='/new/:thread' component={ThreadInviteContainer} />
+    <ProtectedRoute path='/' component={WorkspaceContainer} />
+    <ProtectedRoute path='/:workspace' component={ThreadsContainer} />
+    <ProtectedRoute exact path='/:workspace/new/:thread' component={ThreadInviteContainer} />
     <div className='messages-area'>
-      <ProtectedRoute path='/' component={MessagesContainer} />
-      <ProtectedRoute path='/' component={NewMessageContainer} />
-      <ProtectedRoute exact path='/edit/:messageId' component={EditMessageContainer} />
+      <ProtectedRoute path='/:workspace' component={MessagesContainer} />
+      <ProtectedRoute path='/:workspace' component={NewMessageContainer} />
+      <ProtectedRoute exact path='/:workspace/edit/:messageId' component={EditMessageContainer} />
     </div>
   </div>
 )

@@ -13,6 +13,7 @@ workspaces = Workspace.create([
 ])
 
 User.delete_all
+UserWorkspace.delete_all
 Workspace.first.users.create([
   {password: 123456, display_name: 'nick', email: 'nick@email.com'},
   {password: 123456, display_name: 'One', email: 'one@email.com'},
@@ -29,7 +30,6 @@ coruscant = Workspace.find_by(name: 'Coruscant')
 users = User.all
 ws_assignments = []
 users.each do |user|
-  ws_assignments.push({user_id: user.id, workspace_id: tattooine.id})
   ws_assignments.push({user_id: user.id, workspace_id: hoth.id})
   ws_assignments.push({user_id: user.id, workspace_id: coruscant.id})
 end
