@@ -1085,18 +1085,20 @@ ul.workspace-tooltip {
   transform: scale(1.01) perspective(1px);
 }
 
-.workspace-join input {
+.workspace-info input {
   margin-bottom: 0px;
   margin-top: 10px;
-  width: 100%;
+  width: 95%;
 }
 
 .workspace-join .ui-button {
-  margin-left: 0px;
-  margin-right: 0px;
-  width: 100%;
+  background-color: $light-purple;
 }
 
-.workspace-join input::placeholder {
+.workspace-create .ui-button {
+  background-color: $light-purple;
+}
+
+.workspace-info input::placeholder {
   color: $light;
 }
