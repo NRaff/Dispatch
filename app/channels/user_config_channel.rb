@@ -20,14 +20,23 @@ class UserConfigChannel < ApplicationCable::Channel
 
   def receive_user
     # user = User.find(params[:user])
-    user = User.includes(:threads).find(params[:user])
+    user = User.includes(:threads).includes(:workspaces).find(params[:user])
     user_obj = set_object_JSON(user, current_user_keys)
     socket = {
       user: user_obj,
       type: 'RECEIVE_USER'
     }
     broadcast_user_channel(socket)
+    self.receive_all_workspaces(user.workspaces)
     self.receive_all_threads(user.threads.includes(:members))
+  end
+
+  def receive_all_workspaces(workspaces)
+    socket = {
+      workspaces: set_objects_JSON(workspaces, workspace_keys),
+      type: 'RECEIVE_ALL_WORKSPACES'
+    }
+    broadcast_user_channel(socket)
   end
 
   def receive_all_threads(threads)
@@ -94,6 +103,10 @@ class UserConfigChannel < ApplicationCable::Channel
       socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
       broadcast_user_channel(socket)
     end
+  end
+
+  def workspace_keys
+    ['id', 'name', 'keycode','created_at']
   end
 
   def thread_keys
