@@ -77,6 +77,7 @@ class UserConfigChannel < ApplicationCable::Channel
         type: 'REMOVE_WORKSPACE',
         workspace: workspace_id
       }
+      broadcast_user_channel(socket)
     end
   end
 

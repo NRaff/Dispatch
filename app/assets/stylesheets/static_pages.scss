@@ -1031,6 +1031,11 @@ hr {
   color: $light-purple;
 }
 
+.workspace-info .ui-button {
+  background-color: $dark-red;
+  color: $super-light;
+}
+
 .close {
   position: absolute;
   top: 0px;

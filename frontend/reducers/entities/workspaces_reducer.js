@@ -15,8 +15,8 @@ const WorkspacesReducer = (state={}, action) => {
       nextState[action.workspace.id] = action.workspace
       return nextState;
     case REMOVE_WORKSPACE:
-      delete nextState[action.workspaceId]
-      return nextState
+      delete nextState[action.workspace]
+      return nextState;
     default:
       return state;
   }
