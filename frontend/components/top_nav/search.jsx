@@ -25,7 +25,6 @@ class Search extends React.Component {
       is_thread: false
     }
     const {user, activeWorkspace} = this.props
-    // debugger
     const payload = {
       thread: thread,
       user: user.id,

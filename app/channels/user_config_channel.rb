@@ -28,7 +28,7 @@ class UserConfigChannel < ApplicationCable::Channel
     }
     broadcast_user_channel(socket)
     self.receive_all_workspaces(user.workspaces)
-    self.receive_all_threads(user.threads.includes(:members))
+    # self.receive_all_threads(user.threads.includes(:members))
   end
 
   def receive_all_workspaces(workspaces)
@@ -43,9 +43,9 @@ class UserConfigChannel < ApplicationCable::Channel
     # byebug
     user_id = payload['user']
     wsp_id = payload['workspace']
-    workspace = Workspace.includes(:users).find(wsp_id)
+    workspace = Workspace.includes(:users).includes(:threads).find(wsp_id)
     self.receive_workspace_users(workspace.users)
-    # self.receive_all_threads(workspace.threads)
+    self.receive_all_threads(workspace.threads)
   end
 
   def join_workspace(payload)
@@ -59,7 +59,6 @@ class UserConfigChannel < ApplicationCable::Channel
       workspace.workspace_users.create(user_id: user_id)
       self.receive_workspace(workspace)
       self.receive_workspace_users(workspace.users)
-
       self.receive_all_threads(workspace.threads)
     else
       socket = error_socket(
