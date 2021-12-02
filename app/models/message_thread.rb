@@ -32,7 +32,8 @@ class MessageThread < ApplicationRecord
 
   has_many :messages,
     foreign_key: :thread_id,
-    class_name: :Message
+    class_name: :Message,
+    dependent: :destroy
 
   # check if a thread name exists in the list of threads a user has access to
 end

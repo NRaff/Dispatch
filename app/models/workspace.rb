@@ -21,7 +21,8 @@ class Workspace < ApplicationRecord
 
   has_many :threads,
   foreign_key: :workspace_id,
-  class_name: :MessageThread
+  class_name: :MessageThread,
+  dependent: :destroy
 
   has_many :workspace_users,
   foreign_key: :workspace_id,
