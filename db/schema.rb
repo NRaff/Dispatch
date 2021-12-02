@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_30_184309) do
+ActiveRecord::Schema.define(version: 2021_12_02_003252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_11_30_184309) do
     t.boolean "is_thread", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "workspace_id"
     t.index ["name"], name: "index_message_threads_on_name"
   end
 
@@ -43,6 +44,16 @@ ActiveRecord::Schema.define(version: 2021_11_30_184309) do
     t.index ["user_id"], name: "index_user_threads_on_user_id"
   end
 
+  create_table "user_workspaces", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "workspace_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "workspace_id"], name: "index_user_workspaces_on_user_id_and_workspace_id", unique: true
+    t.index ["user_id"], name: "index_user_workspaces_on_user_id"
+    t.index ["workspace_id"], name: "index_user_workspaces_on_workspace_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "display_name", null: false
@@ -52,6 +63,15 @@ ActiveRecord::Schema.define(version: 2021_11_30_184309) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
+  end
+
+  create_table "workspaces", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "keycode", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["keycode"], name: "index_workspaces_on_keycode", unique: true
+    t.index ["name"], name: "index_workspaces_on_name"
   end
 
 end

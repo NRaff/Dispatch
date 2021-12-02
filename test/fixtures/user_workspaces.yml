@@ -1,17 +1,18 @@
 # == Schema Information
 #
-# Table name: message_threads
+# Table name: user_workspaces
 #
 #  id           :bigint           not null, primary key
-#  is_thread    :boolean          default(FALSE), not null
-#  name         :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#  workspace_id :integer
+#  user_id      :integer          not null
+#  workspace_id :integer          not null
 #
 # Indexes
 #
-#  index_message_threads_on_name  (name)
+#  index_user_workspaces_on_user_id                   (user_id)
+#  index_user_workspaces_on_user_id_and_workspace_id  (user_id,workspace_id) UNIQUE
+#  index_user_workspaces_on_workspace_id              (workspace_id)
 #
 
 # This model initially had no columns defined. If you add columns to the
