@@ -1,5 +1,5 @@
 import React from "react";
-import { ProtectedRoute } from "../utils/route_utils";
+import { ProtectedRoute, ProtectedWorkspace } from "../utils/route_utils";
 import ThreadsContainer from './threads/threads_container'
 import MessagesContainer from './messages/messages_container'
 import NewMessageContainer from './messages/new_message_container'
@@ -10,12 +10,12 @@ import WorkspaceContainer from './workspaces/ws_index_container'
 const MainApp = (props) => (
   <div className='main-app'>
     <ProtectedRoute path='/' component={WorkspaceContainer} />
-    <ProtectedRoute path='/:workspace' component={ThreadsContainer} />
-    <ProtectedRoute exact path='/:workspace/new/:thread' component={ThreadInviteContainer} />
+    <ProtectedWorkspace path='/:workspace' component={ThreadsContainer} />
+    <ProtectedWorkspace exact path='/:workspace/new/:thread' component={ThreadInviteContainer} />
     <div className='messages-area'>
-      <ProtectedRoute path='/:workspace' component={MessagesContainer} />
-      <ProtectedRoute path='/:workspace' component={NewMessageContainer} />
-      <ProtectedRoute exact path='/:workspace/edit/:messageId' component={EditMessageContainer} />
+      <ProtectedWorkspace path='/:workspace' component={MessagesContainer} />
+      <ProtectedWorkspace path='/:workspace' component={NewMessageContainer} />
+      <ProtectedWorkspace exact path='/:workspace/edit/:messageId' component={EditMessageContainer} />
     </div>
   </div>
 )

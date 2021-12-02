@@ -296,6 +296,13 @@ hr {
   color: $super-light;
 }
 
+.all-threads header {
+  padding: 5px;
+  margin-bottom: 5px;
+  border: solid 3px $light-purple;
+  border-radius: 5px;
+}
+
 .all-threads .thread-item:last-child {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -915,8 +922,12 @@ hr {
   font-family: 'Nunito Sans', sans-serif;
 }
 
+.active-workspace {
+  border: solid 3px $light-purple;
+}
+
 .workspace-bubble:hover {
-  border-bottom: solid 3px $light-blue;
+  border-bottom: solid 3px $light-purple;
   cursor: pointer;
   transform: scale(1.01) perspective(1px);
 }

@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom'
 
 const mSTP = state => ({
-  loggedIn: Boolean(state.session.userId)
+  loggedIn: Boolean(state.session.userId),
+  selectedWorkspace: Boolean(state.ui.activeWorkspaceId)
 })
 
 const Auth = ({loggedIn, path, component: Component}) => (
@@ -28,5 +29,15 @@ const Protected = ({loggedIn, path, component: Component}) => (
   />
 )
 
+const Workspace = ({loggedIn, selectedWorkspace, path, component: Component}) => (
+  <Route
+    path={path}
+    render={props => (
+      loggedIn && selectedWorkspace ? <Component {...props} /> : <Redirect to="/" />
+    )}
+  />
+)
+
 export const AuthRoute = withRouter(connect(mSTP, null)(Auth));
 export const ProtectedRoute = withRouter(connect(mSTP, null)(Protected));
+export const ProtectedWorkspace = withRouter(connect(mSTP, null)(Workspace))
