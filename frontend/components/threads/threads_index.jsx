@@ -56,7 +56,7 @@ class ThreadsIndex extends React.Component{
     } = this.props
     return (
       <div className='all-threads'>
-        <header>{activeWorkspace.name}</header>
+        <header className='workspace-header'>{activeWorkspace.name}</header>
         <NewThread 
           currentUser={this.props.currentUserId}
         />
