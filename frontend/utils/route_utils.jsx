@@ -38,6 +38,16 @@ const Workspace = ({loggedIn, selectedWorkspace, path, component: Component}) =>
   />
 )
 
+const Hidden = ({selectedWorkspace, path, component: Component}) => (
+  <Route
+    path={path}
+    render={props => (
+      selectedWorkspace ? <Component {...props} /> : null
+    )}
+  />
+)
+
 export const AuthRoute = withRouter(connect(mSTP, null)(Auth));
 export const ProtectedRoute = withRouter(connect(mSTP, null)(Protected));
 export const ProtectedWorkspace = withRouter(connect(mSTP, null)(Workspace))
+export const HiddenWorkspace = withRouter(connect(mSTP, null)(Hidden))

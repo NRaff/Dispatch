@@ -115,18 +115,19 @@ class Search extends React.Component {
   }
   
   render(){
+
     return (
-      <div className="search-bar">
-        {this.renderClear()}
-        <input 
-          type="text" 
-          value={this.state.userSearch}
-          onChange={this.handleSearch}
-          placeholder="Start a dm..."
-        />
-        {this.renderSearch()}
-      </div>
-    )
+        <div className="search-bar">
+          {this.renderClear()}
+          <input
+            type="text"
+            value={this.state.userSearch}
+            onChange={this.handleSearch}
+            placeholder="Start a dm..."
+          />
+          {this.renderSearch()}
+        </div>
+      )
   }
 }
 

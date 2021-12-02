@@ -4,6 +4,7 @@ import Logo from "../logo"
 import Profile from "./profile"
 import * as RealtimeUser from "../../utils/user_config_socket"
 import SearchContainer from "../top_nav/search_container"
+import { HiddenWorkspace } from "../../utils/route_utils"
 
 class TopNav extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class TopNav extends React.Component {
     return (
       <nav className='top-nav'>
         <Logo theme={Icons.logo.lightLogo} />
-        <SearchContainer />
+        <HiddenWorkspace path='/wsp/:workspace' component={SearchContainer} />
         <Profile theme={Icons.profile.lightProfile} user={user} logout={logout}/>
       </nav>
     )
