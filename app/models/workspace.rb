@@ -34,6 +34,6 @@ class Workspace < ApplicationRecord
 
   private
   def set_keycode
-    self.keycode = SecureRandom::base64(5)
+    self.keycode ||= SecureRandom::base64(5)
   end
 end

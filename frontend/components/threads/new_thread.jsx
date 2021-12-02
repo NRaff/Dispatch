@@ -13,6 +13,7 @@ class NewThread extends React.Component {
     }
     this.handleInput = this.handleInput.bind(this)
     this.clearInputs = this.clearInputs.bind(this)
+    
   }
 
   handleInput(e) {
@@ -33,6 +34,7 @@ class NewThread extends React.Component {
 
   render() {
     const {thread} = this.state
+    const {workspace} = this.props
     return (
       <div className='add-thread'>
         <input 
@@ -42,7 +44,7 @@ class NewThread extends React.Component {
           placeholder='Create a thread'
         />
         <Link 
-          to={`/new/${thread.name}`}
+          to={`/wsp/${workspace.id}/new/${thread.name || '[New Thread]'}`}
           className="add-btn"
           onClick={this.clearInputs}
         >➕</Link>

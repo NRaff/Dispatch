@@ -1045,3 +1045,19 @@ hr {
   cursor: pointer;
   transform: scale(1.01) perspective(1px);
 }
+
+.workspace-join input {
+  margin-bottom: 0px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.workspace-join .ui-button {
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+}
+
+.workspace-join input::placeholder {
+  color: $light;
+}

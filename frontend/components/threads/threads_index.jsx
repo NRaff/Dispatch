@@ -61,6 +61,7 @@ class ThreadsIndex extends React.Component{
         <WorkspaceHeader workspace={activeWorkspace}/>
         <NewThread 
           currentUser={this.props.currentUserId}
+          workspace={activeWorkspace}
         />
         {this.renderThreads()}
         {this.renderDMs()}

@@ -17,11 +17,17 @@ export const createRealtimeUser = (dispatch, userId) => {
       receiveThread: function (data) {
         return this.perform("receive_thread", data)
       },
-      setupWorkspace: function(data) {
-        return this.perform("setup_workspace", data)
-      },
       deleteThread: function (data) {
         return this.perform("delete_thread", data)
+      },
+      setupWorkspace: function (data) {
+        return this.perform("setup_workspace", data)
+      },
+      joinWorkspace: function (data) {
+        return this.perform("join_workspace", data)
+      },
+      leaveWorkspace: function (data) {
+        return this.perform("leave_workspace", data)
       }
     }
   )
@@ -52,12 +58,22 @@ export const receiveThread = payload => {
   userConfigSub.receiveThread(payload)
 }
 
+export const deleteThread = payload => {
+  let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
+  userConfigSub.deleteThread(payload)
+}
+
 export const setupWorkspace = payload => {
   let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
   userConfigSub.setupWorkspace(payload)
 }
 
-export const deleteThread = payload => {
+export const joinWorkspace = payload => {
   let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
-  userConfigSub.deleteThread(payload)
+  userConfigSub.joinWorkspace(payload)
+}
+
+export const leaveWorkspace = payload => {
+  let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
+  userConfigSub.leaveWorkspace(payload)
 }

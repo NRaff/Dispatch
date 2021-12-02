@@ -48,6 +48,47 @@ class UserConfigChannel < ApplicationCable::Channel
     # self.receive_all_threads(workspace.threads)
   end
 
+  def join_workspace(payload)
+    user_id = payload['user']
+    keycode = payload['workspace']['keycode']
+    workspace = Workspace
+                  .includes(:users)
+                  .includes(:threads)
+                  .find_by(keycode: keycode)
+    if workspace
+      workspace.workspace_users.create(user_id: user_id)
+      self.receive_workspace(workspace)
+      self.receive_workspace_users(workspace.users)
+
+      self.receive_all_threads(workspace.threads)
+    else
+      socket = error_socket(
+        ["Couldn't find the workspace"],
+        422,user_id, 'RECEIVE_WORKSPACE_ERRORS')
+      broadcast_user_channel(socket)
+    end
+  end
+
+  def leave_workspace(payload)
+    user_id = payload['user']
+    workspace_id = payload['workspace']
+    user_workspace = UserWorkspace.find_by(user_id: user_id, workspace_id: workspace_id)
+    if user_workspace.destroy
+      socket = {
+        type: 'REMOVE_WORKSPACE',
+        workspace: workspace_id
+      }
+    end
+  end
+
+  def receive_workspace(workspace)
+    socket = {
+      workspace: set_object_JSON(workspace, workspace_keys),
+      type: 'RECEIVE_WORKSPACE'
+    }
+    broadcast_user_channel(socket)
+  end
+
   def receive_workspace_users(users)
     socket = {
       users: set_objects_JSON(users, permitted_user_keys),

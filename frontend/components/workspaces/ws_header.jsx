@@ -11,7 +11,7 @@ const mSTP = (state, props) => ({
 const WorkspaceHeader = ({workspace}) => {
   return (
     <Link
-      to={`/${workspace.id}/info`}
+      to={`/wsp/${workspace.id}/info`}
       className='workspace-header'
     >
       <h1>{workspace.name}</h1>

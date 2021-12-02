@@ -15,7 +15,7 @@ const WorkspaceIndex = props => {
         {props.workspaces.map((wsp, idx) => (
           <Link
             className='workspace-bubble'
-            key={idx} to={`/${wsp.id}`}
+            key={idx} to={`/wsp/${wsp.id}`}
             onClick={(e) => setActiveWorkspace(e, wsp)}
           >
             <h1>{wsp.name[0]}</h1>
@@ -23,7 +23,7 @@ const WorkspaceIndex = props => {
           </Link>
         ))}
       </ul>
-      <span className='workspace-bubble'>+</span>
+      <Link to='/join-workspace' className='workspace-bubble'>+</Link>
     </section>
   )
 }
