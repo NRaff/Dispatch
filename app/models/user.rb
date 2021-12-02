@@ -44,6 +44,10 @@ class User < ApplicationRecord
   through: :user_workspaces,
   source: :workspace
 
+  has_many :owned_workspaces,
+  foreign_key: :created_by,
+  class_name: :Workspace
+
   # ASPIRE
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

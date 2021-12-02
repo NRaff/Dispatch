@@ -26,6 +26,9 @@ export const createRealtimeUser = (dispatch, userId) => {
       joinWorkspace: function (data) {
         return this.perform("join_workspace", data)
       },
+      createWorkspace: function (data) {
+        return this.perform("create_workspace", data)
+      },
       leaveWorkspace: function (data) {
         return this.perform("leave_workspace", data)
       }
@@ -76,4 +79,9 @@ export const joinWorkspace = payload => {
 export const leaveWorkspace = payload => {
   let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
   userConfigSub.leaveWorkspace(payload)
+}
+
+export const createWorkspace = payload => {
+  let userConfigSub = identifyUserSub(App.cable.subscriptions.subscriptions, payload.user)
+  userConfigSub.createWorkspace(payload)
 }

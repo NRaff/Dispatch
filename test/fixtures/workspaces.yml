@@ -3,6 +3,7 @@
 # Table name: workspaces
 #
 #  id         :bigint           not null, primary key
+#  created_by :integer          not null
 #  keycode    :string           not null
 #  name       :string           not null
 #  created_at :datetime         not null

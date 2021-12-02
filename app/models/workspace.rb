@@ -3,6 +3,7 @@
 # Table name: workspaces
 #
 #  id         :bigint           not null, primary key
+#  created_by :integer          not null
 #  keycode    :string           not null
 #  name       :string           not null
 #  created_at :datetime         not null
@@ -18,6 +19,10 @@ class Workspace < ApplicationRecord
 
   validates :name, :keycode, presence: true
   validates :keycode, uniqueness: true
+
+  belongs_to :creator,
+  foreign_key: :created_by,
+  class_name: :User
 
   has_many :threads,
   foreign_key: :workspace_id,

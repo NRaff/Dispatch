@@ -1,36 +1,36 @@
 import React from "react";
-import * as RealtimeUser from '../utils/user_config_socket'
+import * as RealtimeUser from '../../utils/user_config_socket'
 
-class WorkspaceJoin extends React.Component {
-  constructor(props){
+class WorkspaceCreate extends React.Component {
+  constructor(props) {
     super(props)
     this.state = {
       user: this.props.currentUser,
       workspace: {
-        keycode: ''
+        name: ''
       }
     }
-    this.handleJoin = this.handleJoin.bind(this)
+    this.handleCreate = this.handleCreate.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleClose = this.handleClose.bind(this)
   }
 
 
-  handleJoin(e){
+  handleCreate(e) {
     const payload = this.state
-    RealtimeUser.joinWorkspace(payload)
+    RealtimeUser.createWorkspace(payload)
     this.setState({
       user: this.props.currentUser,
       workspace: {
-        keycode: ''
+        name: ''
       }
     })
   }
 
   handleChange(e) {
     let workspace = Object.assign({}, this.state.workspace)
-    workspace.keycode = e.target.value
-    this.setState({workspace})
+    workspace.name = e.target.value
+    this.setState({ workspace })
   }
 
   handleClose(e) {
@@ -41,27 +41,27 @@ class WorkspaceJoin extends React.Component {
     return (
       <div className='workspace-overlay'>
         <section
-          className='workspace-info workspace-join'
+          className='workspace-info workspace-create'
         >
-          <h1>Join a Workspace</h1>
-          <span 
+          <h1>Create a Workspace</h1>
+          <span
             className='close'
             onClick={this.handleClose}
           >&times;</span>
           <input
             type="text"
-            value={this.state.workspace.keycode}
+            value={this.state.workspace.name}
             onChange={this.handleChange}
-            placeholder='Paste keycode here...'
+            placeholder='Workspace name...'
           />
           <button
             className='ui-button'
-            onClick={this.handleJoin}
-          >Join</button>
+            onClick={this.handleCreate}
+          >Create</button>
         </section>
       </div>
     )
   }
 }
 
-export default WorkspaceJoin;
+export default WorkspaceCreate;

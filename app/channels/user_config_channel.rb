@@ -68,6 +68,18 @@ class UserConfigChannel < ApplicationCable::Channel
     end
   end
 
+  def create_workspace(payload)
+    user = User.find(payload['user'])
+    workspace = user.owned_workspaces.create(payload['workspace'])
+    workspace.workspace_users.create(user_id: payload['user'])
+    if workspace.id
+      self.receive_workspace(workspace)
+    else
+      socket = error_socket(err, 422, payload['user'], 'RECEIVE_WORKSPACE_ERRORS')
+      broadcast_user_channel(socket)
+    end
+  end
+
   def leave_workspace(payload)
     user_id = payload['user']
     workspace_id = payload['workspace']

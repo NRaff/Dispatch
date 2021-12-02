@@ -336,11 +336,9 @@ hr {
 
 .add-thread {
   display: flex;
-  // justify-content: space-between;
   align-items: center;
   height: 100%;
   padding: 0px;
-  // border-bottom: solid 3px $dark;
   background-color: $super-light;
   border-radius: 5px;
   margin-bottom: 5px;
@@ -403,9 +401,10 @@ hr {
 
 .main-app {
   display: flex;
-  padding-left: 1vw;
-  padding-right: 1vw;
+  padding-left: 5px;
+  padding-right: 5px;
   height: 92vh;
+  width: 100%;
 
 }
 
@@ -420,6 +419,7 @@ hr {
   border-radius: 5px;
   flex-grow: 0.25;
   position: relative;
+  z-index: auto;
 }
 
 .threads {
@@ -477,7 +477,7 @@ hr {
   background-color: $pop-light;
   border-radius: 5px;
   position: relative;
-  z-index: 0;
+  z-index: 4;
 }
 
 .messages-container {
@@ -913,8 +913,10 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px;
+  // padding: 5px;
   width: 5%;
+  position: relative;
+  z-index: 8;
 }
 
 .workspace-index {
@@ -923,7 +925,6 @@ hr {
   flex-direction: column-reverse;
   align-self: flex-start;
   align-items: center;
-  // padding: 5px;
   margin-right: 15px;
   position: relative;
   z-index: 1;
@@ -933,7 +934,7 @@ hr {
   background-color: $light;
   font-weight: bold;
   border-radius: 5px;
-  width: 100%;
+  width: 35px;
   aspect-ratio: 1;
   margin-bottom: 5px;
   display: flex;
@@ -972,6 +973,8 @@ hr {
 
 .workspace-bubble:hover .workspace-tooltip {
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .workspace-tooltip {
@@ -980,11 +983,42 @@ hr {
   background-color: $super-dark;
   border: solid 3px $light;
   border-radius: 5px;
-  width: 100px;
   position: absolute;
   color: $super-light;
   font-size: 12px;
-  left: 40px;
+  left: 37px;
+  width: max-content;
+  box-sizing: border-box;
+}
+
+ul.workspace-tooltip {
+  padding: 0;
+  border: none;
+}
+
+.tooltip-option {
+  text-decoration: none;
+  flex-grow: 1;
+  color: $super-light;
+  border-radius: 5px;
+  padding: 3px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tooltip-option:first-child {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.tooltip-option:last-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.tooltip-option:hover {
+  border-left: solid 3px $light-purple;
+  background-color: $light;
 }
 
 .workspace-overlay {

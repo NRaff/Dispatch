@@ -10,7 +10,7 @@ const WorkspaceIndex = props => {
     e.currentTarget.classList.add('active-workspace')
   }
   return (
-    <section className='workspaces-container'>
+    <section className='workspace-container'>
       <ul className='workspace-index'>
         {props.workspaces.map((wsp, idx) => (
           <Link
@@ -23,7 +23,13 @@ const WorkspaceIndex = props => {
           </Link>
         ))}
       </ul>
-      <Link to='/join-workspace' className='workspace-bubble'>+</Link>
+      <li className='workspace-bubble'>
+        <h1>+</h1>
+        <ul className='workspace-tooltip'>
+          <Link to='/join-workspace' className='tooltip-option'>Join a workspace</Link>
+          <Link to='/create-workspace' className='tooltip-option'>Create a workspace</Link>
+        </ul>
+      </li>
     </section>
   )
 }
