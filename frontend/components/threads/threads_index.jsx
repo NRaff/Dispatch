@@ -3,6 +3,7 @@ import NewThread from "./new_thread";
 import ThreadItem from "./thread_item";
 import * as RealtimeUser from "../../utils/user_config_socket"
 import SearchContainer from "../top_nav/search_container"
+import WorkspaceHeader from "../workspaces/ws_header";
 
 class ThreadsIndex extends React.Component{
   renderThreads(){
@@ -56,7 +57,8 @@ class ThreadsIndex extends React.Component{
     } = this.props
     return (
       <div className='all-threads'>
-        <header className='workspace-header'>{activeWorkspace.name}</header>
+        {/* <header className='workspace-header'>{activeWorkspace.name}</header> */}
+        <WorkspaceHeader workspace={activeWorkspace}/>
         <NewThread 
           currentUser={this.props.currentUserId}
         />

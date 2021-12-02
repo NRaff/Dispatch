@@ -414,7 +414,6 @@ hr {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: left;
-  // background-color: $super-light;
   width: 10vw;
   min-width: 150px;
   height: fit-content;
@@ -897,10 +896,20 @@ hr {
   margin-bottom: 5px;
   border: solid 3px $light-purple;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: $super-light;
+  font-weight: bold;
+}
+
+.workspace-header img {
+  height: 20px;
+  aspect-ratio: 1;
 }
 
 .workspace-container {
-  // margin-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -976,4 +985,63 @@ hr {
   color: $super-light;
   font-size: 12px;
   left: 40px;
+}
+
+.workspace-overlay {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: $overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.workspace-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $super-dark;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  top: -300px;
+  z-index: 1;
+  width: 20vh;
+}
+
+.workspace-keycode {
+  background-color: $super-light;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  color: $light-purple;
+  font-weight: bold;
+}
+
+.workspace-note {
+  font-size: small;
+}
+
+.workspace-note span {
+  color: $light-purple;
+}
+
+.close {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  font-size: 100%;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+}
+
+.close:hover {
+  cursor: pointer;
+  transform: scale(1.01) perspective(1px);
 }

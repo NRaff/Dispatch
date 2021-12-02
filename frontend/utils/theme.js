@@ -29,5 +29,9 @@ export const Icons = {
   delete: {
     darkDelete: 'delete-dark',
     lightDelete: 'delete-light'
+  },
+  share: {
+    darkShare: 'share-dark',
+    lightShare: 'share-light'
   }
 }
