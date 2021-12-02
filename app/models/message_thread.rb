@@ -16,6 +16,7 @@
 class MessageThread < ApplicationRecord
   validates :name, presence: true
   validates :is_thread, inclusion: {in: [true, false] }
+  validates :name, uniqueness: {scope: :workspace_id}
 
   belongs_to :workspace,
     foreign_key: :workspace_id,

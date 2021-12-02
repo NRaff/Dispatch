@@ -27,7 +27,8 @@ class ThreadInvite extends React.Component {
     })
     const payload = {
       thread: thread,
-      user: this.props.currentUser
+      user: this.props.currentUser,
+      workspace: this.props.activeWorkspace
     }
     RealtimeUser.receiveThread(payload)
     this.props.history.goBack()

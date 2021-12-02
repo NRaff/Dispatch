@@ -111,34 +111,60 @@ class UserConfigChannel < ApplicationCable::Channel
   end
 
   def receive_thread(payload)
-    user = User.includes(:threads).find(payload['user'])
-    thread_names = user.threads.map { |t| t.name }
-    unless thread_names.include?(payload['thread']['name'])
-      new_thread = user.threads.create({
-        name: payload['thread']['name'],
-        is_thread: payload['thread']['is_thread']
-      })
-      if new_thread.id
-        invitees = payload['thread']['invitees']
-        add_invitees(invitees, new_thread)
-        received_thread = new_thread.as_json
-        received_thread['user_ids'] = new_thread.members.map {|m| m.id}
-        socket = {
-          thread: set_obj_camel_JSON(received_thread, thread_keys),
-          type: 'RECEIVE_THREAD'
-        }
-        broadcast_to_members(new_thread.members, socket)
-      else
-        err = new_thread.errors.messages
-        socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
-        broadcast_user_channel(socket)
-      end
+    workspace = Workspace.includes(:threads).find(payload['workspace']['id'])
+    new_thread = workspace.threads.create({
+      name: payload['thread']['name'],
+      is_thread: payload['thread']['is_thread']
+    })
+    if new_thread.id
+      invitees = payload['thread']['invitees']
+      invitees.push(payload['user'])
+      add_invitees(invitees, new_thread)
+      received_thread = new_thread.as_json
+      received_thread['user_ids'] = new_thread.members.map {|m| m.id}
+      socket = {
+        thread: set_obj_camel_JSON(received_thread, thread_keys),
+        type: 'RECEIVE_THREAD'
+      }
+      broadcast_to_members(new_thread.members, socket)
     else
-      err = ["Thread already exists"]
+      err = new_thread.errors.messages
       socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
       broadcast_user_channel(socket)
     end
+
   end
+
+  # ! Deprecated
+  # def receive_break_thread(payload)
+  #   user = User.includes(:threads).find(payload['user'])
+  #   thread_names = user.threads.map { |t| t.name }
+  #   unless thread_names.include?(payload['thread']['name'])
+  #     new_thread = user.threads.create({
+  #       name: payload['thread']['name'],
+  #       is_thread: payload['thread']['is_thread']
+  #     })
+  #     if new_thread.id
+  #       invitees = payload['thread']['invitees']
+  #       add_invitees(invitees, new_thread)
+  #       received_thread = new_thread.as_json
+  #       received_thread['user_ids'] = new_thread.members.map {|m| m.id}
+  #       socket = {
+  #         thread: set_obj_camel_JSON(received_thread, thread_keys),
+  #         type: 'RECEIVE_THREAD'
+  #       }
+  #       broadcast_to_members(new_thread.members, socket)
+  #     else
+  #       err = new_thread.errors.messages
+  #       socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
+  #       broadcast_user_channel(socket)
+  #     end
+  #   else
+  #     err = ["Thread already exists"]
+  #     socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
+  #     broadcast_user_channel(socket)
+  #   end
+  # end
 
   def add_invitees(invitees, thread)
     invitees.each do |user|

@@ -14,7 +14,8 @@ const mSTP = (state, props) => {
   return ({
     users: mapNamesToIds(Object.values(state.entities.users)),
     thread: props.match.params.thread,
-    currentUser: state.session.userId
+    currentUser: state.session.userId,
+    activeWorkspace: state.entities.workspaces[props.match.params.workspace]
   })
 }
 
