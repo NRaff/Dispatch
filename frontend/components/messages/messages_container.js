@@ -14,7 +14,8 @@ const mSTP = state => {
   messages: activeThreadMessages(state.ui.activeThreadId, Object.values(state.entities.messages)),
   users: state.entities.users,
   currentUserId: state.session.userId,
-  activeThreadId: state.ui.activeThreadId
+  activeThreadId: state.ui.activeThreadId,
+  activeWorkspaceId: state.ui.activeWorkspaceId
 })
 }
 

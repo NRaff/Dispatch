@@ -25,10 +25,10 @@ class MessageItem extends React.Component {
   }
 
   renderUDOptions(){
-    const { message } = this.props
+    const { message, activeWorkspaceId } = this.props
     return (
       <div className='edit-delete'>
-        <Link className='edit-btn' to={`/edit/${message.id}`}>
+        <Link className='edit-btn' to={`/wsp/${activeWorkspaceId}/edit/${message.id}`}>
           <img className={Icons.edit.lightEdit} alt="edit icon" />
         </Link>
         <span 

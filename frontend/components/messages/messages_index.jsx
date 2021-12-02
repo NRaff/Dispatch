@@ -30,6 +30,7 @@ class MessagesIndex extends React.Component {
               deleteMessage={deleteMessage}
               sender={users[msg.senderId].displayName}
               currentUserId={this.props.currentUserId}
+              activeWorkspaceId={this.props.activeWorkspaceId}
             />
           ))}
           <div ref={this.bottom} />
