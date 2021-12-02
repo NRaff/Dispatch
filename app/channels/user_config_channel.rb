@@ -111,6 +111,7 @@ class UserConfigChannel < ApplicationCable::Channel
   end
 
   def receive_thread(payload)
+    # byebug
     workspace = Workspace.includes(:threads).find(payload['workspace']['id'])
     new_thread = workspace.threads.create({
       name: payload['thread']['name'],

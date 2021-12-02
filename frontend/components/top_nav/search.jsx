@@ -24,10 +24,12 @@ class Search extends React.Component {
       invitees: addedUsers.map(user => this.props.users[user].id),
       is_thread: false
     }
-    const user = this.props.user
+    const {user, activeWorkspace} = this.props
+    // debugger
     const payload = {
       thread: thread,
-      user: user.id
+      user: user.id,
+      workspace: activeWorkspace
     }
     RealtimeUser.receiveThread(payload)
     this.clearSearch()

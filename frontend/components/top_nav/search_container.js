@@ -17,7 +17,7 @@ const mSTP = (state, props) => {
   user: state.entities.users[state.session.userId],
   users: mapNamesToIds(Object.values(state.entities.users)),
   activeThreadId: state.ui.activeThreadId,
-  activeThread: state.entities.workspaces[props.match.params.workspace]
+  activeWorkspace: state.entities.workspaces[props.match.params.workspace]
 })}
 
 export default withRouter(connect(mSTP)(Search))
