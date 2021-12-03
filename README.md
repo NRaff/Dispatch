@@ -4,6 +4,7 @@
 ## Features
 ### Create or Join a Workspace
 Any user can create a new workspace or join a workspace via unique code (similar to [Kahoot](https://kahoot.it/)). Completed using keycode to search for and connect with in Postgres. Workspace creation and joining all occurs immediately through websockets for the best experience.
+
 __Join Workspace__
 When a user joins a workspace, the server provides all Workspace information in response (```users``` and ```threads``` related to that workspace). Rather than re-writing functions to handle the response, the websocket subscription passes both Redux's ```dispatch``` and an ```action``` defined in the response. That way, the socket can immediately ```dispatch``` the received response to update the state appropriately.
 ```javascript
@@ -35,7 +36,36 @@ export const createRealtimeUser = (dispatch, userId) => {
 }
 ```
 ### Notifications
-
+Notifications will display within the current workspace for messages from threads other than the active thread, and _not_ set by the current user. Both a banner notification as well as a bubble will display accordingly.
+__Banner__
+```javascript
+  render() {
+    if (this.validateShow()) {
+      setTimeout(this.closeNotification, 5000)
+      return (
+        <header className='notification active-notification'>
+          <span onClick={this.closeNotification}>&times;</span>
+          <img className={Icons.notification.darkNote} alt="bell icon" />
+          <h1>{this.renderMessage()}</h1>
+        </header>
+      )
+    } else {
+      return null
+    }
+  }
+```
+__Bubble__
+```javascript
+  renderUnreads(){
+      if (this.props.unreads > 0 && this.props.activeThread != this.props.thread.id) {
+        return (
+          <div className="inline-notify">
+            <span>{this.props.unreads}</span>
+          </div>
+        )
+      }
+    }
+```
 ## Tech Stack:
 - React
 - Ruby on Rails
