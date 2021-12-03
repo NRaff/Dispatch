@@ -413,7 +413,8 @@ hr {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: left;
-  width: 10vw;
+  // width: 10vw;
+  width: 15%;
   min-width: 150px;
   height: fit-content;
   border-radius: 5px;
@@ -471,12 +472,15 @@ hr {
 .messages-area {
   display: flex;
   flex-direction: column;
-  margin-left: 1vw;
+  margin-left: 5px;
   height: 91vh;
-  width: 88vw;
+  // width: 60vw;
+  flex-grow: 1;
+  // width: 80%;
   background-color: $pop-light;
   border-radius: 5px;
   position: relative;
+  margin-right: 10px;
   // z-index: 4;
 }
 

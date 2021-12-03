@@ -140,6 +140,7 @@ class UserConfigChannel < ApplicationCable::Channel
         type: 'RECEIVE_THREAD'
       }
       broadcast_to_members(new_thread.members, socket)
+      self.receive_workspace_users(workspace.users)
     else
       err = new_thread.errors.messages
       socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
