@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Api::SessionsController < ApplicationController
   def create
     @user = User.find_by_credentials(
@@ -13,6 +15,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
+    # byebug 
     if current_user
       logout!
       render :json => {:sys_messages => ["Successfully logged out."]}, :status => 200
