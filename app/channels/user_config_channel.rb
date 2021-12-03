@@ -42,15 +42,17 @@ class UserConfigChannel < ApplicationCable::Channel
   def setup_workspace(payload)
     # byebug
     user_id = payload['user']
+    user = User.find(user_id)
     wsp_id = payload['workspace']
     workspace = Workspace.includes(:users).includes(:threads).find(wsp_id)
     self.receive_workspace_users(workspace.users)
-    self.receive_all_threads(workspace.threads)
+    self.receive_all_threads(user.threads.where(workspace_id: workspace.id))
   end
 
   def join_workspace(payload)
     user_id = payload['user']
     keycode = payload['workspace']['keycode']
+    user = User.find(user_id)
     workspace = Workspace
                   .includes(:users)
                   .includes(:threads)
@@ -59,7 +61,8 @@ class UserConfigChannel < ApplicationCable::Channel
       workspace.workspace_users.create(user_id: user_id)
       self.receive_workspace(workspace)
       self.receive_workspace_users(workspace.users)
-      self.receive_all_threads(workspace.threads)
+      self.receive_all_threads(user.threads.where(workspace_id: workspace.id))
+      
     else
       socket = error_socket(
         ["Couldn't find the workspace"],
@@ -124,14 +127,19 @@ class UserConfigChannel < ApplicationCable::Channel
 
   def receive_thread(payload)
     # byebug
-    workspace = Workspace.includes(:threads).find(payload['workspace']['id'])
+    workspace = Workspace.includes(:threads).includes(:users).find(payload['workspace']['id'])
     new_thread = workspace.threads.create({
       name: payload['thread']['name'],
       is_thread: payload['thread']['is_thread']
     })
     if new_thread.id
       invitees = payload['thread']['invitees']
-      invitees.push(payload['user'])
+      if invitees.empty? && new_thread.is_thread 
+        # default to general workspace channel
+        invitees = workspace.users.map{|u| u.id}
+      else
+        invitees.push(payload['user'])
+      end
       add_invitees(invitees, new_thread)
       received_thread = new_thread.as_json
       received_thread['user_ids'] = new_thread.members.map {|m| m.id}
@@ -139,6 +147,7 @@ class UserConfigChannel < ApplicationCable::Channel
         thread: set_obj_camel_JSON(received_thread, thread_keys),
         type: 'RECEIVE_THREAD'
       }
+      
       broadcast_to_members(new_thread.members, socket)
       self.receive_workspace_users(workspace.users)
     else
@@ -148,37 +157,6 @@ class UserConfigChannel < ApplicationCable::Channel
     end
 
   end
-
-  # ! Deprecated
-  # def receive_break_thread(payload)
-  #   user = User.includes(:threads).find(payload['user'])
-  #   thread_names = user.threads.map { |t| t.name }
-  #   unless thread_names.include?(payload['thread']['name'])
-  #     new_thread = user.threads.create({
-  #       name: payload['thread']['name'],
-  #       is_thread: payload['thread']['is_thread']
-  #     })
-  #     if new_thread.id
-  #       invitees = payload['thread']['invitees']
-  #       add_invitees(invitees, new_thread)
-  #       received_thread = new_thread.as_json
-  #       received_thread['user_ids'] = new_thread.members.map {|m| m.id}
-  #       socket = {
-  #         thread: set_obj_camel_JSON(received_thread, thread_keys),
-  #         type: 'RECEIVE_THREAD'
-  #       }
-  #       broadcast_to_members(new_thread.members, socket)
-  #     else
-  #       err = new_thread.errors.messages
-  #       socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
-  #       broadcast_user_channel(socket)
-  #     end
-  #   else
-  #     err = ["Thread already exists"]
-  #     socket = error_socket(err, 422, payload['user'], 'RECEIVE_THREAD_ERRORS')
-  #     broadcast_user_channel(socket)
-  #   end
-  # end
 
   def add_invitees(invitees, thread)
     invitees.each do |user|
