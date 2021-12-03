@@ -27,6 +27,7 @@ export const clearNewMessage = () => ({
 
 export const setupActiveWorkspace = payload => dispatch => {
   //do things to setup the active workspace
+  dispatch(clearMessages())
   dispatch(receiveActiveWorkspace(payload.workspace))
   RealtimeUser.setupWorkspace(payload)
 }
