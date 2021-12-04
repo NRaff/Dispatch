@@ -69,6 +69,7 @@ export const createRealtimeUser = (dispatch, userId) => {
 ```
 ### Notifications
 Notifications will display within the current workspace for messages from threads other than the active thread, and _not_ set by the current user. Both a banner notification as well as a bubble will display accordingly.
+<img width="718" alt="Screen Shot 2021-12-03 at 9 40 45 PM" src="https://user-images.githubusercontent.com/13125699/144698858-30e80a39-69f4-49eb-a08c-003cbbd48239.png">
 __Banner__
 ```javascript
   render() {
