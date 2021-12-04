@@ -4,7 +4,10 @@
 ## Highlights
 ### Join a Workspace
 Any user can create a new workspace or join a workspace via unique code (similar to [Kahoot](https://kahoot.it/)). Workspace creation and joining all occurs immediately through websockets for the best experience. To join a workspace, a user pastes in a keycode shared by a user already in the workspace.
-
+<section style="display:flex; align-items:center; justify-content:center">
+<img style="margin-right: 5px;" width="717" alt="Screen Shot 2021-12-03 at 10 04 13 PM" src="https://user-images.githubusercontent.com/13125699/144699572-6f4dd7e6-e89f-4497-8e12-38511de26664.png">
+<img width="217" alt="Screen Shot 2021-12-03 at 10 04 49 PM" src="https://user-images.githubusercontent.com/13125699/144699574-96196afe-1c6d-4995-a6a6-e201083f39d0.png">
+</section>
 When a user joins a workspace, the server provides all Workspace information in response (```users``` and ```threads``` related to that workspace). Rather than re-writing functions to handle the response, the websocket subscription passes both Redux's ```dispatch``` and an ```action``` defined in the response. That way, the socket can immediately ```dispatch``` the received response to update the state appropriately. The socket API util is also used to send the initial keycode an payload to the server.
 - Passing Redux's dispatch as an argument and making it available within a subscription, makes it the given socket easily extensible as long as:
    1. The response produced by the server is a plain javascript object and follows the same pattern as a redux action (e.g. {type: TYPE, action: things})
