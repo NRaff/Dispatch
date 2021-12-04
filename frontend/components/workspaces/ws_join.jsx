@@ -25,6 +25,7 @@ class WorkspaceJoin extends React.Component {
         keycode: ''
       }
     })
+    this.props.history.goBack()
   }
 
   handleChange(e) {

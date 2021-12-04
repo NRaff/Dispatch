@@ -25,6 +25,7 @@ class WorkspaceCreate extends React.Component {
         name: ''
       }
     })
+    this.props.history.goBack()
   }
 
   handleChange(e) {

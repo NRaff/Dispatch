@@ -62,7 +62,6 @@ class UserConfigChannel < ApplicationCable::Channel
       self.receive_workspace(workspace)
       self.receive_workspace_users(workspace.users)
       self.receive_all_threads(user.threads.where(workspace_id: workspace.id))
-      
     else
       socket = error_socket(
         ["Couldn't find the workspace"],
