@@ -25,7 +25,12 @@ class WorkspaceInfo extends React.Component {
   }
 
   copykeycode(){
-    navigator.clipboard.writeText(this.props.workspace.keycode)
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(this.props.workspace.keycode)
+      return (<span>Already copied to your clipboard!</span>)
+    } else {
+      return (<span>Copy/paste with cmd + c then cmd + v</span>)
+    }
   }
 
   leaveWorkspace() {
@@ -51,7 +56,7 @@ class WorkspaceInfo extends React.Component {
               className='workspace-keycode'
             >{workspace.keycode}</p>
             <p className='workspace-note'>
-              Share this code to let people join your workspace. <span>Already copied to your clipboard!</span>
+              Share this code to let people join your workspace. {this.copykeycode()}
             </p>
             <Link 
               to='/'
