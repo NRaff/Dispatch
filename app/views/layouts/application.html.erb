@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag asset_path('logo/quickreply_white_24dp.svg') %>
     <% if current_user %>
       <script>
         window.currentUser = {
